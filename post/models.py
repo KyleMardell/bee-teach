@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
 KEYSTAGE = ((0, "Early Years"), (1, "Key Stage 1"), (2, "Key Stage 2"), (3, "Key Stage 3"))
+STATUS = ((0, "Draft"), (1, "Published"))
 
 # Create your models here.
 class Resource(models.Model):
@@ -14,6 +15,7 @@ class Resource(models.Model):
     key_stage = models.IntegerField(choices=KEYSTAGE, default=0)
     content = models.TextField(blank=True)
     links = models.TextField(blank=True)
+    status = models.IntegerField(choices=STATUS, default=0)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
