@@ -27,6 +27,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     '8000-kylemardell-beeteach-kd1gl8x9vwg.ws.codeinstitute-ide.net',
+    '.herokuapp.com',
 ]
 
 
