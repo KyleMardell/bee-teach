@@ -13,10 +13,10 @@
                 <!-- Post author goes before the | the post's created date goes after -->
                 <p class="post-subtitle">{{ resource.author }} | {{ resource.created_on }}</p>
             </div>
-            <div class="d-none d-md-block col-md-6 masthead-image">
-                <!--
-                <img src="{% static 'images/default.jpg' %}" class="scale" alt="placeholder">
-                -->
+            <div class="d-block d-md-block col-md-6 masthead-image">
+                {% for image in images %}
+                <img src="{{ image.featured_media.url }}" class="scale" alt="{{ resource.title }}">
+                {% endfor %}
             </div>
         </div>
     </div>
