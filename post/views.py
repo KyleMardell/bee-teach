@@ -5,5 +5,5 @@ from .models import Resource
 
 # Create your views here.
 class ResourceList(generic.ListView):
-    queryset = Resource.objects.all()
+    queryset = Resource.objects.filter(status=1)
     template_name = "resource_list.html"
