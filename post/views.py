@@ -10,6 +10,17 @@ class ResourceList(generic.ListView):
     paginate_by = 6
 
 
+def resource_list(request):
+    resources = Resource.objects.filter(status=1)
+    template_name = "post/resource_list.html"
+    
+    return render(
+        request,
+        "post/resource_list.html",
+        {"resources": resources},
+    )
+
+
 def resource_detail(request, slug):
     """
     Display an individual :model:`post.Resource`.
