@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
+from django.contrib.auth.decorators import login_required
 from .models import Resource, Media
 
 
@@ -10,17 +11,19 @@ class ResourceList(generic.ListView):
     paginate_by = 6
 
 
+@login_required
 def resource_list(request):
     resources = Resource.objects.filter(status=1)
     template_name = "post/resource_list.html"
     
     return render(
         request,
-        "post/resource_list.html",
+        template_name,
         {"resources": resources},
     )
 
 
+@login_required
 def resource_detail(request, slug):
     """
     Display an individual :model:`post.Resource`.
