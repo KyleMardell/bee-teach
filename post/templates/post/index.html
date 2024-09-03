@@ -14,13 +14,21 @@
 
     <div class="row">
         {% for resource in resources %}
-        <div class="col col-sm-12 col-md-6 col-lg-3">
+        <div class="col-12 col-md-6 col-xl-4 col-xxl-3">
             <div class="card resource-card">
-                <div class="card-body">
-                  <h5 class="card-title">{{ resource.title }}</h5>
-                  <p class="card-text">Author: {{ resource.author }} | Posted: {{ resource.created_on }}</p>
+                <div id="carouselResource{{ resource.id }}" class="carousel slide card-carousel" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for media in resource.media.all %}
+                        <div class="carousel-item card-img-box {% if forloop.first %}active{% endif %}">
+                            <img src="{{ media.featured_media.url }}" class="resource-image d-block" alt="Image for {{ resource.title }}">
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
-                <img src="{{ resource.media.first.featured_media.url }}" class="card-img-bottom img-fluid custom-img" alt="{{ resource.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ resource.title }}</h5>
+                    <p class="card-text">By {{ resource.author }}, on {{ resource.created_on }}</p>
+                </div>
             </div>
         </div>
         {% endfor %}
