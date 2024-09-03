@@ -4,11 +4,17 @@ from django.contrib.auth.decorators import login_required
 from .models import Resource, Media
 
 
-# Create your views here.
-class ResourceList(generic.ListView):
-    queryset = Resource.objects.filter(status=1)
+def home_page(request):
+    queryset = Resource.objects.filter(status=1).order_by("-created_on")
+    resources = queryset[:4]
+    images = Media.objects.filter(resource__in=resources)
     template_name = "post/index.html"
-    paginate_by = 6
+
+    return render(
+        request,
+        template_name,
+        {"resources": resources, "images": images}
+    )
 
 
 @login_required

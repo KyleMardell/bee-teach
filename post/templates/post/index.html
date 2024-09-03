@@ -4,59 +4,28 @@
 
 <!-- index.html content starts here -->
 <div class="container-fluid">
-    <h1>Bee Teach</h1>
-    <p>Educational Resources</p>
+
     <div class="row">
-
-        <!-- Blog Entries Column -->
-        <div class="col-12 mt-3 left">
-            <div class="row">
-                {% for resource in resource_list %}
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="image-container">
-                                <div class="image-flash">
-                                    <p class="author">Author: {{ resource.author }}</p>
-                                </div>
-                            </div>
-                            <a href="{% url 'resource_detail' resource.slug %}" class="post-link">
-                                <h2 class="card-title">{{ resource.title }}</h2>
-                            </a>
-
-                            <hr />
-                            <p class="card-text text-muted h6">{{ resource.created_on}}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                {% if forloop.counter|divisibleby:3 %}
-            </div>
-            <div class="row">
-                {% endif %}
-                {% endfor %}
-
-            </div>
+        <div class="col-12 text-center">
+            <h1>Bee Teach</h1>
+            <p>Educational Resources</p>
         </div>
     </div>
-    {% if is_paginated %}
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-            <li>
-                <a href="?page={{ page_obj.previous_page_number }}"
-                class="page-link">&laquo; PREV</a>
-            </li>
-            {% endif %}
-            {% if page_obj.has_next %}
-            <li>
-                <a href="?page={{ page_obj.next_page_number }}" 
-                class="page-link"> NEXT &raquo;</a>
-            </li>
-            {% endif %}
-        </ul>
-    </nav>
-    {% endif %}
+
+    <div class="row">
+        {% for resource in resources %}
+        <div class="col col-sm-12 col-md-6 col-lg-3">
+            <div class="card resource-card">
+                <div class="card-body">
+                  <h5 class="card-title">{{ resource.title }}</h5>
+                  <p class="card-text">Author: {{ resource.author }} | Posted: {{ resource.created_on }}</p>
+                </div>
+                <img src="{{ resource.media.first.featured_media.url }}" class="card-img-bottom img-fluid custom-img" alt="{{ resource.title }}">
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
 </div>
 
 <!-- index.html content ends here -->
