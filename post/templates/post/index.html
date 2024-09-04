@@ -1,39 +1,117 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
 
 <!-- index.html content starts here -->
 <div class="container-fluid">
 
     <div class="row">
-        <div class="col-12 text-center">
+        <div class="col-12 text-center p-2 mt-2">
             <h1>Bee Teach</h1>
-            <p>Educational Resources</p>
+            <p>The educational community hive.</p>
         </div>
     </div>
 
-    <div class="row">
-        {% for resource in resources %}
-        <div class="col-12 col-md-6 col-xl-4 col-xxl-3">
-            <div class="card resource-card">
-                <div id="carouselResource{{ resource.id }}" class="carousel slide card-carousel" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        {% for media in resource.media.all %}
-                        <div class="carousel-item card-img-box {% if forloop.first %}active{% endif %}">
-                            <img src="{{ media.featured_media.url }}" class="resource-image d-block" alt="Image for {{ resource.title }}">
-                        </div>
-                        {% endfor %}
-                    </div>
+    <div class="row justify-content-center mt-2">
+        <div class="col col-md-8 text-center">
+            <div class="hero-box">
+                <h2>Buzz Into Better Teaching with Bee Teach</h2>
+                <p>
+                    Discover a hive of educational resources designed for every key stage.
+                    From lesson plans and worksheets to engaging activities and printable materials,
+                    Bee Teach is your go-to destination for enhancing your classroom experience.
+                </p>
+            </div>
+            <a href="{% url 'account_signup' %}">Join the Hive</a>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col col-md-8">
+            <div class="row">
+                <div class="col-6">
+                    <p>
+                        Welcome to Bee Teach, where educators come together to create, share,
+                        and discover a rich array of teaching resources. Just like bees work together to build a hive,
+                        you can collaborate with fellow educators to build a better learning environment for your
+                        students.
+                    </p>
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{ resource.title }}</h5>
-                    <p class="card-text">By {{ resource.author }}, on {{ resource.created_on }}</p>
+                <div class="col-6 img-col">
+                    <img src="{% static 'images/bee-heart.png' %}" class="cartoon-bee" alt="cartoon bee">
+                </div>
+                <div class="col-6 img-col">
+                    <img src="{% static 'images/bee-heart.png' %}" class="cartoon-bee" alt="cartoon bee">
+                </div>
+                <div class="col-6">
+                    <p>
+                        Whether you're seeking innovative lesson plans, interactive worksheets,
+                        or creative classroom activities, Bee Teach offers a vibrant community and a treasure trove
+                        of materials to support your teaching journey.
+                    </p>
+                </div>
+                <div class="col-12 text-center">
+                    <!-- Add about link -->
+                    <a href="#">Find Out More</a>
                 </div>
             </div>
         </div>
-        {% endfor %}
     </div>
 
+    <div class="row justify-content-center">
+        <div class="col col-md-8">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2>Check Out Some Recent Resources</h2>
+                </div>
+                {% for resource in resources %}
+                <div class="col-12 col-md-6 col-xl-3">
+                    <div class="card resource-card">
+                        <div id="carouselResource{{ resource.id }}" class="carousel slide card-carousel"
+                            data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                {% for media in resource.media.all %}
+                                <div class="carousel-item card-img-box {% if forloop.first %}active{% endif %}">
+                                    <img src="{{ media.featured_media.url }}" class="resource-image d-block"
+                                        alt="Image for {{ resource.title }}">
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ resource.title }}</h5>
+                            <p class="card-text">By {{ resource.author }}, on {{ resource.created_on }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col col-md-8">
+            <div class="row">
+                <div class="col-12">
+                    <div class="cta-box text-center">
+                        <h2>Join the Hive and Transform Your Teaching</h2>
+                        <p>
+                            Become part of our buzzing community and gain access to a wealth of resources.
+                            Share your own educational materials and benefit from the collective wisdom of educators
+                            around the
+                            globe.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12 text-center">
+                    <a href="{% url 'account_signup' %}">Sign Up Now</a>
+                </div>
+                <div class="col-12 img-col">
+                    <img src="{% static 'images/bee-heart.png' %}" class="cartoon-bee" alt="cartoon bee">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- index.html content ends here -->

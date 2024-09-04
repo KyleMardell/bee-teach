@@ -1,3 +1,14 @@
+/* Global Styles */
+:root {
+    /* custom colour scheme */
+    --yellow: #f3de2c;
+    --green: #5c8001;
+    --light-green: #7cb518;
+    --orange: #fb6107;
+    --light-orange: #fbb02d;
+    --background-green: #EAF5E4;
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -5,20 +16,34 @@
   }
 
 body {
-    background-color: #F9FAFC;
-}
-
-.light-bg {
-    background-color: #fff;
+    background-color: var(--background-green);
 }
 
 .dark-bg {
-    background-color: #445261;
+    background-color: var(--green);
 }
 
 .main-bg {
-    background-color: #F9FAFC;
+    background-color: var(--background-green);
 }
+
+.text-green {
+    color: var(--green);
+}
+
+/* Hero Images */
+
+.cartoon-bee {
+    max-width: 150px;
+    }
+    
+    .img-col {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+/* Resource Card */
 
 .resource-card {
     background-color: #fafafa;
@@ -33,9 +58,15 @@ body {
     width: auto;
     height: auto;
     max-height: 200px;
-    max-width: 330px;
+    max-width: 260px;
     object-fit: contain;
     margin-left: auto;
     margin-right: auto;
   }
+
+/* Nav */
+
+nav {
+    box-shadow: 0 2px 4px 0 var(--green);
+}
 
