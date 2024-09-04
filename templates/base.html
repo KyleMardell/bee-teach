@@ -12,11 +12,6 @@
     <title>Bee Teach - Educational Resources</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Google Fonts CSS -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;700&display=swap" rel="stylesheet">
-
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
@@ -31,7 +26,7 @@
 
 <body class="d-flex flex-column h-100 main-bg">
     <!-- Nav -->
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% if user.is_authenticated %}{% url 'resource_list' %}{% else %}{% url 'home' %}{% endif %}">
                 <span class="brand">Bee Teach</span></a>
@@ -79,8 +74,8 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer mt-auto py-3 dark-bg">
-        <p class="m-0 text-center text-white">Made by Kyle Mardell</p>
+    <footer class="footer mt-auto py-3">
+        <p class="m-0 text-center">Made by Kyle Mardell</p>
 
     </footer>
 

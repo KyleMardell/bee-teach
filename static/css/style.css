@@ -1,22 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Farsan&display=swap');
+
 /* Global Styles */
 :root {
     /* custom colour scheme */
-    --yellow: #f3de2c;
-    --green: #5c8001;
-    --light-green: #7cb518;
-    --orange: #fb6107;
-    --light-orange: #fbb02d;
+    --yellow: #F6E96B;
+    --light-green: #BEDC74;
+    --green: #A2CA71;
+    --dark-green: #387F39;
+    --darkest-green: #1A3636;
     --background-green: #EAF5E4;
+    --text-grey: #FAFAFA;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-  }
+}
 
 body {
     background-color: var(--background-green);
+}
+
+main {
+    margin-top: 56px;
 }
 
 .dark-bg {
@@ -31,26 +40,76 @@ body {
     color: var(--green);
 }
 
-/* Hero Images */
+/* Fonts */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+.hero-btn,
+button,
+label {
+    font-family: "Concert One", sans-serif;
+}
+
+p,
+input {
+    font-family: "Farsan", sans-serif;
+}
+
+/* Hero */
+
+.logo-text h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0;
+}
+
+.hero-box,
+.cta-box {
+    border: 1px solid var(--darkest-green);
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px 0 var(--darkest-green);
+}
+
+.hero-box h2,
+.cta-box h2 {
+    border-bottom: 1px solid var(--darkest-green);
+    padding-bottom: 10px;
+}
+
+.hero-btn {
+    background-color: var(--darkest-green);
+    color: var(--text-grey);
+    border: 2px solid var(--dark-green);
+}
 
 .cartoon-bee {
     max-width: 150px;
-    }
-    
-    .img-col {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+}
+
+.img-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 /* Resource Card */
 
 .resource-card {
-    background-color: #fafafa;
+    background-color: var(--darkest-green);
+    color: var(--text-grey);
+    border-radius: 10px;
+}
+
+.card-title {
+    border-bottom: 1px solid var(--yellow);
+    padding-bottom: 10px;
 }
 
 .card-img-box {
-    padding: 10px;
+    padding-top: 15px;
     height: 225px;
 }
 
@@ -62,11 +121,19 @@ body {
     object-fit: contain;
     margin-left: auto;
     margin-right: auto;
-  }
+    box-shadow: 0 0 4px 0 var(--yellow)
+}
 
 /* Nav */
 
 nav {
-    box-shadow: 0 2px 4px 0 var(--green);
+    background-color: var(--green);
+    box-shadow: 0 2px 4px 0 var(--dark-green);
 }
 
+/* Footer */
+
+footer {
+    background-color: var(--green);
+    box-shadow: 0 -2px 4px 0 var(--dark-green);
+}

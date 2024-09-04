@@ -6,15 +6,15 @@
 <div class="container-fluid">
 
     <div class="row">
-        <div class="col-12 text-center p-2 mt-2">
+        <div class="col-12 p-2 mt-2 text-center logo-text">
             <h1>Bee Teach</h1>
             <p>The educational community hive.</p>
         </div>
     </div>
 
     <div class="row justify-content-center mt-2">
-        <div class="col col-md-8 text-center">
-            <div class="hero-box">
+        <div class="col-11 col-md-10 col-xl-8 text-center">
+            <div class="hero-box mb-5 p-2">
                 <h2>Buzz Into Better Teaching with Bee Teach</h2>
                 <p>
                     Discover a hive of educational resources designed for every key stage.
@@ -22,12 +22,12 @@
                     Bee Teach is your go-to destination for enhancing your classroom experience.
                 </p>
             </div>
-            <a href="{% url 'account_signup' %}">Join the Hive</a>
+            <a href="{% url 'account_signup' %}" class="btn btn-lg hero-btn mb-5">Join the Hive</a>
         </div>
     </div>
 
     <div class="row justify-content-center">
-        <div class="col col-md-8">
+        <div class="col-11 col-md-10 col-xl-8 p-2">
             <div class="row">
                 <div class="col-6">
                     <p>
@@ -50,18 +50,18 @@
                         of materials to support your teaching journey.
                     </p>
                 </div>
-                <div class="col-12 text-center">
-                    <!-- Add about link -->
-                    <a href="#">Find Out More</a>
-                </div>
             </div>
+        </div>
+        <div class="col-12 text-center">
+            <!-- Add about link -->
+            <a href="#" class="btn btn-lg hero-btn mb-5 mt-5">Find Out More</a>
         </div>
     </div>
 
-    <div class="row justify-content-center">
-        <div class="col col-md-8">
+    <div class="row justify-content-center mb-5">
+        <div class="col-11 col-md-10 col-xl-8">
             <div class="row">
-                <div class="col-12 text-center">
+                <div class="col-12 text-center mb-3">
                     <h2>Check Out Some Recent Resources</h2>
                 </div>
                 {% for resource in resources %}
@@ -90,10 +90,10 @@
     </div>
 
     <div class="row justify-content-center">
-        <div class="col col-md-8">
+        <div class="col-11 col-md-10 col-xl-8">
             <div class="row">
                 <div class="col-12">
-                    <div class="cta-box text-center">
+                    <div class=" mb-5 p-2 text-center cta-box">
                         <h2>Join the Hive and Transform Your Teaching</h2>
                         <p>
                             Become part of our buzzing community and gain access to a wealth of resources.
@@ -104,10 +104,10 @@
                     </div>
                 </div>
                 <div class="col-12 text-center">
-                    <a href="{% url 'account_signup' %}">Sign Up Now</a>
+                    <a href="{% url 'account_signup' %}" class="btn btn-lg hero-btn mb-5">Sign Up Now</a>
                 </div>
                 <div class="col-12 img-col">
-                    <img src="{% static 'images/bee-heart.png' %}" class="cartoon-bee" alt="cartoon bee">
+                    <img src="{% static 'images/bee-heart.png' %}" class="cartoon-bee mb-5" alt="cartoon bee">
                 </div>
             </div>
         </div>
