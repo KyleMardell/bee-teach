@@ -25,7 +25,7 @@ body {
 }
 
 main {
-    margin-top: 56px;
+    margin-top: 57px;
 }
 
 .dark-bg {
@@ -98,7 +98,7 @@ input {
 /* Resource Card */
 
 .resource-card {
-    background-color: var(--darkest-green);
+    background: linear-gradient(150deg, var(--dark-green), var(--darkest-green));
     color: var(--text-grey);
     border-radius: 10px;
 }
@@ -129,6 +129,11 @@ input {
 nav {
     background-color: var(--green);
     box-shadow: 0 2px 4px 0 var(--dark-green);
+}
+
+.brand {
+    font-weight: 700;
+    font-size: 1.3rem;
 }
 
 /* Footer */
