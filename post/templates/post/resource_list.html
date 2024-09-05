@@ -13,11 +13,85 @@
             {% endif %}
         </div>
     </div>
-    
+
+    <div class="row justify-content-center mb-5">
+        <div class="col-12 col-md-8 col-xl-4 p-0 feature-box">
+
+            <div id="featureCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% if features %}
+                    <div class="carousel-item active" data-bs-interval="6000">
+                        <div class="card feature-card">
+                            <div class="card-header">
+                                <h4 class="card-title">{{ features.0.title }}</h4>
+                                <p class="card-text feature-card-text">{{ features.0.body }}</p>
+                            </div>
+                            {% if features.0.resource %}
+                            <div class="card-body">
+
+                                <div class="card resource-card mb-3">
+                                    <img src="{{ features.0.resource.media.first.featured_media.url }}"
+                                        class="resource-image d-block mt-3" alt="Image for {{ features.0.resource.title }}">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center text-truncate">{{ features.0.resource.title }}
+                                        </h5>
+                                        <p class="card-text text-end">By {{ features.0.resource.author }}</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% for feature in features|slice:"1:" %}
+                    <div class="carousel-item" data-bs-interval="6000">
+                        <div class="card feature-card">
+                            <div class="card-header">
+                                <h4 class="card-title">{{ feature.title }}</h4>
+                                <p class="card-text feature-card-text">{{ feature.body }}</p>
+                            </div>
+                            {% if feature.resource %}
+                            <div class="card-body">
+
+                                <div class="card resource-card mb-3">
+                                    <img src="{{ feature.resource.media.first.featured_media.url }}"
+                                        class="resource-image d-block mt-3" alt="Image for {{ feature.resource.title }}">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center text-truncate">{{ feature.resource.title }}
+                                        </h5>
+                                        <p class="card-text text-end">By {{ feature.resource.author }}</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#featureCarousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#featureCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+
+
     <div class="row">
         <div class="col">
             <div class="row">
-
                 {% for resource in resources %}
                 <div class="col-12 col-md-6 col-xl-3">
                     <div class="card resource-card mb-3">
@@ -41,7 +115,6 @@
                     </div>
                 </div>
                 {% endfor %}
-
             </div>
         </div>
     </div>

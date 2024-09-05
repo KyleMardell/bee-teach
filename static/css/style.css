@@ -126,6 +126,25 @@ input {
     box-shadow: 0 0 4px 0 var(--yellow)
 }
 
+/* Features */
+.feature-card {
+    background-color: var(--green);
+}
+
+.feature-card h4 {
+    font-size: 1.5rem;
+}
+
+.feature-card-text {
+    font-size: 1.3rem;
+}
+
+.feature-box {
+    border-radius: 10px;
+    border: 2px solid var(--dark-green);
+    box-shadow: 4px 4px 8px 0 var(--darkest-green);
+}
+
 /* Nav */
 
 nav {

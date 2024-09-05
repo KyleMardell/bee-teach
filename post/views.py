@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from django.contrib.auth.decorators import login_required
-from .models import Resource, Media
+from .models import Resource, Media, Feature
 
 
 def home_page(request):
