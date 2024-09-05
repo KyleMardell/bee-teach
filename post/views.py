@@ -20,12 +20,14 @@ def home_page(request):
 @login_required
 def resource_list(request):
     resources = Resource.objects.filter(status=1)
+    features = Feature.objects.all()
+
     template_name = "post/resource_list.html"
     
     return render(
         request,
         template_name,
-        {"resources": resources},
+        {"resources": resources, "features": features},
     )
 
 

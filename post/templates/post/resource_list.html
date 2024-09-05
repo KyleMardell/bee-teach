@@ -4,62 +4,48 @@
 
 <!-- index.html content starts here -->
 <div class="container-fluid">
-    <h1>RESOURCE LIST</h1>
-
-    {% if user.is_authenticated %}
-    <p class="text-end m-3">You are logged in as {{ user }}</p>
-    {% endif %}
 
     <div class="row">
-        <!-- Resource Entries Column -->
-        <div class="col-12 mt-3 left">
+        <div class="col-12 p-2 mt-2 text-center logo-text">
+            <h1>Bee Teach</h1>
+            {% if user.is_authenticated %}
+            <p class="m-3 text-center">Welcome {{ user }}, check out what's buzzing!</p>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col">
             <div class="row">
-                {% for resource in resources %}
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="image-container">
-                                <div class="image-flash">
-                                    <p class="author">Author: {{ resource.author }}</p>
-                                </div>
-                            </div>
-                            <a href="{% url 'resource_detail' resource.slug %}" class="post-link">
-                                <h2 class="card-title">{{ resource.title }}</h2>
-                            </a>
 
-                            <hr />
-                            <p class="card-text text-muted h6">{{ resource.created_on}}
-                            </p>
+                {% for resource in resources %}
+                <div class="col-12 col-md-6 col-xl-3">
+                    <div class="card resource-card mb-3">
+                        <div id="carouselResource{{ resource.id }}" class="carousel slide card-carousel"
+                            data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                {% for media in resource.media.all %}
+                                <div class="carousel-item card-img-box {% if forloop.first %}active{% endif %}">
+                                    <img src="{{ media.featured_media.url }}" class="resource-image d-block"
+                                        alt="Image for {{ resource.title }}">
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <a href="{% url 'resource_detail' resource.slug %}" class="post-link text-center">
+                                <h5 class="card-title text-truncate">{{ resource.title }}</h5>
+                            </a>
+                            <p class="card-text text-end">By {{ resource.author }}</p>
                         </div>
                     </div>
                 </div>
-                {% if forloop.counter|divisibleby:3 %}
-            </div>
-            <div class="row">
-                {% endif %}
                 {% endfor %}
 
             </div>
         </div>
     </div>
-    {% if is_paginated %}
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-            <li>
-                <a href="?page={{ page_obj.previous_page_number }}"
-                class="page-link">&laquo; PREV</a>
-            </li>
-            {% endif %}
-            {% if page_obj.has_next %}
-            <li>
-                <a href="?page={{ page_obj.next_page_number }}" 
-                class="page-link"> NEXT &raquo;</a>
-            </li>
-            {% endif %}
-        </ul>
-    </nav>
-    {% endif %}
+
 </div>
 
 <!-- index.html content ends here -->

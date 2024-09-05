@@ -101,6 +101,8 @@ input {
     background: linear-gradient(150deg, var(--dark-green), var(--darkest-green));
     color: var(--text-grey);
     border-radius: 10px;
+    max-height: 320px;
+    height: 320px;
 }
 
 .card-title {

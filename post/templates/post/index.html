@@ -66,7 +66,7 @@
                 </div>
                 {% for resource in resources %}
                 <div class="col-12 col-md-6 col-xl-3">
-                    <div class="card resource-card">
+                    <div class="card resource-card mb-3">
                         <div id="carouselResource{{ resource.id }}" class="carousel slide card-carousel"
                             data-bs-ride="carousel">
                             <div class="carousel-inner">
@@ -79,8 +79,8 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">{{ resource.title }}</h5>
-                            <p class="card-text">By {{ resource.author }}, on {{ resource.created_on }}</p>
+                            <h5 class="card-title text-center text-truncate">{{ resource.title }}</h5>
+                            <p class="card-text text-end">By {{ resource.author }}</p>
                         </div>
                     </div>
                 </div>
