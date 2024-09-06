@@ -9,13 +9,18 @@
         <div class="col-12 p-2 mt-2 text-center logo-text">
             <h1>Bee Teach</h1>
             {% if user.is_authenticated %}
-            <p class="m-3 text-center">Welcome {{ user }}, check out what's buzzing!</p>
+            <p class="m-3 text-center">
+                Welcome {{ user }}, check out what's buzzing!<br>
+                Explore the Bee Teach communities collection of educational materials to inspire 
+                and enhance your teaching. Discover a variety of lesson plans, worksheets, activities and more 
+                all created by fellow educators.
+            </p>
             {% endif %}
         </div>
     </div>
 
     <div class="row justify-content-center mb-5">
-        <div class="col-12 col-md-8 col-xl-4 p-0 feature-box">
+        <div class="col-11 col-md-8 col-xl-4 p-0 feature-box">
 
             <div id="featureCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
@@ -27,18 +32,18 @@
                                 <p class="card-text feature-card-text">{{ features.0.body }}</p>
                             </div>
                             {% if features.0.resource %}
-                            <div class="card-body">
-
-                                <div class="card resource-card mb-3">
-                                    <img src="{{ features.0.resource.media.first.featured_media.url }}"
-                                        class="resource-image d-block mt-3" alt="Image for {{ features.0.resource.title }}">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-center text-truncate">{{ features.0.resource.title }}
-                                        </h5>
-                                        <p class="card-text text-end">By {{ features.0.resource.author }}</p>
+                            <div class="card-body d-flex justify-content-center">
+                                <a href="{% url 'resource_detail' features.0.resource.slug %}">
+                                    <div class="card feature-resource-card mb-3">
+                                        <img src="{{ features.0.resource.media.first.featured_media.url }}"
+                                            class="feature-resource-image d-block mt-3" alt="Image for {{ features.0.resource.title }}">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center text-truncate">{{ features.0.resource.title }}
+                                            </h5>
+                                            <p class="card-text text-end">By {{ features.0.resource.author }}</p>
+                                        </div>
                                     </div>
-                                </div>
-
+                                </a>
                             </div>
                             {% endif %}
                         </div>
@@ -53,18 +58,18 @@
                                 <p class="card-text feature-card-text">{{ feature.body }}</p>
                             </div>
                             {% if feature.resource %}
-                            <div class="card-body">
-
-                                <div class="card resource-card mb-3">
-                                    <img src="{{ feature.resource.media.first.featured_media.url }}"
-                                        class="resource-image d-block mt-3" alt="Image for {{ feature.resource.title }}">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-center text-truncate">{{ feature.resource.title }}
-                                        </h5>
-                                        <p class="card-text text-end">By {{ feature.resource.author }}</p>
+                            <div class="card-body d-flex justify-content-center">
+                                <a href="{% url 'resource_detail' feature.resource.slug %}">
+                                    <div class="card feature-resource-card mb-3">
+                                        <img src="{{ feature.resource.media.first.featured_media.url }}"
+                                            class="feature-resource-image d-block mt-3" alt="Image for {{ feature.resource.title }}">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center text-truncate">{{ feature.resource.title }}
+                                            </h5>
+                                            <p class="card-text text-end">By {{ feature.resource.author }}</p>
+                                        </div>
                                     </div>
-                                </div>
-
+                                </a>
                             </div>
                             {% endif %}
                         </div>
@@ -91,6 +96,13 @@
 
     <div class="row">
         <div class="col">
+
+            <div class="row">
+                <div class="col text-center mb-3">
+                    <h2>Recent Posts</h2>
+                </div>
+            </div>
+
             <div class="row">
                 {% for resource in resources %}
                 <div class="col-12 col-md-6 col-xl-3">
@@ -107,7 +119,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <a href="{% url 'resource_detail' resource.slug %}" class="post-link text-center">
+                            <a href="{% url 'resource_detail' resource.slug %}" class="resource-link text-center">
                                 <h5 class="card-title text-truncate">{{ resource.title }}</h5>
                             </a>
                             <p class="card-text text-end">By {{ resource.author }}</p>

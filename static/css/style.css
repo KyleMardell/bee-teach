@@ -21,7 +21,7 @@
 }
 
 body {
-    background-color: var(--background-green);
+    background-color: var(--text-grey);
 }
 
 main {
@@ -33,7 +33,7 @@ main {
 }
 
 .main-bg {
-    background-color: var(--background-green);
+    background-color: var(--text-grey);
 }
 
 .text-green {
@@ -68,6 +68,11 @@ input {
 
 .hero-box,
 .cta-box {
+    background-color: var(--background-green);
+}
+
+.hero-box,
+.cta-box {
     border: 1px solid var(--darkest-green);
     border-radius: 10px;
     box-shadow: 2px 2px 4px 0 var(--darkest-green);
@@ -85,6 +90,11 @@ input {
     border: 2px solid var(--dark-green);
 }
 
+.hero-btn:hover {
+    background-color: var(--dark-green);
+    color: var(--text-grey);
+}
+
 .cartoon-bee {
     max-width: 150px;
 }
@@ -98,15 +108,15 @@ input {
 /* Resource Card */
 
 .resource-card {
-    background: linear-gradient(150deg, var(--dark-green), var(--darkest-green));
-    color: var(--text-grey);
+    background-color: var(--background-green);
     border-radius: 10px;
+    border: 3px solid var(--dark-green);
     max-height: 320px;
     height: 320px;
 }
 
 .card-title {
-    border-bottom: 1px solid var(--yellow);
+    border-bottom: 1px solid var(--dark-green);
     padding-bottom: 10px;
 }
 
@@ -126,9 +136,18 @@ input {
     box-shadow: 0 0 4px 0 var(--yellow)
 }
 
+.resource-link {
+    text-decoration: none;
+    color: black;
+}
+
+.resource-link:hover {
+    color: var(--dark-green);
+}
+
 /* Features */
 .feature-card {
-    background-color: var(--green);
+    background: linear-gradient(155deg, var(--background-green), var(--light-green));
 }
 
 .feature-card h4 {
@@ -143,6 +162,35 @@ input {
     border-radius: 10px;
     border: 2px solid var(--dark-green);
     box-shadow: 4px 4px 8px 0 var(--darkest-green);
+}
+
+.feature-resource-card {
+    background: linear-gradient(150deg, var(--dark-green), var(--darkest-green));
+    color: var(--text-grey);
+    border-radius: 10px;
+    max-height: 200px;
+    max-width: 200px;
+}
+
+.feature-resource-card .card-title {
+    font-size: medium;
+    padding-bottom: 2px;
+    margin-bottom: 2px;
+}
+
+.feature-resource-card .card-text {
+    font-size: small;
+}
+
+.feature-resource-image {
+    width: auto;
+    height: auto;
+    max-height: 120px;
+    max-width: 120px;
+    object-fit: contain;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 4px 0 var(--yellow)
 }
 
 /* Nav */
