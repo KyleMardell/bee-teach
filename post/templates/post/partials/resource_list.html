@@ -1,0 +1,30 @@
+{% for resource in page_obj %}
+<div class="col-12 col-md-6 col-xl-3">
+    <div class="card resource-card mb-3">
+        <div
+            id="carouselResource{{ resource.id }}"
+            class="carousel slide card-carousel"
+            data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for media in resource.media.all %}
+                <div
+                    class="carousel-item card-img-box {% if forloop.first %}active{% endif %}">
+                    <img
+                        src="{{ media.featured_media.url }}"
+                        class="resource-image d-block"
+                        alt="Image for {{ resource.title }}" />
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="card-body">
+            <a
+                href="{% url 'resource_detail' resource.slug %}"
+                class="resource-link text-center">
+                <h5 class="card-title text-truncate">{{ resource.title }}</h5>
+            </a>
+            <p class="card-text text-end">By {{ resource.author }}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}

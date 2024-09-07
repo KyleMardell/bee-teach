@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from django.contrib.auth.decorators import login_required
@@ -22,12 +23,18 @@ def resource_list(request):
     resources = Resource.objects.filter(status=1)
     features = Feature.objects.all()
 
+    paginator = Paginator(resources, 3)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    if page_number:
+        return render(request, 'post/partials/resource_list.html', {'page_obj': page_obj})
+
     template_name = "post/resource_list.html"
-    
     return render(
         request,
         template_name,
-        {"resources": resources, "features": features},
+        {"page_obj": page_obj, "features": features},
     )
 
 
