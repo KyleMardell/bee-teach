@@ -15,12 +15,17 @@ document.addEventListener('DOMContentLoaded', function () {
                     return response.text();
                 })
                 .then(data => {
-                    console.log(data);
                     const resourceContainer = document.getElementById('resource-container');
-                    resourceContainer.insertAdjacentHTML('beforeend', data);
                     
-                    const newResourcesCount = (new DOMParser().parseFromString(data, 'text/html')).querySelectorAll('.resource-card').length;
-                    if (newResourcesCount < 3) {  // Adjust to match paginator count
+                    const newResources = (new DOMParser().parseFromString(data, 'text/html')).querySelectorAll('.resource-card-col');
+                    
+                    console.log(newResources);
+
+                    newResources.forEach(resource => {
+                        resourceContainer.appendChild(resource)
+                    });
+
+                    if (newResources.length < 1) {  // Adjust to match paginator count
                         showMoreButton.style.display = 'none';
                     } else {
                         showMoreButton.setAttribute('data-page', parseInt(page) + 1);
