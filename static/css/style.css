@@ -145,6 +145,26 @@ input {
     color: var(--dark-green);
 }
 
+/* Resource Detail */
+
+.details-link a {
+    text-decoration: none;
+    color: black;
+}
+
+.details-link a:hover {
+    color: var(--dark-green);
+}
+
+.media-download a {
+    text-decoration: none;
+    color: black;
+}
+
+.media-download a:hover {
+    color: var(--dark-green);
+}
+
 /* Features */
 .feature-card {
     background: linear-gradient(155deg, var(--background-green), var(--light-green));
