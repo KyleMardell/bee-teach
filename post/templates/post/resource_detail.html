@@ -59,6 +59,28 @@
     </div>
     {% endif %}
 
+    <div class="row">
+        <div class="col">
+            <h3>{{ comment_count }} comments </h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <h4>Comments</h4>
+            {% for comment in comments %}
+            <div class="card">
+                <div class="card-body">
+                    {{ comment.body | linebreaks }}
+                </div>
+                <div class="card-footer">
+                    <p>{{ comment.author }} - {{ comment.created_on }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
 </div>
 
 {% endblock content %}

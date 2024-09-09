@@ -55,11 +55,18 @@ def resource_detail(request, slug):
 
     queryset = Resource.objects.filter(status=1)
     resource = get_object_or_404(queryset, slug=slug)
+    comments = resource.comments.all().order_by("-created_on")
+    comment_count = comments.count()
 
     images = Media.objects.filter(resource=resource.id)
 
     return render(
         request,
         "post/resource_detail.html",
-        {"resource": resource, "images": images},
+        {
+            "resource": resource,
+            "images": images,
+            "comments": comments,
+            "comment_count": comment_count,
+        },
     )
