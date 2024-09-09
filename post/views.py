@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from .models import Resource, Media, Feature
+from .forms import CommentForm
 
 
 def home_page(request):
@@ -55,10 +56,19 @@ def resource_detail(request, slug):
 
     queryset = Resource.objects.filter(status=1)
     resource = get_object_or_404(queryset, slug=slug)
+    images = Media.objects.filter(resource=resource.id)
     comments = resource.comments.all().order_by("-created_on")
     comment_count = comments.count()
 
-    images = Media.objects.filter(resource=resource.id)
+    if request.method == "POST":
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.author = request.user
+            comment.resource = resource
+            comment.save()
+
+    comment_form = CommentForm()
 
     return render(
         request,
@@ -68,5 +78,6 @@ def resource_detail(request, slug):
             "images": images,
             "comments": comments,
             "comment_count": comment_count,
+            "comment_form": comment_form,
         },
     )
