@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from .models import Resource, Media, Feature
-from .forms import CommentForm
+from .forms import CommentForm, ResourceForm, MediaForm
 
 
 def home_page(request):
@@ -79,5 +79,21 @@ def resource_detail(request, slug):
             "comments": comments,
             "comment_count": comment_count,
             "comment_form": comment_form,
+        },
+    )
+
+
+@login_required
+def resource_create(request):
+
+    resource_form = ResourceForm()
+    media_form = MediaForm()
+
+    return render(
+        request,
+        "post/resource_create.html",
+        {
+            "resource_form": resource_form,
+            "media_form": media_form,
         },
     )
