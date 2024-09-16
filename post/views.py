@@ -1,5 +1,6 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils.text import slugify
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from .models import Resource, Media, Feature
@@ -85,6 +86,20 @@ def resource_detail(request, slug):
 
 @login_required
 def resource_create(request):
+
+    if request.method == 'POST':
+        resource_form = ResourceForm(request.POST)
+        media_form = MediaForm(request.POST, request.FILES)
+        
+        if resource_form.is_valid() and media_form.is_valid():
+            resource = resource_form.save(commit=False)
+            resource.slug = slugify(resource.title)
+            resource.author = request.user
+            resource.save()
+
+            media = media_form.save(commit=False)
+            media.resource = resource
+            media.save()
 
     resource_form = ResourceForm()
     media_form = MediaForm()

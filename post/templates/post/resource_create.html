@@ -14,7 +14,7 @@
                     <p>Posting as: {{ user.username }}</p>
                 </div>
                 <div class="card-body">
-                    <form id="resourceForm" method="post">
+                    <form id="resourceForm" method="post" enctype="multipart/form-data">
                         {{ resource_form | crispy }}
                         {{ media_form | crispy }}
                         {% csrf_token %}
