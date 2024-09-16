@@ -16,7 +16,8 @@
                 <div class="card-body">
                     <form id="resourceForm" method="post" enctype="multipart/form-data">
                         {{ resource_form | crispy }}
-                        {{ media_form | crispy }}
+                        <label for="id_featured_media">Upload media</label>
+                        <input type="file" name="featured_media" id="id_featured_media" multiple>
                         {% csrf_token %}
                         <button id="submitButton" type="submit" class="btn btn-lg">Submit</button>
                     </form>

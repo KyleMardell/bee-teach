@@ -89,17 +89,16 @@ def resource_create(request):
 
     if request.method == 'POST':
         resource_form = ResourceForm(request.POST)
-        media_form = MediaForm(request.POST, request.FILES)
+        media_files = request.FILES.getlist('featured_media')
         
-        if resource_form.is_valid() and media_form.is_valid():
+        if resource_form.is_valid():
             resource = resource_form.save(commit=False)
             resource.slug = slugify(resource.title)
             resource.author = request.user
             resource.save()
-
-            media = media_form.save(commit=False)
-            media.resource = resource
-            media.save()
+            
+            for media_file in media_files:
+                Media.objects.create(resource=resource, featured_media=media_file)
 
     resource_form = ResourceForm()
     media_form = MediaForm()
