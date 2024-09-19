@@ -225,6 +225,12 @@ nav {
     font-size: 1.3rem;
 }
 
+/* Alerts */
+
+.alert-container {
+    z-index: 99;
+}
+
 /* Footer */
 
 footer {

@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.text import slugify
 from django.views import generic
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import Resource, Media, Feature
 from .forms import CommentForm, ResourceForm, MediaForm
 
@@ -68,6 +69,8 @@ def resource_detail(request, slug):
             comment.author = request.user
             comment.resource = resource
             comment.save()
+            
+            messages.success(request, "Comment Added")
 
     comment_form = CommentForm()
 
@@ -99,6 +102,9 @@ def resource_create(request):
             
             for media_file in media_files:
                 Media.objects.create(resource=resource, featured_media=media_file)
+
+            messages.success(request, "Resource Posted")
+            return redirect('resource_detail', slug=resource.slug)
 
     resource_form = ResourceForm()
     media_form = MediaForm()
