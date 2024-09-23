@@ -145,6 +145,11 @@ input {
     color: var(--dark-green);
 }
 
+/* Resource List */
+#resource-end {
+    display: none;
+}
+
 /* Resource Detail */
 
 .details-link a {
@@ -223,12 +228,6 @@ nav {
 .brand {
     font-weight: 700;
     font-size: 1.3rem;
-}
-
-/* Alerts */
-
-.alert-container {
-    z-index: 99;
 }
 
 /* Footer */

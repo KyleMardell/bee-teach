@@ -12,11 +12,10 @@ def home_page(request):
     queryset = Resource.objects.filter(status=1).order_by("-created_on")
     resources = queryset[:4]
     images = Media.objects.filter(resource__in=resources)
-    template_name = "post/index.html"
 
     return render(
         request,
-        template_name,
+        "post/index.html",
         {"resources": resources, "images": images}
     )
 
@@ -26,17 +25,16 @@ def resource_list(request):
     resources = Resource.objects.filter(status=1)
     features = Feature.objects.all()
 
-    paginator = Paginator(resources, 3)
+    paginator = Paginator(resources, 5)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
     if page_number:
         return render(request, 'post/partials/resource_list.html', {'page_obj': page_obj})
 
-    template_name = "post/resource_list.html"
     return render(
         request,
-        template_name,
+        "post/resource_list.html",
         {"page_obj": page_obj, "features": features},
     )
 

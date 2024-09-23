@@ -1,6 +1,14 @@
 console.log("Hello World!");
 
 document.addEventListener('DOMContentLoaded', function () {
+    
+    const commentFormLabel = document.querySelector('label[for="id_body"]');
+
+    if (commentFormLabel) {
+        console.log("found");
+        commentFormLabel.style.display = "none";
+    }
+
     const keyStageLabel = document.getElementById('key-stage'); // Store the element reference
 
     switch (keyStageLabel.innerText) {  // Use innerText to get the element's text

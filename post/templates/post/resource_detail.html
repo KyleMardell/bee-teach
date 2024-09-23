@@ -104,4 +104,10 @@
 
 {% block script %}
 <script src="{% static 'js/script.js' %}"></script>
+
+<!-- Script to hide the django auto generated form label -->
+<script>
+    document.querySelector('label[for="id_body"]').style.display = "none";
+</script>
 {% endblock %}
+

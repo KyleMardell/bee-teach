@@ -2,6 +2,8 @@ console.log("Resource Page")
 
 document.addEventListener('DOMContentLoaded', function () {
     const showMoreButton = document.getElementById('show-more-button');
+    const resourceContainer = document.getElementById('resource-container');
+    const resourceEnd = document.getElementById("resource-end");
     
     if (showMoreButton) {
         showMoreButton.addEventListener('click', function () {
@@ -15,18 +17,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     return response.text();
                 })
                 .then(data => {
-                    const resourceContainer = document.getElementById('resource-container');
-                    
                     const newResources = (new DOMParser().parseFromString(data, 'text/html')).querySelectorAll('.resource-card-col');
-                    
-                    console.log(newResources);
 
                     newResources.forEach(resource => {
-                        resourceContainer.appendChild(resource)
+                        resourceContainer.appendChild(resource);
                     });
 
-                    if (newResources.length < 1) {  // Adjust to match paginator count
+                    if (newResources.length < 5) {  // Adjust to match paginator count
                         showMoreButton.style.display = 'none';
+                        resourceEnd.style.display = 'block';
                     } else {
                         showMoreButton.setAttribute('data-page', parseInt(page) + 1);
                     }
