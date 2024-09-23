@@ -1,10 +1,11 @@
 from django.core.paginator import Paginator
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.utils.text import slugify
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Resource, Media, Feature
+from django.http import HttpResponseRedirect
+from .models import Resource, Media, Feature, Comment
 from .forms import CommentForm, ResourceForm, MediaForm
 
 
@@ -115,3 +116,22 @@ def resource_create(request):
             "media_form": media_form,
         },
     )
+
+@login_required
+def comment_edit(request, slug, comment_id):
+    if request.method == "POST":
+
+        queryset = Resource.objects.filter(status=1)
+        resource = get_object_or_404(queryset, slug=slug)
+        comment = get_object_or_404(Comment, pk=comment_id)
+        comment_form = CommentForm(data=request.POST, instance=comment)
+
+        if comment_form.is_valid() and comment.author == request.user:
+            comment = comment_form.save(commit=False)
+            comment.resource = resource
+            comment.save()
+            messages.success(request, "Comment updated")
+        else:
+            messages.error(request, "Error updating")
+
+    return HttpResponseRedirect(reverse('resource_detail', args=[slug]))

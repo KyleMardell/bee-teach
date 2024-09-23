@@ -87,11 +87,14 @@
             </div>
             {% for comment in comments %}
             <div class="card">
-                <div class="card-body">
+                <div id="comment{{comment.id}}" class="card-body">
                     {{ comment.body | linebreaks }}
                 </div>
                 <div class="card-footer">
                     <p>{{ comment.author }} - {{ comment.created_on }}</p>
+                    {% if user.is_authenticated and comment.author == user %}
+                        <button class="btn edit-button" data-comment_id="{{ comment.id }}">Edit</button>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}
@@ -104,6 +107,7 @@
 
 {% block script %}
 <script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/comments.js' %}"></script>
 
 <!-- Script to hide the django auto generated form label -->
 <script>
