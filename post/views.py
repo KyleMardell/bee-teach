@@ -140,10 +140,12 @@ def comment_edit(request, slug, comment_id):
 @login_required
 def user_posts_list(request):
 
+    user_resources = Resource.objects.filter(author=request.user)
+
     return render(
         request,
         "post/user_posts_list.html",
         {
-
+            "user_resources": user_resources,
         },
     )

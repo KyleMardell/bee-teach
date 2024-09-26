@@ -4,6 +4,37 @@
 
 {% block content %}
 
-<h1>User Posts</h1>
+<section class="container">
+    <div class="row my-5">
+        <div class="col">
+            <h1 class="text-center">My Resources</h1>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mb-5">
+        <div class="col-12 col-md-10 col-lg-8">
+
+            <div class="list-group w-100">
+
+                {% for resource in user_resources %}
+                <div class="list-group-item mb-2">
+
+                    <a href="{% url 'resource_detail' resource.slug %}" class="resource-link text-center">
+                        <h5 class="card-title text-truncate">{{ resource.title }}</h5>
+                    </a>
+                    <div class="d-flex w-100 justify-content-between">
+                        <small>{{ resource.created_on }}</small>
+                        <div>
+                            <button class="btn">Edit</button>
+                            <button class="btn">Delete</button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock %}
