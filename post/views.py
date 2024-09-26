@@ -135,3 +135,15 @@ def comment_edit(request, slug, comment_id):
             messages.error(request, "Error updating")
 
     return HttpResponseRedirect(reverse('resource_detail', args=[slug]))
+
+
+@login_required
+def user_posts_list(request):
+
+    return render(
+        request,
+        "post/user_posts_list.html",
+        {
+
+        },
+    )
