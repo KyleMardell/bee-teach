@@ -11,6 +11,30 @@
         </div>
     </div>
 
+    <div class="row justify-content-center my-5">
+        <div class="col col-md-10 col-lg-8 mb-5">
+            <div class="card" id="editResourceCard">
+                {% if user.is_authenticated %}
+                <div class="card-header d-flex justify-content-between">
+                    <h4>Editing Resource:</h4>
+                    <p>* Required Field</p>
+                </div>
+                <div class="card-body">
+                    <form id="editResourceForm" method="post" enctype="multipart/form-data">
+                        {{ resource_form | crispy }}
+                        <label for="id_featured_media">Upload media</label>
+                        <input type="file" name="featured_media" id="id_featured_media" multiple>
+                        {% csrf_token %}
+                        <button id="submitEditButton" type="submit" class="btn btn-lg">Submit</button>
+                    </form>
+                    {% else %}
+                    <p>Log in to edit a resource</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row justify-content-center mb-5">
         <div class="col-12 col-md-10 col-lg-8">
 
@@ -46,29 +70,7 @@
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col mb-5">
-            <div class="card">
-                {% if user.is_authenticated %}
-                <div class="card-header">
-                    <h4>Editing Resource:</h4>
-                </div>
-                <div class="card-body">
-                    <form id="editResourceForm" method="post" enctype="multipart/form-data">
-                        {{ resource_form | crispy }}
-                        <label for="id_featured_media">Upload media</label>
-                        <input type="file" name="featured_media" id="id_featured_media" multiple>
-                        {% csrf_token %}
-                        <button id="submitEditButton" type="submit" class="btn btn-lg">Submit</button>
-                    </form>
-                    {% else %}
-                    <p>Log in to edit a resource</p>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
+ 
 </section>
 
 {% endblock %}

@@ -172,7 +172,7 @@ def resource_edit(request, slug, resource_id):
                 Media.objects.create(resource=resource, featured_media=media_file)
 
             messages.success(request, "Resource Updated")
-            return redirect('resource_detail', slug=resource.slug)
+            return redirect('user_posts_list')
 
         else:
             messages.error(request, "Error updating")

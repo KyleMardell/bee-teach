@@ -6,11 +6,15 @@ const resource_content = document.getElementById("id_content");
 const resource_links = document.getElementById("id_links");
 const resource_status = document.getElementById("id_status");
 
+const resourceCard = document.getElementById("editResourceCard");
 const resourceForm = document.getElementById("editResourceForm");
 const submitButton = document.getElementById("submitEditButton");
 
 for (let button of editButtons) {
   button.addEventListener("click", (e) => {
+
+    resourceCard.style.display = "Block";
+
     let resourceId = e.target.getAttribute("data-resource_id");
     let resourceTitle = e.target.getAttribute("data-resource_title");
     let resourceKeyStage = e.target.getAttribute("data-resource_key_stage");
