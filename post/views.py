@@ -158,6 +158,7 @@ def resource_edit(request, slug, resource_id):
     if request.method == "POST":
 
         resource = get_object_or_404(Resource, pk=resource_id)
+        media_files = request.FILES.getlist('featured_media')
 
         if resource.author == request.user:
             resource_form = ResourceForm(data=request.POST, instance=resource)
