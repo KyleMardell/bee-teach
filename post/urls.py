@@ -7,5 +7,6 @@ urlpatterns = [
     path('user_posts_list/', views.user_posts_list, name='user_posts_list'),
     path('<slug:slug>/', views.resource_detail, name='resource_detail'),
     path('<slug:slug>/edit_comment/<int:comment_id>', views.comment_edit, name='comment_edit'),
+    path('<slug:slug>/edit_resource/<int:resource_id>', views.resource_edit, name='resource_edit'),
     path('', views.home_page, name='home'),
 ]

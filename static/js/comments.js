@@ -1,7 +1,7 @@
 const editButtons = document.getElementsByClassName("edit-button");
 const commentText = document.getElementById("id_body");
 const commentForm = document.getElementById("commentForm");
-const submitButton = document.getElementById("submitButton");
+const submitButton = document.getElementById("submitCommentButton");
 
 for (let button of editButtons) {
   button.addEventListener("click", (e) => {

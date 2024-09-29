@@ -141,11 +141,39 @@ def comment_edit(request, slug, comment_id):
 def user_posts_list(request):
 
     user_resources = Resource.objects.filter(author=request.user)
+    resource_form = ResourceForm()
 
     return render(
         request,
         "post/user_posts_list.html",
         {
             "user_resources": user_resources,
+            "resource_form": resource_form,
         },
     )
+
+
+@login_required
+def resource_edit(request, slug, resource_id):
+    if request.method == "POST":
+
+        resource = get_object_or_404(Resource, pk=resource_id)
+
+        if resource.author == request.user:
+            resource_form = ResourceForm(data=request.POST, instance=resource)
+
+        if resource_form.is_valid() and resource.author == request.user:
+            resource = resource_form.save(commit=False)
+            resource.slug = slugify(resource.title)
+            resource.save()
+            
+            for media_file in media_files:
+                Media.objects.create(resource=resource, featured_media=media_file)
+
+            messages.success(request, "Resource Updated")
+            return redirect('resource_detail', slug=resource.slug)
+
+        else:
+            messages.error(request, "Error updating")
+            
+            

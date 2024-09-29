@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% load crispy_forms_tags %}
 
 {% block content %}
 
@@ -25,7 +25,18 @@
                     <div class="d-flex w-100 justify-content-between">
                         <small>{{ resource.created_on }}</small>
                         <div>
-                            <button class="btn">Edit</button>
+                            {% if user.is_authenticated and resource.author == user %}
+                            <button class="btn edit-button" 
+                            data-resource_id="{{ resource.id }}"
+                            data-resource_title="{{ resource.title }}"
+                            
+                            data-resource_content="{{ resource.content }}" 
+                            data-resource_links="{{ resource.links }}" 
+                            data-resource_status="{{ resource.status }}"
+                            data-resource_key_stage="{{ resource.key_stage }}" 
+
+                            >Edit</button>
+                            {% endif %}
                             <button class="btn">Delete</button>
                         </div>
                     </div>
@@ -35,6 +46,33 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col mb-5">
+            <div class="card">
+                {% if user.is_authenticated %}
+                <div class="card-header">
+                    <h4>Editing Resource:</h4>
+                </div>
+                <div class="card-body">
+                    <form id="editResourceForm" method="post" enctype="multipart/form-data">
+                        {{ resource_form | crispy }}
+                        <label for="id_featured_media">Upload media</label>
+                        <input type="file" name="featured_media" id="id_featured_media" multiple>
+                        {% csrf_token %}
+                        <button id="submitEditButton" type="submit" class="btn btn-lg">Submit</button>
+                    </form>
+                    {% else %}
+                    <p>Log in to edit a resource</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/resource_edit.js' %}"></script>
 {% endblock %}
