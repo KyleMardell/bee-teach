@@ -13,7 +13,7 @@ const submitButton = document.getElementById("submitEditButton");
 for (let button of editButtons) {
   button.addEventListener("click", (e) => {
 
-    resourceCard.style.display = "Block";
+    resourceCard.style.display = "Flex";
 
     let resourceId = e.target.getAttribute("data-resource_id");
     let resourceTitle = e.target.getAttribute("data-resource_title");

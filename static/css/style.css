@@ -83,7 +83,7 @@ a {
 }
 
 .hero-box,
-.cta-box {
+.cta-box{
     border: 1px solid var(--darkest-green);
     border-radius: 10px;
     box-shadow: 2px 2px 4px 0 var(--darkest-green);
@@ -163,6 +163,15 @@ a {
 
 #editResourceCard {
     display: none;
+}
+
+.resource-list {
+    border: 2px solid var(--darkest-green);
+    box-shadow: 2px 2px 4px 0 var(--darkest-green);
+}
+
+.resource-list:not(:last-child) {
+    border-bottom: 3px solid var(--darkest-green);
 }
 
 /* Resource Detail */
