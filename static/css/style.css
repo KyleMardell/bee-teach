@@ -167,6 +167,10 @@ a {
 
 /* Resource Detail */
 
+.detail-card .card-body {
+    min-height: 100px;
+}
+
 .details-link a {
     text-decoration: none;
     color: black;
