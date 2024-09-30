@@ -40,6 +40,11 @@ main {
     color: var(--green);
 }
 
+.btn {
+    border: 1px solid --darkest-green;
+    box-shadow: 2px 2px 4px 0 var(--darkest-green);
+}
+
 /* Fonts */
 h1,
 h2,
@@ -50,13 +55,19 @@ h6,
 a,
 .hero-btn,
 button,
+.btn,
 label {
     font-family: "Concert One", sans-serif;
 }
 
 p,
-input {
+input,
+li {
     font-family: "Farsan", sans-serif;
+}
+
+a {
+    color: var(--dark-green);
 }
 
 /* Hero */

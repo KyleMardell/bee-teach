@@ -7,11 +7,11 @@
 {% block content %}
 <div class="container">
   <div class="row">
-    <div class="col-md-8 mt-3 offset-md-2">
+    <div class="col-md-8 mt-3 offset-md-2 text-center">
       <h3>{% trans "Sign Up" %}</h3>
 
       <p>{% blocktrans %}
-        Welcome back to the code|star blog.
+        Welcome to Bee Teach, the educational community hive.<br>
         Do you already have an account? Then please
         <a class="link" href="{{ login_url }}">sign in</a>
         instead.
@@ -28,8 +28,10 @@
         <input type="hidden" name="{{ redirect_field_name }}"
           value="{{ redirect_field_value }}" />
         {% endif %}
-        <button class="btn btn-signup right" type="submit">
-          {% trans "Sign Up" %} &raquo;</button>
+        <div class="text-center">
+          <button class="btn btn-signup right" type="submit">
+            {% trans "Sign Up" %} &raquo;</button>
+        </div>
       </form>
     </div>
   </div>
