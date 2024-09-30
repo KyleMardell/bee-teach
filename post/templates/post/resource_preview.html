@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center">Draft Resource</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card my-5">
+                <div class="card-header">
+                    <h1 class="text-center mb-2 mt-3">{{ resource.title }}</h1>
+                    <p class="m-0 key-stage text-end fs-6">{{ resource.key_stage }}</p>
+                    <p class="text-end fs-6">Shared by {{ resource.author }} on {{ resource.created_on }}</p>
+                </div>
+                <div class="card-body">
+                    <article class="text-center fs-5">
+                        {{ resource.content | safe}}
+                    </article>
+                    {% if resource.media %}
+                    <div id="carouselResourceDetail{{ resource.id }}" class="carousel slide card-carousel">
+                        <div class="carousel-inner">
+                            {% for media in resource.media.all %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <div class="card-img-box">
+                                    <img src="{{ media.featured_media.url }}" class="resource-image d-block"
+                                        alt="Image for {{ resource.title }}" />
+                                </div>
+                                <div class="media-download text-center">
+                                    <a href="{{ media.featured_media.url }}" download="{{ media.featured_media.name }}"
+                                        class="btn" target="_blank">Download Media</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <button class="carousel-control-prev" type="button"
+                            data-bs-target="#carouselResourceDetail{{ resource.id }}" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon dark-bg" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button"
+                            data-bs-target="#carouselResourceDetail{{ resource.id }}" data-bs-slide="next">
+                            <span class="carousel-control-next-icon dark-bg" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    {% endif %}
+                </div>
+                {% if resource.links %}
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col col-12 text-truncate text-center details-link">
+                            Link -
+                            <a href="{{ resource.links }}" target="_blank"
+                                aria-label="link to external website, opens in a new page">
+                                {{ resource.links }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row  justify-content-center mb-5">
+        <div class="col">
+            <a class="btn" href="{% url 'user_posts_list' %}">Back to My Resources</a>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/script.js' %}"></script>
+{% endblock %}
+

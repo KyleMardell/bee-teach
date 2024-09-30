@@ -87,6 +87,22 @@ def resource_detail(request, slug):
 
 
 @login_required
+def resource_preview(request, slug):
+    queryset = Resource.objects.filter(author=request.user)
+    resource = get_object_or_404(queryset, slug=slug)
+    images = Media.objects.filter(resource=resource.id)
+
+    return render(
+        request,
+        "post/resource_preview.html",
+        {
+            "resource": resource,
+            "images": images,
+        },
+    )
+
+
+@login_required
 def resource_create(request):
 
     if request.method == 'POST':
