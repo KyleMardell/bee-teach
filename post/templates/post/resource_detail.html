@@ -9,7 +9,7 @@
 
     <div class="row">
         <div class="col">
-            <div class="card my-5">
+            <div class="card detail-card my-5">
                 <div class="card-header">
                     <h1 class="text-center mb-2 mt-3">{{ resource.title }}</h1>
                     <p id="key-stage" class="m-0 key-stage text-end fs-6">{{ resource.key_stage }}</p>
@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="media-download text-center">
                                     <a href="{{ media.featured_media.url }}" download="{{ media.featured_media.name }}"
-                                        class="btn" target="_blank">Download Media</a>
+                                        class="btn my-2" target="_blank">Download Media</a>
                                 </div>
                             </div>
                             {% endfor %}

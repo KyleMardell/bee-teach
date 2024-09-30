@@ -9,7 +9,7 @@
 
     <div class="row mt-5">
         <div class="col">
-            <h1 class="text-center">Draft Resource</h1>
+            <h1 class="text-center">Resource Draft</h1>
         </div>
     </div>
 
@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="media-download text-center">
                                     <a href="{{ media.featured_media.url }}" download="{{ media.featured_media.name }}"
-                                        class="btn" target="_blank">Download Media</a>
+                                        class="btn my-3" target="_blank">Download Media</a>
                                 </div>
                             </div>
                             {% endfor %}
@@ -72,7 +72,7 @@
     </div>
 
     <div class="row  justify-content-center mb-5">
-        <div class="col">
+        <div class="col text-center">
             <a class="btn" href="{% url 'user_posts_list' %}">Back to My Resources</a>
         </div>
     </div>
