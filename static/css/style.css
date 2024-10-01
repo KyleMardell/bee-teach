@@ -70,6 +70,44 @@ a {
     color: var(--dark-green);
 }
 
+
+.btn {
+    background-color: var(--darkest-green);
+    color: var(--text-grey);
+    border: 2px solid var(--dark-green);
+}
+
+.btn:hover {
+    background-color: var(--dark-green);
+    color: var(--text-grey);
+}
+
+/* Borders */
+
+.feature-box,
+.hero-box,
+.cta-box {
+    border-radius: 10px;
+    border: 2px solid var(--dark-green);
+    box-shadow: 4px 4px 8px 0 var(--darkest-green);
+}
+
+.create-resource-card,
+.resource-list {
+    border: 2px solid var(--darkest-green);
+    box-shadow: 2px 2px 4px 0 var(--darkest-green);
+}
+
+#id_key_stage,
+#id_status,
+#id_links,
+.note-editor.note-airframe, 
+.note-editor.note-frame,
+.slim-border,
+.textinput {
+    border: 1px solid var(--darkest-green);
+}
+
 /* Hero */
 
 .logo-text h1 {
@@ -82,28 +120,10 @@ a {
     background-color: var(--background-green);
 }
 
-.hero-box,
-.cta-box{
-    border: 1px solid var(--darkest-green);
-    border-radius: 10px;
-    box-shadow: 2px 2px 4px 0 var(--darkest-green);
-}
-
 .hero-box h2,
 .cta-box h2 {
     border-bottom: 1px solid var(--darkest-green);
     padding-bottom: 10px;
-}
-
-.hero-btn {
-    background-color: var(--darkest-green);
-    color: var(--text-grey);
-    border: 2px solid var(--dark-green);
-}
-
-.hero-btn:hover {
-    background-color: var(--dark-green);
-    color: var(--text-grey);
 }
 
 .cartoon-bee {
@@ -122,6 +142,7 @@ a {
     background-color: var(--background-green);
     border-radius: 10px;
     border: 3px solid var(--dark-green);
+    box-shadow: 2px 2px 4px 0 var(--darkest-green);
     max-height: 320px;
     height: 320px;
 }
@@ -156,7 +177,8 @@ a {
     color: var(--dark-green);
 }
 
-/* Resource List */
+/* Create Resource */
+
 #resource-end,
 #editResourceCard,
 .note-view,
@@ -164,8 +186,7 @@ a {
 .note-table,
 .note-fontname,
 .note-color,
-.note-style
- {
+.note-style {
     display: none;
 }
 
@@ -177,10 +198,7 @@ a {
     height: 40px
 }
 
-.resource-list {
-    border: 2px solid var(--darkest-green);
-    box-shadow: 2px 2px 4px 0 var(--darkest-green);
-}
+/* Resource List */
 
 .resource-list:not(:last-child) {
     border-bottom: 3px solid var(--darkest-green);
@@ -221,12 +239,6 @@ a {
 
 .feature-card-text {
     font-size: 1.3rem;
-}
-
-.feature-box {
-    border-radius: 10px;
-    border: 2px solid var(--dark-green);
-    box-shadow: 4px 4px 8px 0 var(--darkest-green);
 }
 
 .feature-resource-card {
