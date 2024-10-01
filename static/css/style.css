@@ -157,12 +157,24 @@ a {
 }
 
 /* Resource List */
-#resource-end {
+#resource-end,
+#editResourceCard,
+.note-view,
+.note-insert,
+.note-table,
+.note-fontname,
+.note-color,
+.note-style
+ {
     display: none;
 }
 
-#editResourceCard {
-    display: none;
+.note-editable {
+    min-height: 300px;
+}
+
+#id_links {
+    height: 40px
 }
 
 .resource-list {
