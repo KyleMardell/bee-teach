@@ -165,7 +165,6 @@ a {
     object-fit: contain;
     margin-left: auto;
     margin-right: auto;
-    box-shadow: 0 0 4px 0 var(--yellow)
 }
 
 .resource-link {

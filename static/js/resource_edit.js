@@ -24,7 +24,6 @@ for (let button of editButtons) {
 
     resource_title.value = resourceTitle;
     resource_key_stage.value = resourceKeyStage;
-    //resource_content.value = resourceContent;
     resource_links.value = resourceLinks;
     resource_status.value = resourceStatus;
 
