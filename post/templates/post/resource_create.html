@@ -10,8 +10,8 @@
             <div class="card create-resource-card">
                 {% if user.is_authenticated %}
                 <div class="card-header slim-border">
-                    <h4 class="text-center">Posting New Resource</h4>
-                    <p class="mb-0">Posting as: {{ user.username }}</p>
+                    <h4 class="text-center fs-2">Posting New Resource</h4>
+                    <p class="mb-0 d-flex justify-content-between"><span>Posting as: {{ user.username }}</span><span>*Required field</span></p>
                 </div>
                 <div class="card-body slim-border">
                     <form id="resourceForm" method="post" enctype="multipart/form-data">

@@ -197,7 +197,23 @@ a {
     height: 40px
 }
 
+.create-resource-card  .card-header {
+    background: linear-gradient(150deg, var(--light-green), var(--green));
+}
+.create-resource-card  .card-body,
+.create-resource-card textarea,
+.create-resource-card textarea:focus,
+.create-resource-card select,
+.create-resource-card input,
+.create-resource-card input:focus {
+    background-color: var(--background-green);
+}
+
 /* Resource List */
+
+.resource-list {
+    background-color: var(--background-green);
+}
 
 .resource-list:not(:last-child) {
     border-bottom: 3px solid var(--darkest-green);

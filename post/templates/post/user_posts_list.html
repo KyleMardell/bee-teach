@@ -25,7 +25,8 @@
                         <label for="id_featured_media">Upload media</label>
                         <input type="file" name="featured_media" id="id_featured_media" multiple>
                         {% csrf_token %}
-                        <button id="submitEditButton" type="submit" class="btn btn-lg">Submit</button>
+                        <button id="submitEditButton" type="submit" class="btn btn-lg mx-2">Submit</button>
+                        <a href="{% url 'user_posts_list' %}" class="btn btn-lg">Cancel</a>
                     </form>
                     {% else %}
                     <p>Log in to edit a resource</p>
