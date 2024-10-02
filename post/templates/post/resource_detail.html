@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% load static %}
 {% load crispy_forms_tags %}
 
@@ -7,46 +6,55 @@
 
 <div class="container">
 
-    <div class="row">
-        <div class="col">
-            <div class="card detail-card my-5">
+    <div class="row justify-content-center">
+        <div class="col-11 col-md-10 col-xl-8">
+            <div class="card detail-card my-3">
                 <div class="card-header">
-                    <h1 class="text-center mb-2 mt-3">{{ resource.title }}</h1>
+                    <h1 class="text-center my-1">{{ resource.title }}</h1>
                     <p id="key-stage" class="m-0 key-stage text-end fs-6">{{ resource.key_stage }}</p>
-                    <p class="text-end fs-6">Shared by {{ resource.author }} on {{ resource.created_on }}</p>
+                    <p class="m-0 text-end fs-6">Shared by {{ resource.author }} on {{ resource.created_on }}</p>
                 </div>
                 <div class="card-body">
                     <article class="text-center fs-5">
                         {{ resource.content | safe}}
                     </article>
-                    {% if resource.media %}
                     <div id="carouselResourceDetail{{ resource.id }}" class="carousel slide card-carousel">
                         <div class="carousel-inner">
-                            {% for media in resource.media.all %}
-                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                <div class="card-img-box">
-                                    <img src="{{ media.featured_media.url }}" class="resource-image d-block"
-                                        alt="Image for {{ resource.title }}" />
+                            {% if resource.media.all %}
+                                {% for media in resource.media.all %}
+                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                    <div class="card-img-box">
+                                        <img src="{{ media.featured_media.url }}" class="resource-image d-block"
+                                            alt="Image for {{ resource.title }}" />
+                                    </div>
+                                    <div class="media-download text-center">
+                                        <a href="{{ media.featured_media.url }}" download="{{ media.featured_media.name }}"
+                                            class="btn my-2" target="_blank">Download Media</a>
+                                    </div>
                                 </div>
-                                <div class="media-download text-center">
-                                    <a href="{{ media.featured_media.url }}" download="{{ media.featured_media.name }}"
-                                        class="btn my-2" target="_blank">Download Media</a>
+                                {% endfor %}
+                            {% else %}
+                                <div class="carousel-item active">
+                                    <div class="card-img-box">
+                                        <img src="{% static 'images/bee-heart.png' %}" class="resource-image d-block" alt="cartoon bee">
+                                    </div>
                                 </div>
-                            </div>
-                            {% endfor %}
+                            {% endif %}
                         </div>
-                        <button class="carousel-control-prev" type="button"
-                            data-bs-target="#carouselResourceDetail{{ resource.id }}" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon dark-bg" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button"
-                            data-bs-target="#carouselResourceDetail{{ resource.id }}" data-bs-slide="next">
-                            <span class="carousel-control-next-icon dark-bg" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
+                        {% if resource.media.count > 1 %}
+                            <button class="carousel-control-prev" type="button"
+                                data-bs-target="#carouselResourceDetail{{ resource.id }}" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon dark-bg" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                data-bs-target="#carouselResourceDetail{{ resource.id }}" data-bs-slide="next">
+                                <span class="carousel-control-next-icon dark-bg" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        {% endif %}
                     </div>
-                    {% endif %}
+                    
                 </div>
                 {% if resource.links %}
                 <div class="card-footer">
@@ -65,13 +73,13 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col mb-5">
+    <div class="row justify-content-center">
+        <div class="col-11 col-md-10 col-xl-8 mb-5">
             <h3>Comments: {{ comment_count }}</h3>
             <div class="card">
                 {% if user.is_authenticated %}
                 <div class="card-header">
-                    <h4>Leave a comment:</h4>
+                    <h4>Leave a comment <i class="fa-regular fa-comment"></i></h4>
                     <p>Commenting as: {{ user.username }}</p>
                 </div>
                 <div class="card-body">

@@ -220,7 +220,7 @@ a {
 
 .media-download a {
     text-decoration: none;
-    color: black;
+    color: var(--text-grey);
 }
 
 .media-download a:hover {

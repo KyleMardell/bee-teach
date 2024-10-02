@@ -6,24 +6,29 @@
             <div id="carouselResource{{ resource.id }}" class="carousel slide card-carousel" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     {% if resource.media.all %}
-                        {% for media in resource.media.all %}
-                        <div class="carousel-item card-img-box {% if forloop.first %}active{% endif %}">
-                            <img src="{{ media.featured_media.url }}" class="resource-image d-block"
-                                alt="Image for {{ resource.title }}" />
-                        </div>
-                        {% endfor %}
+                    {% for media in resource.media.all %}
+                    <div class="carousel-item card-img-box {% if forloop.first %}active{% endif %}">
+                        <img src="{{ media.featured_media.url }}" class="resource-image d-block"
+                            alt="Image for {{ resource.title }}" />
+                    </div>
+                    {% endfor %}
                     {% else %}
-                        <div class="carousel-item card-img-box active">
-                            <img src="{% static 'images/bee-heart.png' %}" class="resource-image d-block" alt="cartoon bee">
-                        </div>
+                    <div class="carousel-item card-img-box active">
+                        <img src="{% static 'images/bee-heart.png' %}" class="resource-image d-block" alt="cartoon bee">
+                    </div>
                     {% endif %}
                 </div>
             </div>
             <div class="card-body">
-
                 <h5 class="card-title text-truncate">{{ resource.title }}</h5>
-
-                <p class="card-text text-end">By {{ resource.author }}</p>
+                <p class="card-text {% if resource.comments.count > 0 %} d-flex justify-content-between {% else %} text-end {% endif %}">
+                    {% if resource.comments.count > 0 %}
+                    <span>
+                        {{ resource.comments.count }} <i class="fa-regular fa-comment"></i>
+                    </span>
+                    {% endif %}
+                    <span>By {{ resource.author }}</span>
+                </p>
             </div>
         </div>
     </a>
