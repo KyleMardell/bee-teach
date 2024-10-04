@@ -62,7 +62,8 @@ label {
 
 p,
 input,
-li {
+li,
+article {
     font-family: "Farsan", sans-serif;
 }
 
@@ -93,7 +94,8 @@ a {
 }
 
 .create-resource-card,
-.resource-list {
+.resource-list,
+.detail-card {
     border: 2px solid var(--darkest-green);
     box-shadow: 2px 2px 4px 0 var(--darkest-green);
 }
@@ -104,8 +106,16 @@ a {
 .note-editor.note-airframe, 
 .note-editor.note-frame,
 .slim-border,
-.textinput {
+.textinput,
+#commentAccordion,
+.comment-card {
     border: 1px solid var(--darkest-green);
+}
+
+.detail-card > .card-body,
+.comment-card > .card-body {
+    border-top: 1px solid var(--darkest-green);
+    border-bottom: 1px solid var(--darkest-green);
 }
 
 /* Hero */
@@ -223,6 +233,15 @@ a {
 
 .detail-card .card-body {
     min-height: 100px;
+    background-color: var(--background-green);
+}
+
+.detail-card .card-header {
+    background: linear-gradient(150deg, var(--light-green), var(--green));
+}
+
+.detail-card .card-footer {
+    background: linear-gradient(150deg, var(--green), var(--light-green));
 }
 
 .details-link a {
@@ -242,6 +261,22 @@ a {
 .media-download a:hover {
     color: var(--dark-green);
 }
+
+/* Comments */
+.accordion-button {
+    background: linear-gradient(155deg, var(--light-green), var(--green));   
+}
+
+.accordion-button:not(.collapsed),
+.comment-card .card-footer {
+    background: var(--light-green);
+}
+
+.accordion-collapse,
+.comment-card .card-body {
+    background-color: var(--background-green);
+}
+
 
 /* Features */
 .feature-card {

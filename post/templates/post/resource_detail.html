@@ -6,7 +6,7 @@
 
 <div class="container">
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center my-5">
         <div class="col-11 col-md-10 col-xl-8">
             <div class="card detail-card my-3">
                 <div class="card-header">
@@ -73,33 +73,42 @@
         </div>
     </div>
 
-    <div class="row justify-content-center">
-        <div class="col-11 col-md-10 col-xl-8 mb-5">
+    <div class="row justify-content-center mb-5">
+        <div class="col-11 col-md-10 col-xl-8">
             <h3>Comments: {{ comment_count }}</h3>
-            <div class="card">
-                {% if user.is_authenticated %}
-                <div class="card-header">
-                    <h4>Leave a comment <i class="fa-regular fa-comment"></i></h4>
-                    <p>Commenting as: {{ user.username }}</p>
-                </div>
-                <div class="card-body">
-                    <form id="commentForm" method="post">
-                        {{ comment_form | crispy }}
-                        {% csrf_token %}
-                        <button id="submitCommentButton" type="submit" class="btn btn-lg">Submit</button>
-                    </form>
-                    {% else %}
-                    <p>Log in to leave a comment</p>
-                    {% endif %}
+            <div class="accordion accordion-flush rounded mb-3" id="commentAccordion">
+                <div class="accordion-item rounded">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        <div class="d-md-flex justify-content-between w-100">
+                            <h4>Leave a comment <i class="fa-regular fa-comment"></i></h4>
+                            <p class="m-2 mb-0">Commenting as: {{ user.username }}</p>
+                        </div>
+                    </button>
+                  </h2>
+                  <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#commentAccordion">
+                    <div class="accordion-body">
+                        {% if user.is_authenticated %}
+                            <form id="commentForm" method="post">
+                                {{ comment_form | crispy }}
+                                {% csrf_token %}
+                                <button id="submitCommentButton" type="submit" class="btn btn-lg">Submit</button>
+                            </form>
+                        {% else %}
+                        <p>Log in to leave a comment</p>
+                        {% endif %}
+                    </div>
+                  </div>
                 </div>
             </div>
+
             {% for comment in comments %}
-            <div class="card">
+            <div class="card comment-card mb-3">
                 <div id="comment{{comment.id}}" class="card-body">
                     {{ comment.body | linebreaks }}
                 </div>
-                <div class="card-footer">
-                    <p>{{ comment.author }} - {{ comment.created_on }}</p>
+                <div class="card-footer d-flex justify-content-between">
+                    <p class="mb-0"><span class="fw-bold">{{ comment.author }}</span> - {{ comment.created_on }}</p>
                     {% if user.is_authenticated and comment.author == user %}
                         <button class="btn edit-button" data-comment_id="{{ comment.id }}">Edit</button>
                     {% endif %}
@@ -117,9 +126,10 @@
 <script src="{% static 'js/script.js' %}"></script>
 <script src="{% static 'js/comments.js' %}"></script>
 
-<!-- Script to hide the django auto generated form label -->
+<!-- Script to hide the django auto generated form label and add a placeholder to the textarea input -->
 <script>
     document.querySelector('label[for="id_body"]').style.display = "none";
+    document.getElementById("id_body").placeholder = "Enter Comment Here";
 </script>
 {% endblock %}
 

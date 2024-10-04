@@ -1,6 +1,7 @@
 # Bee Teach
 
 A place for teachers to share educational resources.
+[Live App](https://bee-teach-95df758315f5.herokuapp.com/)
 
 ### Images
 
