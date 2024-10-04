@@ -118,8 +118,12 @@ def resource_create(request):
             for media_file in media_files:
                 Media.objects.create(resource=resource, featured_media=media_file)
 
-            messages.success(request, "Resource Posted")
-            return redirect('resource_detail', slug=resource.slug)
+            if resource.status == 1:
+                messages.success(request, "Resource Posted")
+                return redirect('resource_detail', slug=resource.slug)
+            else:
+                messages.success(request, "Resource Draft Created (Publish your post from the 'My Resources' Page)")
+                return redirect('user_posts_list')
 
     resource_form = ResourceForm()
     media_form = MediaForm()

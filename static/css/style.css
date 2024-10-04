@@ -63,7 +63,8 @@ label {
 p,
 input,
 li,
-article {
+article,
+.alert {
     font-family: "Farsan", sans-serif;
 }
 
