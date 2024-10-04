@@ -41,6 +41,22 @@ def resource_list(request):
 
 
 @login_required
+def user_posts_list(request):
+
+    user_resources = Resource.objects.filter(author=request.user)
+    resource_form = ResourceForm()
+
+    return render(
+        request,
+        "post/user_posts_list.html",
+        {
+            "user_resources": user_resources,
+            "resource_form": resource_form,
+        },
+    )
+
+
+@login_required
 def resource_detail(request, slug):
     """
     Display an individual :model:`post.Resource`.
@@ -137,41 +153,6 @@ def resource_create(request):
         },
     )
 
-@login_required
-def comment_edit(request, slug, comment_id):
-    if request.method == "POST":
-
-        queryset = Resource.objects.filter(status=1)
-        resource = get_object_or_404(queryset, slug=slug)
-        comment = get_object_or_404(Comment, pk=comment_id)
-        comment_form = CommentForm(data=request.POST, instance=comment)
-
-        if comment_form.is_valid() and comment.author == request.user:
-            comment = comment_form.save(commit=False)
-            comment.resource = resource
-            comment.save()
-            messages.success(request, "Comment updated")
-        else:
-            messages.error(request, "Error updating")
-
-    return HttpResponseRedirect(reverse('resource_detail', args=[slug]))
-
-
-@login_required
-def user_posts_list(request):
-
-    user_resources = Resource.objects.filter(author=request.user)
-    resource_form = ResourceForm()
-
-    return render(
-        request,
-        "post/user_posts_list.html",
-        {
-            "user_resources": user_resources,
-            "resource_form": resource_form,
-        },
-    )
-
 
 @login_required
 def resource_edit(request, slug, resource_id):
@@ -198,3 +179,36 @@ def resource_edit(request, slug, resource_id):
             messages.error(request, "Error updating")
             
             
+@login_required
+def comment_edit(request, slug, comment_id):
+    if request.method == "POST":
+
+        queryset = Resource.objects.filter(status=1)
+        resource = get_object_or_404(queryset, slug=slug)
+        comment = get_object_or_404(Comment, pk=comment_id)
+        comment_form = CommentForm(data=request.POST, instance=comment)
+
+        if comment_form.is_valid() and comment.author == request.user:
+            comment = comment_form.save(commit=False)
+            comment.resource = resource
+            comment.save()
+            messages.success(request, "Comment updated")
+        else:
+            messages.error(request, "Error updating")
+
+    return HttpResponseRedirect(reverse('resource_detail', args=[slug]))
+
+
+def comment_delete(request, slug, comment_id):
+
+    queryset = Resource.objects.filter(status=1)
+    resource = get_object_or_404(queryset, slug=slug)
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    if comment.author == request.user:
+        comment.delete()
+        messages.success(request, 'Comment deleted!')
+    else:
+        messages.error(request, 'You can only delete your own comments!')
+
+    return HttpResponseRedirect(reverse('resource_detail', args=[slug]))

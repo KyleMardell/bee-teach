@@ -111,15 +111,32 @@
                     <p class="mb-0"><span class="fw-bold">{{ comment.author }}</span> - {{ comment.created_on }}</p>
                     {% if user.is_authenticated and comment.author == user %}
                         <button class="btn edit-button" data-comment_id="{{ comment.id }}">Edit</button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteCommentModal{{ comment.id }}"> Delete </button>
                     {% endif %}
+                </div>
+            </div>
+
+            <div class="modal fade" id="deleteCommentModal{{ comment.id }}" tabindex="-1" aria-labelledby="deleteCommentModalLabel{{ comment.id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteCommentModalLabel{{ comment.id }}">Delete Comment?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete your comment?
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a id="confirmCommentDelete{{ comment.id }}" href="{% url 'comment_delete' resource.slug comment.id %}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
-
 </div>
-
 {% endblock content %}
 
 {% block script %}

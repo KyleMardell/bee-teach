@@ -8,6 +8,7 @@ urlpatterns = [
     path('<slug:slug>/resource_preview', views.resource_preview, name='resource_preview'),
     path('<slug:slug>/resource_detail', views.resource_detail, name='resource_detail'),
     path('<slug:slug>/edit_comment/<int:comment_id>', views.comment_edit, name='comment_edit'),
+    path('<slug:slug>/delete_comment/<int:comment_id>', views.comment_delete, name='comment_delete'),
     path('<slug:slug>/edit_resource/<int:resource_id>', views.resource_edit, name='resource_edit'),
     path('', views.home_page, name='home'),
 ]
