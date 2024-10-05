@@ -177,8 +177,23 @@ def resource_edit(request, slug, resource_id):
 
         else:
             messages.error(request, "Error updating")
-            
-            
+
+
+@login_required
+def resource_delete(request, slug):
+
+    queryset = Resource.objects.filter(author=request.user)
+    resource = get_object_or_404(queryset, slug=slug)
+
+    if resource.author == request.user:
+        resource.delete()
+        messages.success(request, 'Resource deleted!')
+    else:
+        messages.error(request, 'An error occurred.')
+
+    return redirect('user_posts_list')
+
+
 @login_required
 def comment_edit(request, slug, comment_id):
     if request.method == "POST":
@@ -199,6 +214,7 @@ def comment_edit(request, slug, comment_id):
     return HttpResponseRedirect(reverse('resource_detail', args=[slug]))
 
 
+@login_required
 def comment_delete(request, slug, comment_id):
 
     queryset = Resource.objects.filter(status=1)

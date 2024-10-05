@@ -5,6 +5,7 @@
 {% block content %}
 
 <section class="container">
+    
     <div class="row my-5">
         <div class="col">
             <h1 class="text-center">My Resources</h1>
@@ -40,10 +41,8 @@
         <div class="col-12 col-md-10 col-lg-8">
 
             <div class="list-group w-100">
-
                 {% for resource in user_resources %}
                 <div class="list-group-item resource-list">
-
                     {% if resource.status == 0 %}
                     <a href="{% url 'resource_preview' resource.slug %}" class="resource-link text-center">
                     {% else %}
@@ -56,30 +55,51 @@
                         <div>
                             {% if user.is_authenticated and resource.author == user %}
                             <a href="#editResourceForm">
-                                <button class="btn edit-button my-2" 
-                                data-resource_id="{{ resource.id }}"
-                                data-resource_title="{{ resource.title }}"
-                                
-                                data-resource_content="{{ resource.content }}" 
-                                data-resource_links="{{ resource.links }}" 
-                                data-resource_status="{{ resource.status }}"
-                                data-resource_key_stage="{{ resource.key_stage }}" 
-
-                                >Edit</button>
+                                <button class="btn edit-button my-2" data-resource_id="{{ resource.id }}"
+                                    data-resource_title="{{ resource.title }}"
+                                    data-resource_content="{{ resource.content }}"
+                                    data-resource_links="{{ resource.links }}"
+                                    data-resource_status="{{ resource.status }}"
+                                    data-resource_key_stage="{{ resource.key_stage }}">
+                                    Edit
+                                </button>
                             </a>
                             {% endif %}
-                            <button class="btn m-2">Delete</button>
+                            <button type="button" class="btn m-2" data-bs-toggle="modal"
+                                data-bs-target="#deleteResourceModal{{ resource.id }}">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="deleteResourceModal{{ resource.id }}" tabindex="-1"
+                    aria-labelledby="deleteResourceModal{{ resource.id }}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="deleteResourceModal{{ resource.id }}Label">
+                                    Delete resource?
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete your resource?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                                <a id="confirmResourceDelete{{ resource.id }}"
+                                    href="{% url 'resource_delete' resource.slug %}" class="btn">Delete</a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
-
             </div>
+
         </div>
     </div>
- 
 </section>
-
 {% endblock %}
 
 {% block script %}
