@@ -31,7 +31,8 @@ def resource_list(request):
     page_obj = paginator.get_page(page_number)
 
     if page_number:
-        return render(request, 'post/partials/resource_list.html', {'page_obj': page_obj})
+        return render(request, 'post/partials/resource_list.html',
+                      {'page_obj': page_obj})
 
     return render(
         request,
@@ -84,7 +85,7 @@ def resource_detail(request, slug):
             comment.author = request.user
             comment.resource = resource
             comment.save()
-            
+
             messages.success(request, "Comment Added")
 
     comment_form = CommentForm()
@@ -124,21 +125,24 @@ def resource_create(request):
     if request.method == 'POST':
         resource_form = ResourceForm(request.POST)
         media_files = request.FILES.getlist('featured_media')
-        
+
         if resource_form.is_valid():
             resource = resource_form.save(commit=False)
             resource.slug = slugify(resource.title)
             resource.author = request.user
             resource.save()
-            
+
             for media_file in media_files:
-                Media.objects.create(resource=resource, featured_media=media_file)
+                Media.objects.create(resource=resource,
+                                     featured_media=media_file)
 
             if resource.status == 1:
                 messages.success(request, "Resource Posted")
                 return redirect('resource_detail', slug=resource.slug)
             else:
-                messages.success(request, "Resource Draft Created (Publish your post from the 'My Resources' Page)")
+                messages.success(
+                    request, "Resource Draft Created" +
+                    " (Publish your post from the 'My Resources' Page)")
                 return redirect('user_posts_list')
 
     resource_form = ResourceForm()
@@ -168,9 +172,10 @@ def resource_edit(request, slug, resource_id):
             resource = resource_form.save(commit=False)
             resource.slug = slugify(resource.title)
             resource.save()
-            
+
             for media_file in media_files:
-                Media.objects.create(resource=resource, featured_media=media_file)
+                Media.objects.create(resource=resource,
+                                     featured_media=media_file)
 
             messages.success(request, "Resource Updated")
             return redirect('user_posts_list')

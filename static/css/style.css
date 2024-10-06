@@ -41,7 +41,7 @@ main {
 }
 
 .btn {
-    border: 1px solid --darkest-green;
+    border: 1px solid var(--darkest-green);
     box-shadow: 2px 2px 4px 0 var(--darkest-green);
 }
 

@@ -9,7 +9,7 @@
                     {% for media in resource.media.all %}
                     <div class="carousel-item card-img-box {% if forloop.first %}active{% endif %}">
                         <img src="{{ media.featured_media.url }}" class="resource-image d-block"
-                            alt="Image for {{ resource.title }}" />
+                            alt="Image for {{ resource.title }}">
                     </div>
                     {% endfor %}
                     {% else %}

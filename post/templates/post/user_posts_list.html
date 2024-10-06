@@ -54,15 +54,13 @@
                         <small>{{ resource.created_on }}</small>
                         <div>
                             {% if user.is_authenticated and resource.author == user %}
-                            <a href="#editResourceForm">
-                                <button class="btn edit-button my-2" data-resource_id="{{ resource.id }}"
+                            <a href="#editResourceForm" class="btn edit-button my-2" data-resource_id="{{ resource.id }}"
                                     data-resource_title="{{ resource.title }}"
                                     data-resource_content="{{ resource.content }}"
                                     data-resource_links="{{ resource.links }}"
                                     data-resource_status="{{ resource.status }}"
                                     data-resource_key_stage="{{ resource.key_stage }}">
                                     Edit
-                                </button>
                             </a>
                             {% endif %}
                             <button type="button" class="btn m-2" data-bs-toggle="modal"

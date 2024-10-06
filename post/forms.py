@@ -8,10 +8,12 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('body',)
 
+
 class ResourceForm(forms.ModelForm):
     class Meta:
         model = Resource
         fields = ('title', 'key_stage', 'content', 'links', 'status',)
+
 
 class MediaForm(forms.ModelForm):
     class Meta:
@@ -20,7 +22,7 @@ class MediaForm(forms.ModelForm):
 
     def clean_featured_media(self):
         media = self.cleaned_data.get('featured_media')
-        
+
         if media and not media.content_type.startswith('image'):
             raise forms.ValidationError("Only image files are allowed.")
 

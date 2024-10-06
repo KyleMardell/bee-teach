@@ -16,6 +16,7 @@
                 </div>
                 <div class="card-body">
                     <article class="text-center fs-5">
+                        <h2 class="d-none">Article title: {{ resource.title }}</h2>
                         {{ resource.content | safe}}
                     </article>
                     <div id="carouselResourceDetail{{ resource.id }}" class="carousel slide card-carousel">
@@ -25,7 +26,7 @@
                                 <div class="carousel-item {% if forloop.first %}active{% endif %}">
                                     <div class="card-img-box">
                                         <img src="{{ media.featured_media.url }}" class="resource-image d-block"
-                                            alt="Image for {{ resource.title }}" />
+                                            alt="Image for {{ resource.title }}">
                                     </div>
                                     <div class="media-download text-center">
                                         <a href="{{ media.featured_media.url }}" download="{{ media.featured_media.name }}"
@@ -79,11 +80,9 @@
             <div class="accordion accordion-flush rounded mb-3" id="commentAccordion">
                 <div class="accordion-item rounded">
                   <h2 class="accordion-header">
-                    <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                        <div class="d-md-flex justify-content-between w-100">
-                            <h4>Leave a comment <i class="fa-regular fa-comment"></i></h4>
-                            <p class="m-2 mb-0">Commenting as: {{ user.username }}</p>
-                        </div>
+                    <button class="accordion-button collapsed rounded d-md-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        <span>Leave a comment <i class="fa-regular fa-comment"></i></span>
+                        <small class="mb-0 ms-auto">Commenting as: {{ user.username }}</small>
                     </button>
                   </h2>
                   <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#commentAccordion">
@@ -111,7 +110,7 @@
                     <p class="mb-0"><span class="fw-bold">{{ comment.author }}</span> - {{ comment.created_on }}</p>
                     {% if user.is_authenticated and comment.author == user %}
                         <button class="btn edit-button" data-comment_id="{{ comment.id }}">Edit</button>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteCommentModal{{ comment.id }}"> Delete </button>
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteCommentModal{{ comment.id }}"> Delete </button>
                     {% endif %}
                 </div>
             </div>
@@ -128,7 +127,7 @@
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a id="confirmCommentDelete{{ comment.id }}" href="{% url 'comment_delete' resource.slug comment.id %}" class="btn btn-danger">Delete</a>
+                    <a id="confirmCommentDelete{{ comment.id }}" href="{% url 'comment_delete' resource.slug comment.id %}" class="btn">Delete</a>
                     </div>
                 </div>
                 </div>
