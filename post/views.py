@@ -16,7 +16,8 @@ def home_page(request):
     **Context**
 
     ``resources``
-        A queryset of the latest 4 :model:1post.Resource` published objects (status=1), ordered by creation date
+        A queryset of the latest 4 :model:1post.Resource`
+          published objects (status=1), ordered by creation date
 
     ``images``
         A queryset of :model:`post.Media` related to the 4 resources.
@@ -40,22 +41,26 @@ def home_page(request):
 @login_required
 def resource_list(request):
     """
-    Displays the logged in homepage, showing a paginated list of published resources
+    Displays the logged in homepage,
+      showing a paginated list of published resources
 
     **Context**
 
     ``resources``
-        A queryset of the :model:`post.Resource` published objects (status=1), ordered by creation date
+        A queryset of the :model:`post.Resource`
+          published objects (status=1), ordered by creation date
 
     ``featured``
         A queryset of the :model:`post.Feature` objects
 
     ``page_obj``
-        A paginated object containing a set of ``resources`` dependent on the current page number
+        A paginated object containing a set of ``resources``
+          dependent on the current page number
 
     *Template:*
 
-    If a page_number is returned from the get function the partial template is rendered:
+    If a page_number is returned from the get function
+      the partial template is rendered:
 
     :template:`post/partials/resource_list.html`
 
@@ -84,19 +89,22 @@ def resource_list(request):
 @login_required
 def user_posts_list(request):
     """
-    Displays a list of the logged-in user's posted :model:`post.Resource` titles with associated edit and delete buttons.
+    Displays a list of the logged-in user's posted :model:`post.Resource`
+      titles with associated edit and delete buttons.
 
     **Context**
 
     ``user_resources``
-        A queryset of :model:`post.Resource` objects, filtered by logged-in user (author=request.user).
+        A queryset of :model:`post.Resource` objects,
+        filtered by logged-in user (author=request.user).
 
     ``resource_form``
-        An instance of :form:`post.ResourceForm`, used to edit an existing resource.
+        An instance of :form:`post.ResourceForm`,
+          used to edit an existing resource.
 
     **Template**
 
-    :template:`post/user_posts_list.html` 
+    :template:`post/user_posts_list.html`
     """
 
     user_resources = Resource.objects.filter(author=request.user)
@@ -115,7 +123,8 @@ def user_posts_list(request):
 @login_required
 def resource_detail(request, slug):
     """
-    Display an individual :model:`post.Resource` with related media and comments.
+    Display an individual :model:`post.Resource`
+      with related media and comments.
 
     **Context**
 
@@ -126,17 +135,20 @@ def resource_detail(request, slug):
         An queryset of :model:`post.Media` related to the resource
 
     ``comments``
-        An queryset of :model:`post.Comments` related to the resource, ordered by creation date
+        An queryset of :model:`post.Comments` related to the resource,
+          ordered by creation date
 
     ``comment_count``
-        An integer representing the total number of comments related to the resource.
+        An integer representing the total number of
+        comments related to the resource.
 
     ``comment_form``
         An instance of :form:`post.CommentForm` for submitting a new comment.
 
     **POST behavior**
 
-    If a valid POST request is made, a new comment is created, linked to the resource, and associated with the logged-in user.
+    If a valid POST request is made, a new comment is created,
+      linked to the resource, and associated with the logged-in user.
 
     **Template:**
 
@@ -182,14 +194,15 @@ def resource_preview(request, slug):
     **Context**
 
     ``resources``
-        An instance of :model:`post.Resource`, filtered by the logged-in user and slug
+        An instance of :model:`post.Resource`,
+          filtered by the logged-in user and slug
 
     ``images``
         An queryset of :model:`post.Media` related to the resource
 
     **Template**
 
-    :template:`post/resource_preview.html` 
+    :template:`post/resource_preview.html`
     """
 
     queryset = Resource.objects.filter(author=request.user)
@@ -209,22 +222,28 @@ def resource_preview(request, slug):
 @login_required
 def resource_create(request):
     """
-    Handles the creation of a new :model:`post.Resource` and its associated media files.
+    Handles the creation of a new :model:`post.Resource`
+      and its associated media files.
 
     **Context**
 
     ``resource_form``
-        An instance of :form:`post.ResourceForm`, used to create a new resource.
+        An instance of :form:`post.ResourceForm`,
+        used to create a new resource.
 
     ``media_form``
-        An instance of :form:`post.MediaForm`, used to upload media files for the resource.
+        An instance of :form:`post.MediaForm`,
+          used to upload media files for the resource.
 
     **POST behavior**
 
     - The ``resource_form`` is validated.
     - If valid, the resource is saved with the logged-in user as the author.
-    - If `Media` files are added, they are associated with the resource and saved.
-    - A success message is displayed based on the resource status (published or draft), and the user is redirected to the appropriate page.
+    - If `Media` files are added, they are associated with
+        the resource and saved.
+    - A success message is displayed based on the resource status
+        (published or draft), and the user is redirected to
+        the appropriate page.
 
     **Template**
 
@@ -251,8 +270,8 @@ def resource_create(request):
             else:
                 messages.success(
                     request, "Resource Draft Created" +
-                    " (Publish your post from the 'My Resources' Page)")
-                return redirect('user_posts_list')
+                    " (Publish your resource from the 'My Resources' Page)")
+                return redirect('resource_preview', slug=resource.slug)
 
     resource_form = ResourceForm()
     media_form = MediaForm()
@@ -270,7 +289,8 @@ def resource_create(request):
 @login_required
 def resource_edit(request, slug, resource_id):
     """
-    Handles the editing of an existing :model:`post.Resource` and its associated media files by the logged-in user.
+    Handles the editing of an existing :model:`post.Resource`
+      and its associated media files by the logged-in user.
 
     **Context**
 
@@ -281,14 +301,18 @@ def resource_edit(request, slug, resource_id):
         A list of media files (images) uploaded to associate with the resource.
 
     ``resource_form``
-        An instance of :form:`post.ResourceForm`, pre-filled with the existing resource data for editing.
+        An instance of :form:`post.ResourceForm`,
+          pre-filled with the existing resource data for editing.
 
 
     **POST behavior**
     - If valid, the resource is updated with the modified data.
-    - If new media files are added, they are saved and associated with the resource.
-    - A success message is displayed when the resource is successfully updated, and the user is redirected to the "My Resources" page.
-    - If the form is invalid or the user is not the author, an error message is displayed.
+    - If new media files are added, they are saved and
+        associated with the resource.
+    - A success message is displayed when the resource is successfully updated,
+        and the user is redirected to the "My Resources" page.
+    - If the form is invalid or the user is not the author,
+        an error message is displayed.
 
     **Template**
 
@@ -312,8 +336,14 @@ def resource_edit(request, slug, resource_id):
                 Media.objects.create(resource=resource,
                                      featured_media=media_file)
 
-            messages.success(request, "Resource Updated")
-            return redirect('user_posts_list')
+            if resource.status == 1:
+                messages.success(request, "Resource Posted")
+                return redirect('resource_detail', slug=resource.slug)
+            else:
+                messages.success(
+                    request, "Resource Draft Created" +
+                    " (Publish your resource from the 'My Resources' Page)")
+                return redirect('resource_preview', slug=resource.slug)
 
         else:
             messages.error(request, "Error updating")
@@ -322,17 +352,20 @@ def resource_edit(request, slug, resource_id):
 @login_required
 def resource_delete(request, slug):
     """
-    Handles the deletion of an existing :model:`post.Resource` by the logged-in user.
+    Handles the deletion of an existing :model:`post.Resource`
+      by the logged-in user.
 
     **Context**
 
     ``resource``
-        An instance of :model:`post.Resource`, filtered by the slug and logged-in user.
+        An instance of :model:`post.Resource`,
+          filtered by the slug and logged-in user.
 
     **POST behavior**
 
     - The resource is retrieved based on the slug and the logged-in user.
-    - If the logged-in user is the author of the resource, it is deleted, and a success message is displayed.
+    - If the logged-in user is the author of the resource,
+        it is deleted, and a success message is displayed.
     - If an error occurs, an error message is displayed.
 
     **Template**
@@ -355,7 +388,8 @@ def resource_delete(request, slug):
 @login_required
 def comment_edit(request, slug, comment_id):
     """
-    Handles the editing of an existing :model:`post.Comment` for a published :model:`post.Resource`.
+    Handles the editing of an existing :model:`post.Comment`
+      for a published :model:`post.Resource`.
 
     **Context**
 
@@ -366,19 +400,23 @@ def comment_edit(request, slug, comment_id):
         An instance of :model:`post.Comment`, retrieved by its ID.
 
     ``comment_form``
-        An instance of :form:`post.CommentForm`, pre-filled with the existing comment data for editing.
+        An instance of :form:`post.CommentForm`, pre-filled with
+        the existing comment data for editing.
 
     **POST behavior**
 
     - The ``comment_form`` is validated.
-    - If valid and the logged-in user is the comment author, the comment is updated and saved.
-    - If successful, a success message is displayed. 
-    - If the form is invalid or the user is not the author, an error message is shown.
+    - If valid and the logged-in user is the comment author,
+        the comment is updated and saved.
+    - If successful, a success message is displayed.
+    - If the form is invalid or the user is not the author,
+        an error message is shown.
 
     **Template**
 
     :template:`post/resource_detail.html`
     """
+
     if request.method == "POST":
 
         queryset = Resource.objects.filter(status=1)
@@ -400,7 +438,8 @@ def comment_edit(request, slug, comment_id):
 @login_required
 def comment_delete(request, slug, comment_id):
     """
-    Handles the deletion of an existing :model:`post.Comment` for a published :model:`post.Resource`.
+    Handles the deletion of an existing :model:`post.Comment`
+      for a published :model:`post.Resource`.
 
     **Context**
 
@@ -413,8 +452,10 @@ def comment_delete(request, slug, comment_id):
     **POST behavior**
 
     - The comment is retrieved by its ID.
-    - If the logged-in user is the author of the comment, the comment is deleted and a success message is displayed.
-    - If the user is not the author, an error message is shown, and the comment is not deleted.
+    - If the logged-in user is the author of the comment,
+        the comment is deleted and a success message is displayed.
+    - If the user is not the author, an error message is shown,
+        and the comment is not deleted.
 
     **Template**
     :template:`post/resource_detail.html`
