@@ -10,6 +10,22 @@ from .forms import CommentForm, ResourceForm, MediaForm
 
 
 def home_page(request):
+    """
+    Displays the homepage with the most recently published resources
+
+    **Context**
+
+    ``resources``
+        A queryset of the latest 4 :model:1post.Resource` published objects (status=1), ordered by creation date
+
+    ``images``
+        A queryset of :model:`post.Media` related to the 4 resources.
+
+    *Template:*
+
+    :template:`post/index.html`
+    """
+
     queryset = Resource.objects.filter(status=1).order_by("-created_on")
     resources = queryset[:4]
     images = Media.objects.filter(resource__in=resources)
@@ -23,7 +39,31 @@ def home_page(request):
 
 @login_required
 def resource_list(request):
-    resources = Resource.objects.filter(status=1)
+    """
+    Displays the logged in homepage, showing a paginated list of published resources
+
+    **Context**
+
+    ``resources``
+        A queryset of the :model:`post.Resource` published objects (status=1), ordered by creation date
+
+    ``featured``
+        A queryset of the :model:`post.Feature` objects
+
+    ``page_obj``
+        A paginated object containing a set of ``resources`` dependent on the current page number
+
+    *Template:*
+
+    If a page_number is returned from the get function the partial template is rendered:
+
+    :template:`post/partials/resource_list.html`
+
+    Otherwise the full template is rendered:
+
+    :template:`post/resource_list.html`
+    """
+    resources = Resource.objects.filter(status=1).order_by("-created_on")
     features = Feature.objects.all()
 
     paginator = Paginator(resources, 5)
@@ -43,6 +83,21 @@ def resource_list(request):
 
 @login_required
 def user_posts_list(request):
+    """
+    Displays a list of the logged-in user's posted :model:`post.Resource` titles with associated edit and delete buttons.
+
+    **Context**
+
+    ``user_resources``
+        A queryset of :model:`post.Resource` objects, filtered by logged-in user (author=request.user).
+
+    ``resource_form``
+        Aan instance of :form:`post.ResourceForm`, used to edit an existing resource.
+
+    **Template**
+
+    :template:`post/user_posts_list.html` 
+    """
 
     user_resources = Resource.objects.filter(author=request.user)
     resource_form = ResourceForm()
@@ -60,12 +115,28 @@ def user_posts_list(request):
 @login_required
 def resource_detail(request, slug):
     """
-    Display an individual :model:`post.Resource`.
+    Display an individual :model:`post.Resource` with related media and comments.
 
     **Context**
 
     ``resource``
-        An instance of :model:`post.Resource`.
+        An instance of :model:`post.Resource`, filtered by status and slug
+
+    ``images``
+        An queryset of :model:`post.Media` related to the resource
+
+    ``comments``
+        An queryset of :model:`post.Comments` related to the resource, ordered by creation date
+
+    ``comment_count``
+        An integer representing the total number of comments related to the resource.
+
+    ``comment_form``
+        An instance of :form:`post.CommentForm` for submitting a new comment.
+
+    **POST behavior**
+
+    If a valid POST request is made, a new comment is created, linked to the resource, and associated with the current user.
 
     **Template:**
 
@@ -105,6 +176,22 @@ def resource_detail(request, slug):
 
 @login_required
 def resource_preview(request, slug):
+    """
+    Display an individual :model:`post.Resource` draft.
+
+    **Context**
+
+    ``resources``
+        An instance of :model:`post.Resource`, filtered by the logged-in user and slug
+
+    ``images``
+        An queryset of :model:`post.Media` related to the resource
+
+    **Template**
+
+    :template:`post/resource_preview.html` 
+    """
+    
     queryset = Resource.objects.filter(author=request.user)
     resource = get_object_or_404(queryset, slug=slug)
     images = Media.objects.filter(resource=resource.id)

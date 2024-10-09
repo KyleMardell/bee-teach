@@ -1,17 +1,15 @@
-console.log("Hello World!");
-
+// function executes when the dom has finished loading
 document.addEventListener('DOMContentLoaded', function () {
-    
-    const commentFormLabel = document.querySelector('label[for="id_body"]');
 
+    // hides the django generated comment label
+    const commentFormLabel = document.querySelector('label[for="id_body"]');
     if (commentFormLabel) {
         console.log("found");
         commentFormLabel.style.display = "none";
     }
 
-    let keyStageLabels = document.getElementsByClassName('key-stage'); // Store the element reference
-    console.log(keyStageLabels);
-
+    // finds all instances of key-stage and applies the associated wording labels
+    let keyStageLabels = document.getElementsByClassName('key-stage');
     for (let keyStageLabel of keyStageLabels) {
 
         switch (keyStageLabel.innerText) {  // Use innerText to get the element's text

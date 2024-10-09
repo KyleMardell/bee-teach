@@ -10,9 +10,14 @@ const resourceCard = document.getElementById("editResourceCard");
 const resourceForm = document.getElementById("editResourceForm");
 const submitButton = document.getElementById("submitEditButton");
 
+/*
+Adds an event listener to each resource edit button and populates 
+the edit form with the resource details.
+*/
 for (let button of editButtons) {
   button.addEventListener("click", (e) => {
 
+    // displays the form
     resourceCard.style.display = "Flex";
 
     let resourceId = e.target.getAttribute("data-resource_id");
@@ -27,6 +32,7 @@ for (let button of editButtons) {
     resource_links.value = resourceLinks;
     resource_status.value = resourceStatus;
 
+    // uses django summernote for the resource content
     $(resource_content).summernote('code', resourceContent);
 
     submitButton.innerText = "Update";
