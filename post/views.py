@@ -92,7 +92,7 @@ def user_posts_list(request):
         A queryset of :model:`post.Resource` objects, filtered by logged-in user (author=request.user).
 
     ``resource_form``
-        Aan instance of :form:`post.ResourceForm`, used to edit an existing resource.
+        An instance of :form:`post.ResourceForm`, used to edit an existing resource.
 
     **Template**
 
@@ -136,7 +136,7 @@ def resource_detail(request, slug):
 
     **POST behavior**
 
-    If a valid POST request is made, a new comment is created, linked to the resource, and associated with the current user.
+    If a valid POST request is made, a new comment is created, linked to the resource, and associated with the logged-in user.
 
     **Template:**
 
@@ -191,7 +191,7 @@ def resource_preview(request, slug):
 
     :template:`post/resource_preview.html` 
     """
-    
+
     queryset = Resource.objects.filter(author=request.user)
     resource = get_object_or_404(queryset, slug=slug)
     images = Media.objects.filter(resource=resource.id)
@@ -208,6 +208,28 @@ def resource_preview(request, slug):
 
 @login_required
 def resource_create(request):
+    """
+    Handles the creation of a new :model:`post.Resource` and its associated media files.
+
+    **Context**
+
+    ``resource_form``
+        An instance of :form:`post.ResourceForm`, used to create a new resource.
+
+    ``media_form``
+        An instance of :form:`post.MediaForm`, used to upload media files for the resource.
+
+    **POST behavior**
+
+    - The ``resource_form`` is validated.
+    - If valid, the resource is saved with the logged-in user as the author.
+    - If `Media` files are added, they are associated with the resource and saved.
+    - A success message is displayed based on the resource status (published or draft), and the user is redirected to the appropriate page.
+
+    **Template**
+
+    :template:`post/resource_create.html`
+    """
 
     if request.method == 'POST':
         resource_form = ResourceForm(request.POST)
@@ -247,6 +269,32 @@ def resource_create(request):
 
 @login_required
 def resource_edit(request, slug, resource_id):
+    """
+    Handles the editing of an existing :model:`post.Resource` and its associated media files by the logged-in user.
+
+    **Context**
+
+    ``resource``
+        An instance of :model:`post.Resource`, retrieved by its ID.
+
+    ``media_files``
+        A list of media files (images) uploaded to associate with the resource.
+
+    ``resource_form``
+        An instance of :form:`post.ResourceForm`, pre-filled with the existing resource data for editing.
+
+
+    **POST behavior**
+    - If valid, the resource is updated with the modified data.
+    - If new media files are added, they are saved and associated with the resource.
+    - A success message is displayed when the resource is successfully updated, and the user is redirected to the "My Resources" page.
+    - If the form is invalid or the user is not the author, an error message is displayed.
+
+    **Template**
+
+    :template:`post/user_posts_list.html`
+    """
+
     if request.method == "POST":
 
         resource = get_object_or_404(Resource, pk=resource_id)
@@ -273,6 +321,24 @@ def resource_edit(request, slug, resource_id):
 
 @login_required
 def resource_delete(request, slug):
+    """
+    Handles the deletion of an existing :model:`post.Resource` by the logged-in user.
+
+    **Context**
+
+    ``resource``
+        An instance of :model:`post.Resource`, filtered by the slug and logged-in user.
+
+    **POST behavior**
+
+    - The resource is retrieved based on the slug and the logged-in user.
+    - If the logged-in user is the author of the resource, it is deleted, and a success message is displayed.
+    - If an error occurs, an error message is displayed.
+
+    **Template**
+
+    :template:`post/user_posts_list.html`
+    """
 
     queryset = Resource.objects.filter(author=request.user)
     resource = get_object_or_404(queryset, slug=slug)
@@ -288,6 +354,31 @@ def resource_delete(request, slug):
 
 @login_required
 def comment_edit(request, slug, comment_id):
+    """
+    Handles the editing of an existing :model:`post.Comment` for a published :model:`post.Resource`.
+
+    **Context**
+
+    ``resource``
+        An instance of :model:`post.Resource`, filtered by status and slug.
+
+    ``comment``
+        An instance of :model:`post.Comment`, retrieved by its ID.
+
+    ``comment_form``
+        An instance of :form:`post.CommentForm`, pre-filled with the existing comment data for editing.
+
+    **POST behavior**
+
+    - The ``comment_form`` is validated.
+    - If valid and the logged-in user is the comment author, the comment is updated and saved.
+    - If successful, a success message is displayed. 
+    - If the form is invalid or the user is not the author, an error message is shown.
+
+    **Template**
+
+    :template:`post/resource_detail.html`
+    """
     if request.method == "POST":
 
         queryset = Resource.objects.filter(status=1)
@@ -308,6 +399,26 @@ def comment_edit(request, slug, comment_id):
 
 @login_required
 def comment_delete(request, slug, comment_id):
+    """
+    Handles the deletion of an existing :model:`post.Comment` for a published :model:`post.Resource`.
+
+    **Context**
+
+    ``resource``
+        An instance of :model:`post.Resource`, filtered by slug and status.
+
+    ``comment``
+        An instance of :model:`post.Comment`, retrieved by its ID.
+
+    **POST behavior**
+
+    - The comment is retrieved by its ID.
+    - If the logged-in user is the author of the comment, the comment is deleted and a success message is displayed.
+    - If the user is not the author, an error message is shown, and the comment is not deleted.
+
+    **Template**
+    :template:`post/resource_detail.html`
+    """
 
     queryset = Resource.objects.filter(status=1)
     resource = get_object_or_404(queryset, slug=slug)
