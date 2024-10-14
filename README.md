@@ -24,7 +24,8 @@ My inspiration for the concept of the Bee Teach app came from my partner, who is
 
 ### Database
 When designing the Bee Teach app, creating a solid database schema was paramount as I wanted to avoid making large changes or unnecessary migrations later in the development phase. With this in mind, I designed my app using the wire-frame software [Excalidraw](https://excalidraw.com/) to help envision what pages the app would need, thus helping me to understand the models my database would require. I created a database schema using the same wire-frame software, checking multiple times before finalising my plans and creating the database models. 
-[Database schema](/docmedia/wireframes/db-schema.png)
+
+![Database schema](/docmedia/wireframes/db-schema.png)
 
 ### Functionality
 The functionality of the Bee Teach app needed to reflect the core idea of sharing educational resources and provide both a quick way to find and obtain resources, as well as being able to easily share resources. With this in mind, the user needed only a few core functions in the app: view a list of resources posted by other users, post their own resources, view a list of their own posted resources, and finally be able to edit or delete resources they have posted. To extend the core functionality and allow users to give support and feedback to other users resources, I also wanted to add the ability to like or comment on a resource. This would become a more social media based approach, providing the familiarity I wanted to app to have, and create a fuller experience for educators when sharing resources and ideas. This kind of functionality meant the users need the ability to create an account with an associated username, and therefore some form of authorisation would also be needed.
@@ -55,7 +56,14 @@ Here are the initial wire-frames I created.
 ### Colour Scheme
 When it came to choosing a colour scheme for the app, I wanted to keep the colours quite muted and stick to one colour, creating a brand associated colour. Using a single colour also helps to maintain the focus on the resources or content of the app, as using a large number of different colours can sometimes distract from the user posted content, and I wanted the resources to be the focal point of the Bee Teach app. In the end I chose an all green colour scheme, green being a colour invoking feelings of positivity and nature. I also chose a yellow for accenting and an off white that i could use for light coloured text.
 
-[Colour Scheme](/docmedia/designs/colour-scheme.png)
+![Colour Scheme](/docmedia/designs/colour-scheme.png)
+
+### Typography
+For the typography I wanted To use a chunky style font I could use for things such as headings and buttons, and a contrasting written style font for things such as main content and comments. Both fonts needed to be screen friendly and therefore I chose san-serif fonts to use in the app. I used the fonts Farsan and Concert One from [Google Fonts](https://fonts.google.com/).
+
+![Farsan Font](/docmedia/designs/farsan-font.png)
+
+![Concert One Font](/docmedia/designs/concert-font.png)
 
 ## Features
 
