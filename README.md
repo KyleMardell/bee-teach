@@ -120,9 +120,38 @@ Below the resource card is the comments section where there is a collapsible com
 If a resource is saved as a draft when created or edited, a user can view a preview of the resource from the users resources list. This preview is identical to a resource detail page, omitting the comments section. This gives the user a way to see what a resource may look like before publishing or posting.
 
 #### User Resources List
-This page displays a simple list of any resources a logged in user has posted. Each list item has a clickable link that takes the user to either the resource detail or draft pages, the date posted and number of comments on that resource. There are also buttons to edit and delete each resource. When a delete button is clicked, a modal confirmation box is displayed and the user must click a confirmation delete button to delete a resource. When editing a resource, a form similar to the create resource form is displayed, pre populated with the chosen resources detail to be edited and again confirmed.  
+This page displays a simple list of any resources a logged in user has posted. Each list item has a clickable link that takes the user to either the resource detail or draft pages, the date posted and number of comments on that resource. There are also buttons to edit and delete each resource. When a delete button is clicked, a modal confirmation box is displayed and the user must click a confirmation delete button to delete a resource. When editing a resource, a form similar to the create resource form is displayed, pre populated with the chosen resources detail to be edited and again confirmed. 
 
-### Images
+#### Admin Page
+The admin page uses the built in Django admin features, with limited admin user permissions. An admin user can delete and edit resources and comments, as well as creating new features.
+As the admin pages are exclusively for admin users, I have chosen to keep the default Django admin styles to obviously distinguish when an admin page is being navigated. This way admin users are aware that they are carrying out administrative operations on other users resources and comments.
+
+#### Admin Superuser
+Superusers have access to all the built in Django admin features, extending a regular admin's permissions to include; being able to edit and delete user information, create groups and edit permissions. In order to create a regular admin versus a superuser, I created a group named admin and set limited permissions for users added to the group. This way there are 2 levels of admin user, one set of permissions could be given to trusted ambassadors of the Bee Teach community to help monitor regular and new users posted resources or comments, and a smaller number of trusted high level admin users with full admin permissions. 
+
+### Future Features
+As I was planning and developing the Bee Teach app, I had to keep scope at the front of my mind as I found it had the potential to be very large and have a lot of features. With this thought, I tried to keep the MVP scope as realistic as possible for the timescale, while also leaving room for growth in the future. Here are some of the features I plan to add in the future to create a fuller experience when visiting the Bee Teach app.
+
+#### Profile Page
+In the future I would like to add a profile page for each user. I originally added a profile page to my designs and plans, although due to time constraints I knew this was a "nice to have" feature. This page would let users add their own profile details such as their name, about section, their posted resources and potentially resources they have liked, creating more depth to the app and letting users easily share more information about themselves or find all the resources posted by a single user.
+
+#### Search Function
+If the app became populated with a large number of resources, it would be helpful to be able to search for resources. Each resource currently has an associated ket stage that is shown when a resource is viewed in detail and I added this detail to help create a search function where users could filter resources by key stage and easily see all the resources aimed at a certain age range. I would also like to add a word search function so users could search for a resource containing a certain word. For example a user could search "Bee" to find all resources about bees.
+
+#### User Comments
+I would also like to add a page or section where the user could see all comments they have left on other users resources in a single list, much like the current user resources list. This way a user could not only see all their comments in a single place, but they could also edit or delete those comments.
+In my database schema I added the ability to comment on an existing comment but when creating the database I simplified comments to only apply to resources to stay in the scope of the project. In the future this is a feature I would like to add to create more of a conversational feeling in the comments section. 
+
+#### Media Types
+As resources are the main feature of the app, I would also like users to be able to add multiple types of media such as PDF files, videos or other media types. This would extend the amount and types of resources that users can share within the app. 
+
+
+### Deployment
+
+
+### Credits
+
+#### Images
 
 [Bee Images](https://www.freepik.com/free-vector/cute-bees-set_18737678.htm#fromView=image_search_similar&page=1&position=1&uuid=0106aee3-1cfd-4e2b-837d-901652d8cfc9) Image by lesyaskripak on Freepik
 
