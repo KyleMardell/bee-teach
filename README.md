@@ -4,7 +4,9 @@ Bee Teach is an educational resource sharing app. The Bee Teach app is aimed at 
 
 [Bee Teach Live App](https://bee-teach-95df758315f5.herokuapp.com/)
 
+
 ## Contents
+
 
 ## User Experience
 
@@ -16,6 +18,7 @@ Returning visitors to the Bee Teach app are expected to be educators, impressed 
 
 ### App use goals
 The app use goals are to provide a solution to a real-world problem, providing free educational resources, through a simple, familiar feeling, easy to navigate web app. The app should provide educators with a way to find free resource materials, share resources of their own through images, written content or links, and get involved in the Bee Teach community by posting comments. Overall the app should be a helpful free tool for all educators.
+
 
 ## Design
 
@@ -64,6 +67,7 @@ When it came to choosing a [Colour Scheme](/docmedia/designs/colour-scheme.png) 
 For the typography I wanted To use a chunky style font I could use for things such as headings and buttons, and a contrasting written style font for things such as main content and comments. Both fonts needed to be screen friendly and therefore I chose san-serif fonts to use in the app. 
 
 I used the [Farsan Font](/docmedia/designs/farsan-font.png) and [Concert One Font](/docmedia/designs/concert-font.png) from [Google Fonts](https://fonts.google.com/).
+
 
 ## Features
 
@@ -123,11 +127,12 @@ If a resource is saved as a draft when created or edited, a user can view a prev
 This page displays a simple list of any resources a logged in user has posted. Each list item has a clickable link that takes the user to either the resource detail or draft pages, the date posted and number of comments on that resource. There are also buttons to edit and delete each resource. When a delete button is clicked, a modal confirmation box is displayed and the user must click a confirmation delete button to delete a resource. When editing a resource, a form similar to the create resource form is displayed, pre populated with the chosen resources detail to be edited and again confirmed. 
 
 #### Admin Page
-The admin page uses the built in Django admin features, with limited admin user permissions. An admin user can delete and edit resources and comments, as well as creating new features.
+The admin page uses the built in Django admin features, with limited admin user permissions. An admin user can delete resources and comments, as well as creating new features.
 As the admin pages are exclusively for admin users, I have chosen to keep the default Django admin styles to obviously distinguish when an admin page is being navigated. This way admin users are aware that they are carrying out administrative operations on other users resources and comments.
 
 #### Admin Superuser
-Superusers have access to all the built in Django admin features, extending a regular admin's permissions to include; being able to edit and delete user information, create groups and edit permissions. In order to create a regular admin versus a superuser, I created a group named admin and set limited permissions for users added to the group. This way there are 2 levels of admin user, one set of permissions could be given to trusted ambassadors of the Bee Teach community to help monitor regular and new users posted resources or comments, and a smaller number of trusted high level admin users with full admin permissions. 
+Superusers have access to all the built in Django admin features, extending a regular admin's permissions to include; being able to edit and delete user information, comments and resources, create groups and edit permissions. In order to create a regular admin versus a superuser, I created a group named admin and set limited permissions for users added to the group. This way there are 2 levels of admin user, one set of permissions could be given to trusted ambassadors of the Bee Teach community to help monitor regular and new users posted resources or comments, and a smaller number of trusted high level admin users with full admin permissions. 
+
 
 ### Future Features
 As I was planning and developing the Bee Teach app, I had to keep scope at the front of my mind as I found it had the potential to be very large and have a lot of features. With this thought, I tried to keep the MVP scope as realistic as possible for the timescale, while also leaving room for growth in the future. Here are some of the features I plan to add in the future to create a fuller experience when visiting the Bee Teach app.
@@ -146,13 +151,82 @@ In my database schema I added the ability to comment on an existing comment but 
 As resources are the main feature of the app, I would also like users to be able to add multiple types of media such as PDF files, videos or other media types. This would extend the amount and types of resources that users can share within the app. 
 
 
-### Deployment
+## Deployment
+When deploying the Bee Teach app there are multiple steps that must be taken to ensure the app is functioning correctly. A pre requisite is there needs to be a functioning database. In this case I used one of the [Code Institute](https://codeinstitute.net/) provided PostgreSQL databases. If there is an active database, the app can then be reproduced by cloning the repo and deploying locally or on a hosting service, in this case Heroku. The steps taken to deploy the app are detailed below.
 
+### GitHub
+
+#### Fork Repository
+
+- To fork the repository
+    - Login or Sign Up to GitHub
+    - Navigate to the repository for this project [Bee Teach](https://github.com/KyleMardell/bee-teach)
+    - Click the "Fork" button on the top right of the page
+
+#### Clone Repository
+
+- To clone the repository
+    - Login or Sign Up to GitHub
+    - Navigate to the repository for this project [Bee Teach](https://github.com/KyleMardell/bee-teach)
+    - Click on the "Code" button
+    - Select how you would like to clone (HTTPS, SSH, or GitHub CLI)
+    - Copy your chosen link
+    - Open the terminal of your code editor or IDE
+    - Change the current working directory to the location you want to use for the cloned directory
+    - Type "git clone" into the terminal followed by the copied link and press enter.
+
+#### Django Settings
+
+- Django Settings
+    - Navigate to the settings.py file of the Bee Teach Django Project
+    - Locate the "ALLOWED_HOSTS" and replace the first entry with your own development server URL (in this case, starting "8000-kylemardell-beeteach")
+    - Locate the "CSRF_TRUSTED_ORIGINS" and replace the first entry with your own development server URL (in this case, starting "8000-kylemardell-beeteach")
+    - If deploying locally install the requirements with the command "pip install -r requirements.txt" in the terminal for your local development environment.
+
+#### Cloudinary
+
+- In order to set up the Bee Teach app, an image hosting service is needed to host the images. In this case I used [Cloudinary](https://cloudinary.com/).
+    - Login or sign up with your [Cloudinary](https://cloudinary.com/) account
+    - Navigate to the dashboard
+    - Click "Go to API Keys" at the top of the page
+    - Locate the "API environment variable" / Cloudinary URL at the top of the page
+    - Copy your "API Key" and "API Secret" into the Cloudinary URL for use in the Heroku settings
+
+### Heroku
+
+- Deploy to Heroku
+    - Login or sign up with your [Heroku](https://heroku.com) account
+    - Navigate to the dashboard
+    - Click "New" at the top right of the screen, select "Create new app"
+    - Enter a unique name (I used BeeTeach)
+    - Choose a region
+    - Click "Create app"
+    - Navigate to the "Settings" tab
+    - Navigate to "Buildpacks"
+    - Click "Add buildpack"
+    - Add "Python" as a buildpacks
+    - Click "Reveal Config Vars"
+    - Add a new config var with key "CLOUDINARY_URL" and the value from your Cloudinary URL detailed above, beginning "cloudinary://"
+    - Add a new config var with key "DATABASE_URL" and add the URL of your database, in this case beginning "postgres://"
+    - Add a new config var with key "SECRET_KEY" and add your own secret key, e.g. "th15-15-4-53CR3T-K3y"
+    - Navigate to the "Deploy" tab
+    - Select GitHub as deployment method
+    - Authenticate with GitHub account
+    - Search for repo name (BeeTeach), click "Connect"
+    - Optionally enable "Automatic deploys"
+    - Click "Deploy branch" under "Manual Deploy" ensuring main branch is selected
 
 ### Credits
 
+#### Django
+In order to learn more about how to use Django and find out how to use features such as pagination, template snippets and overriding admin templates, I used the [Django Docs](https://docs.djangoproject.com/)
+I also referenced the django blog practice project from [Code Institute](https://codeinstitute.net/)
+
+#### Javascript
+When writing the javascript for the project, I referenced a combination of examples from my previous projects, and the django blog practice project from [Code Institute](https://codeinstitute.net/)
+
 #### Images
+The default placeholder Bee image is from [Freepik](https://www.freepik.com/free-vector/cute-bees-set_18737678.htm#fromView=image_search_similar&page=1&position=1&uuid=0106aee3-1cfd-4e2b-837d-901652d8cfc9) - Image by lesyaskripak
 
-[Bee Images](https://www.freepik.com/free-vector/cute-bees-set_18737678.htm#fromView=image_search_similar&page=1&position=1&uuid=0106aee3-1cfd-4e2b-837d-901652d8cfc9) Image by lesyaskripak on Freepik
-
-[Crayola Sheets](https://www.crayola.com/free-coloring-pages/make-and-play/cut-and-color-coloring-pages/)
+#### Resources
+There are resources added by my partner and friends in teaching or educational professions.
