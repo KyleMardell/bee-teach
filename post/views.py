@@ -5,7 +5,7 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .models import Resource, Media, Feature, Comment
+from .models import Resource, Media, Feature, Comment, Like
 from .forms import CommentForm, ResourceForm, MediaForm
 
 
@@ -160,6 +160,7 @@ def resource_detail(request, slug):
     images = Media.objects.filter(resource=resource.id)
     comments = resource.comments.all().order_by("-created_on")
     comment_count = comments.count()
+    like_count = resource.likes.count()
 
     if request.method == "POST":
         comment_form = CommentForm(data=request.POST)
@@ -182,6 +183,7 @@ def resource_detail(request, slug):
             "comments": comments,
             "comment_count": comment_count,
             "comment_form": comment_form,
+            "like_count": like_count,
         },
     )
 
@@ -472,3 +474,25 @@ def comment_delete(request, slug, comment_id):
         messages.error(request, 'You can only delete your own comments!')
 
     return HttpResponseRedirect(reverse('resource_detail', args=[slug]))
+
+
+@login_required
+def like_resource(request, slug):
+
+    if request.method == 'POST' and request.user.is_authenticated:
+        queryset = Resource.objects.filter(status=1)
+        resource = get_object_or_404(queryset, slug=slug)
+
+        liked_resource = Like.objects.filter(resource=resource, author=request.user).exists()
+
+        if liked_resource:
+            Like.objects.filter(resource=resource, author=request.user).delete()
+            messages.success(request, 'Un-Liked Resource')
+        else:
+            Like.objects.create(resource=resource, author=request.user)
+            messages.success(request, 'Liked Resource!')
+
+        return HttpResponseRedirect(reverse('resource_detail', args=[slug]))
+    else:
+        messages.error(request, 'An error occurred!')
+        return HttpResponseRedirect(reverse('resource_detail', args=[slug]))

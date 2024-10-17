@@ -14,6 +14,8 @@ urlpatterns = [
          views.resource_delete, name='resource_delete'),
     path('<slug:slug>/resource_detail',
          views.resource_detail, name='resource_detail'),
+    path('<slug:slug>/like/',
+         views.like_resource, name='like_resource'),
     path('<slug:slug>/edit_comment/<int:comment_id>',
          views.comment_edit, name='comment_edit'),
     path('<slug:slug>/delete_comment/<int:comment_id>',

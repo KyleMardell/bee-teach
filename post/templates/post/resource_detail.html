@@ -76,7 +76,18 @@
 
     <div class="row justify-content-center mb-5">
         <div class="col-11 col-md-10 col-xl-8">
-            <h3>Comments: {{ comment_count }}</h3>
+            <div class="d-flex justify-content-between my-2">
+                <h3 class="mx-3">Comments: {{ comment_count }}</h3>
+                <div class="d-flex">
+                    <h3>Likes: <span id="like-count{{ resource.id }}">{{ like_count }}</span></h3>
+                    <form method="post" action="{% url 'like_resource' resource.slug %}" class="like-form">
+                        {% csrf_token %}
+                        <button type="submit" class="btn mx-3 like-btn">Like</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 col-md-10 col-xl-8">
             <div class="accordion accordion-flush rounded mb-3" id="commentAccordion">
                 <div class="accordion-item rounded">
                   <h2 class="accordion-header">
