@@ -277,8 +277,8 @@ class TestPostViews(TestCase):
         updated_resource = Resource.objects.get(id=self.resource.id)
         self.assertEqual(updated_resource.title, "Updated Resource Title")
         self.assertRedirects(
-            response, reverse('resource_preview', kwargs={
-                'slug': updated_resource.slug}))
+            response, reverse(
+                'resource_preview', args=[updated_resource.slug]))
 
     # Resource Delete
 
@@ -287,7 +287,6 @@ class TestPostViews(TestCase):
         response = self.client.post(
             reverse('resource_delete', args=[self.resource.slug]))
         after_delete_resource_count = Resource.objects.count()
-
         self.assertEqual(after_delete_resource_count, resource_count - 1)
         self.assertRedirects(response, reverse('user_posts_list'))
 
@@ -298,7 +297,6 @@ class TestPostViews(TestCase):
             password="TestUsersPassword",
         )
         self.client.login(username='TestUser', password='TestUsersPassword')
-
         resource_count = Resource.objects.count()
         response = self.client.post(
             reverse('resource_delete', args=[self.resource.slug]))
@@ -308,13 +306,43 @@ class TestPostViews(TestCase):
 
     # Comment Edit
 
+    def test_successful_comment_edit(self):
+        post_data = {'body': 'This is an edited test comment.'}
+        response = self.client.post(reverse(
+            'comment_edit', args=[
+                'resource-title', self.comment.id]), post_data)
+        self.assertEqual(response.status_code, 302)
+        updated_comment = Comment.objects.get(id=self.comment.id)
+        self.assertEqual(
+            updated_comment.body, "This is an edited test comment.")
+        self.assertRedirects(response, reverse(
+            'resource_detail', args=[self.resource.slug]))
+
+    def test_comment_edit_not_author(self):
+        self.client.logout()
+        test_user = User.objects.create_user(
+            username="TestUser",
+            password="TestUsersPassword",
+        )
+        self.client.login(username='TestUser', password='TestUsersPassword')
+        post_data = {'body': 'This is an edited test comment.'}
+        response = self.client.post(reverse(
+            'comment_edit', args=[
+                'resource-title', self.comment.id]), post_data)
+        self.assertEqual(response.status_code, 302)
+        updated_comment = Comment.objects.get(id=self.comment.id)
+        self.assertNotEqual(
+            updated_comment.body, "This is an edited test comment.")
+        self.assertRedirects(response, reverse(
+            'resource_detail', args=[self.resource.slug]))
+
     # Comment Delete
 
     def test_comment_delete_success(self):
-
         comment_count = Comment.objects.count()
         response = self.client.post(
-            reverse('comment_delete', args=[self.resource.slug, self.comment.id]))
+            reverse('comment_delete', args=[
+                self.resource.slug, self.comment.id]))
         after_delete_comment_count = Comment.objects.count()
         self.assertEqual(after_delete_comment_count, comment_count - 1)
         self.assertEqual(response.status_code, 302)
@@ -328,12 +356,11 @@ class TestPostViews(TestCase):
             password="TestUsersPassword",
         )
         self.client.login(username='TestUser', password='TestUsersPassword')
-
         comment_count = Comment.objects.count()
         response = self.client.post(
-            reverse('comment_delete', args=[self.resource.slug, self.comment.id]))
+            reverse('comment_delete', args=[
+                self.resource.slug, self.comment.id]))
         after_delete_comment_count = Comment.objects.count()
-        
         self.assertEqual(after_delete_comment_count, comment_count)
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse(
