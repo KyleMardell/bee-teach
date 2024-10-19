@@ -478,7 +478,27 @@ def comment_delete(request, slug, comment_id):
 
 @login_required
 def like_resource(request, slug):
+    """
+    Handles the liking or un-liking of an existing :model:`post.Resource`
+    by the logged-in user.
 
+    **Context**
+
+    ``resource``
+        An instance of :model:`post.Resource`, filtered by status and slug.
+
+    **POST behavior**
+
+    - The ``resource`` is retrieved based on the slug.
+    - If a like from the logged-in user already exists for the ``resource``,
+        the like is removed, and a success message is displayed.
+    - If no like exists, a new like is created for the ``resource``,
+        and a success message is displayed.
+
+    **Template**
+
+    :template:`post/resource_detail.html`
+    """
     if request.method == 'POST' and request.user.is_authenticated:
         queryset = Resource.objects.filter(status=1)
         resource = get_object_or_404(queryset, slug=slug)

@@ -99,12 +99,43 @@ class TestPostViews(TestCase):
         response = self.client.get(reverse('resource_list'))
         self.assertIn('features', response.context)
 
+    # User Posts List Page
+
+    def test_user_resources_page_status(self):
+        response = self.client.get(reverse('user_posts_list'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_user_resources_page_requires_authentication(self):
+        self.client.logout()
+        response = self.client.get(reverse('user_posts_list'))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/accounts/login/?next=/user_posts_list/')
+
+    def test_user_resources_page_uses_correct_template(self):
+        response = self.client.get(reverse('user_posts_list'))
+        self.assertTemplateUsed(response, 'post/user_posts_list.html')
+
+    def test_user_resources_shows_published_resources(self):
+        response = self.client.get(reverse('user_posts_list'))
+        self.assertContains(response, 'Resource Title')
+
+    def test_user_resources_shows_draft_resources(self):
+            response = self.client.get(reverse('user_posts_list'))
+            self.assertContains(response, 'Draft Resource Title')
+
     # Resource Detail Page
 
     def test_resource_detail_page_status_code(self):
         response = self.client.get(reverse(
             'resource_detail', args=['resource-title']))
         self.assertEqual(response.status_code, 200)
+
+    def test_resource_detail_page_requires_authentication(self):
+        self.client.logout()
+        response = self.client.get(reverse(
+            'resource_detail', args=['resource-title']))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/accounts/login/?next=/resource-title/resource_detail')
 
     def test_resource_detail_uses_correct_template(self):
         response = self.client.get(reverse(
@@ -127,3 +158,34 @@ class TestPostViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Comment Added', response.content)
         self.assertIn(b'This is a test comment.', response.content)
+
+    # Resource Preview
+
+    def test_resource_preview_page_status_code(self):
+        response = self.client.get(reverse(
+            'resource_preview', args=['resource-title']))
+        self.assertEqual(response.status_code, 200)
+
+    def test_resource_preview_page_requires_authentication(self):
+        self.client.logout()
+        response = self.client.get(reverse(
+            'resource_preview', args=['resource-title']))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/accounts/login/?next=/resource-title/resource_preview')
+
+    def test_resource_preview_uses_correct_template(self):
+        response = self.client.get(reverse(
+            'resource_preview', args=['resource-title']))
+        self.assertTemplateUsed(response, 'post/resource_preview.html')
+
+    # Resource Create
+
+    def test_resource_create_page_status_code(self):
+        response = self.client.get(reverse('resource_create'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_resource_create_page_requires_authentication(self):
+        self.client.logout()
+        response = self.client.get(reverse('resource_create'))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/accounts/login/?next=/resource_create/')
