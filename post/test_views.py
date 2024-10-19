@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.test import TestCase
 from .forms import CommentForm, ResourceForm
-from .models import Resource, Media
+from .models import Resource, Comment
 
 
 class TestPostViews(TestCase):
@@ -49,6 +49,12 @@ class TestPostViews(TestCase):
                 links="www.testlinks.com",
                 status=1
             )
+
+        self.comment = Comment.objects.create(
+            body="Test Comment",
+            resource=self.resource,
+            author=self.user
+        )
 
     # Index Page
 
@@ -246,11 +252,15 @@ class TestPostViews(TestCase):
             'links': "www.updatedlinks.com",
             'status': "1",
         }
-        response = self.client.post(reverse('resource_edit', args=['resource-title', self.resource.id]), post_data)
+        response = self.client.post(
+            reverse('resource_edit', args=[
+                'resource-title', self.resource.id]), post_data)
         self.assertEqual(response.status_code, 302)
         updated_resource = Resource.objects.get(id=self.resource.id)
         self.assertEqual(updated_resource.title, "Updated Resource Title")
-        self.assertRedirects(response, reverse('resource_detail', kwargs={'slug': updated_resource.slug}))
+        self.assertRedirects(
+            response, reverse('resource_detail', kwargs={
+                'slug': updated_resource.slug}))
 
     def test_successful_draft_resource_edit_submission(self):
         post_data = {
@@ -260,8 +270,71 @@ class TestPostViews(TestCase):
             'links': "www.updatedlinks.com",
             'status': "0",
         }
-        response = self.client.post(reverse('resource_edit', args=['resource-title', self.resource.id]), post_data)
+        response = self.client.post(
+            reverse('resource_edit', args=[
+                'resource-title', self.resource.id]), post_data)
         self.assertEqual(response.status_code, 302)
         updated_resource = Resource.objects.get(id=self.resource.id)
         self.assertEqual(updated_resource.title, "Updated Resource Title")
-        self.assertRedirects(response, reverse('resource_preview', kwargs={'slug': updated_resource.slug}))
+        self.assertRedirects(
+            response, reverse('resource_preview', kwargs={
+                'slug': updated_resource.slug}))
+
+    # Resource Delete
+
+    def test_resource_delete_success(self):
+        resource_count = Resource.objects.count()
+        response = self.client.post(
+            reverse('resource_delete', args=[self.resource.slug]))
+        after_delete_resource_count = Resource.objects.count()
+
+        self.assertEqual(after_delete_resource_count, resource_count - 1)
+        self.assertRedirects(response, reverse('user_posts_list'))
+
+    def test_resource_delete_not_author(self):
+        self.client.logout()
+        test_user = User.objects.create_user(
+            username="TestUser",
+            password="TestUsersPassword",
+        )
+        self.client.login(username='TestUser', password='TestUsersPassword')
+
+        resource_count = Resource.objects.count()
+        response = self.client.post(
+            reverse('resource_delete', args=[self.resource.slug]))
+        after_delete_resource_count = Resource.objects.count()
+        self.assertEqual(after_delete_resource_count, resource_count)
+        self.assertEqual(response.status_code, 404)
+
+    # Comment Edit
+
+    # Comment Delete
+
+    def test_comment_delete_success(self):
+
+        comment_count = Comment.objects.count()
+        response = self.client.post(
+            reverse('comment_delete', args=[self.resource.slug, self.comment.id]))
+        after_delete_comment_count = Comment.objects.count()
+        self.assertEqual(after_delete_comment_count, comment_count - 1)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse(
+            'resource_detail', args=[self.resource.slug]))
+
+    def test_comment_delete_not_author(self):
+        self.client.logout()
+        test_user = User.objects.create_user(
+            username="TestUser",
+            password="TestUsersPassword",
+        )
+        self.client.login(username='TestUser', password='TestUsersPassword')
+
+        comment_count = Comment.objects.count()
+        response = self.client.post(
+            reverse('comment_delete', args=[self.resource.slug, self.comment.id]))
+        after_delete_comment_count = Comment.objects.count()
+        
+        self.assertEqual(after_delete_comment_count, comment_count)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse(
+            'resource_detail', args=[self.resource.slug]))
