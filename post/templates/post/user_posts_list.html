@@ -6,13 +6,18 @@
 
 <section class="container">
     
-    <div class="row my-5">
-        <div class="col">
-            <h1 class="text-center">My Resources</h1>
+    <div class="row my-3">
+        <div class="col text-center">
+            <h1>My Resources</h1>
+            <p>
+                Hey {{ user }}, here are all your posted resources.<br>
+                Click a resource to view its detail page when published or a preview when drafted.<br>
+                From here you can also edit or delete your resources.
+            </p>
         </div>
     </div>
 
-    <div id="editResourceCard" class="row justify-content-center my-5">
+    <div id="editResourceCard" class="row justify-content-center my-3">
         <div class="col col-md-10 col-lg-8 mb-5">
             <div class="card create-resource-card">
                 {% if user.is_authenticated %}

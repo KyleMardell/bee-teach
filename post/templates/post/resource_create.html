@@ -5,18 +5,29 @@
 {% block content %}
 
 <div class="container">
-    <div class="row justify-content-center my-5">
+    <div class="row justify-content-center my-3">
+        <div class="col col-md-10 col-lg-8 text-center">
+            <h1>Create A Resource</h1>
+            <p>To share your own resources, just choose a title, key stage and set the status to published.<br>
+                You can also add text, upload images, and add a single link to your resource.<br>
+                Once you have added all your details, simply hit "Submit" to upload your resource.<br>
+                Don't forget to change the status to published if you want to post your resource straight away,<br>
+                or leave the status as draft to edit before posting.
+            </p>
+        </div>
+    </div>
+    <div class="row justify-content-center my-3">
         <div class="col col-md-10 col-lg-8">
             <div class="card create-resource-card">
                 {% if user.is_authenticated %}
                 <div class="card-header slim-border">
-                    <h4 class="text-center fs-2">Posting New Resource</h4>
+                    <h4 class="text-center fs-2">New Resource</h4>
                     <p class="mb-0 d-flex justify-content-between"><span>Posting as: {{ user.username }}</span><span>*Required field</span></p>
                 </div>
                 <div class="card-body slim-border">
                     <form id="resourceForm" method="post" enctype="multipart/form-data">
                         {{ resource_form | crispy }}
-                        <label for="id_featured_media">Upload media</label>
+                        <label for="id_featured_media">Upload Images</label>
                         <input type="file" name="featured_media" id="id_featured_media" multiple>
                         {% csrf_token %}
                         <button id="submitButton" type="submit" class="btn btn-lg">Submit</button>
