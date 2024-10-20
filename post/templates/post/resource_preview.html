@@ -23,6 +23,7 @@
                 </div>
                 <div class="card-body">
                     <article class="text-center fs-5">
+                        <h2 class="d-none">Article title: {{ resource.title }}</h2>
                         {{ resource.content | safe}}
                     </article>
                     <div id="carouselResourceDetail{{ resource.id }}" class="carousel slide card-carousel">
@@ -32,7 +33,7 @@
                             <div class="carousel-item {% if forloop.first %}active{% endif %}">
                                 <div class="card-img-box">
                                     <img src="{{ media.featured_media.url }}" class="resource-image d-block"
-                                        alt="Image for {{ resource.title }}" />
+                                        alt="Image for {{ resource.title }}">
                                 </div>
                                 <div class="media-download text-center">
                                     <a href="{{ media.featured_media.url }}" download="{{ media.featured_media.name }}"

@@ -3,6 +3,7 @@
 Bee Teach is an educational resource sharing app. The Bee Teach app is aimed at teachers, parents and educators in general who want to share and access educational resources in the form of posts. Users can view a lists of resources that other users have shared and view the resource in further detail, including written content and shared images.
 
 [Bee Teach Live App](https://bee-teach-95df758315f5.herokuapp.com/)
+[Bee Teach Repo](https://github.com/KyleMardell/bee-teach)
 
 
 ## Contents
@@ -175,7 +176,7 @@ When deploying the Bee Teach app there are multiple steps that must be taken to 
     - Change the current working directory to the location you want to use for the cloned directory
     - Type "git clone" into the terminal followed by the copied link and press enter.
 
-#### Django Settings
+### Django Settings
 
 - Django Settings
     - Navigate to the settings.py file of the Bee Teach Django Project
@@ -183,7 +184,7 @@ When deploying the Bee Teach app there are multiple steps that must be taken to 
     - Locate the "CSRF_TRUSTED_ORIGINS" and replace the first entry with your own development server URL (in this case, starting "8000-kylemardell-beeteach")
     - If deploying locally install the requirements with the command "pip install -r requirements.txt" in the terminal for your local development environment.
 
-#### Cloudinary
+### Cloudinary
 
 - In order to set up the Bee Teach app, an image hosting service is needed to host the images. In this case I used [Cloudinary](https://cloudinary.com/).
     - Login or sign up with your [Cloudinary](https://cloudinary.com/) account
@@ -216,21 +217,20 @@ When deploying the Bee Teach app there are multiple steps that must be taken to 
     - Optionally enable "Automatic deploys"
     - Click "Deploy branch" under "Manual Deploy" ensuring main branch is selected
 
-### Credits
+## Credits
 
-#### Django
+### Django
 In order to learn more about how to use Django and find out how to use features such as pagination, template snippets and overriding admin templates, I used the [Django Docs](https://docs.djangoproject.com/)
 I also referenced the django blog practice project from [Code Institute](https://codeinstitute.net/)
 
-#### Javascript
+### Javascript
 When writing the javascript for the project, I referenced a combination of examples from my previous projects, and the django blog practice project from [Code Institute](https://codeinstitute.net/)
 
-#### Images
+### Images
 The default placeholder Bee image is from [Freepik](https://www.freepik.com/free-vector/cute-bees-set_18737678.htm#fromView=image_search_similar&page=1&position=1&uuid=0106aee3-1cfd-4e2b-837d-901652d8cfc9) - Image by lesyaskripak
 
-#### Resources
-There are resources added by my partner and friends in teaching or educational professions.
+### Resources
+There are resources added by my peers in teaching or educational professions. Although this is the purpose of the app, I still wanted to mention there may be images or links to external sources shared, not owned by myself or the publisher. All shared resources should be used for educational purposes only and be either owned by the user or free to use.
 
-#### Testing
-Django messages
-https://stackoverflow.com/questions/2897609/how-can-i-unit-test-django-messages/14909727
+### Testing
+When writing unit tests, I wanted to test messages for correct feedback and found the following [Stack Overflow](https://stackoverflow.com/questions/2897609/how-can-i-unit-test-django-messages/14909727) thread on testing Django messages. I used this method in my testing to check for correct message feedback when carrying out certain operations in the app.
