@@ -1,8 +1,9 @@
 from django.contrib.auth.models import User
-from django.urls import reverse
+from django.contrib.messages import get_messages
 from django.test import TestCase
+from django.urls import reverse
 from .forms import CommentForm, ResourceForm
-from .models import Resource, Comment
+from .models import Resource, Comment, Like
 
 
 class TestPostViews(TestCase):
@@ -11,8 +12,7 @@ class TestPostViews(TestCase):
 
         self.user = User.objects.create_superuser(
             username="myUsername",
-            password="myPassword",
-            email="test@test.com"
+            password="myPassword"
         )
 
         self.client.login(
@@ -168,6 +168,9 @@ class TestPostViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Comment Added', response.content)
         self.assertIn(b'This is a test comment.', response.content)
+        messages = list(response.context['messages'])
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Comment Added')
 
     # Resource Preview
 
@@ -227,6 +230,10 @@ class TestPostViews(TestCase):
         self.assertRedirects(response, reverse(
             'resource_detail', kwargs={'slug': published_resource.slug}))
 
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Resource Posted')
+
     def test_successful_draft_resource_form_submission(self):
         post_data = {
             'title': "Draft New Resource Title",
@@ -241,6 +248,10 @@ class TestPostViews(TestCase):
         self.assertRedirects(
             response, reverse(
                 'resource_preview', kwargs={'slug': draft_resource.slug}))
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), "Resource Draft Created (Publish your " +
+        "resource from the 'My Resources' Page)")
 
     # Resource Edit
 
@@ -261,6 +272,9 @@ class TestPostViews(TestCase):
         self.assertRedirects(
             response, reverse('resource_detail', kwargs={
                 'slug': updated_resource.slug}))
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Resource Posted')
 
     def test_successful_draft_resource_edit_submission(self):
         post_data = {
@@ -279,6 +293,11 @@ class TestPostViews(TestCase):
         self.assertRedirects(
             response, reverse(
                 'resource_preview', args=[updated_resource.slug]))
+        messages = [m.message for m in get_messages(response.wsgi_request)]
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), "Resource Draft Created (Publish your " +
+        "resource from the 'My Resources' Page)")
 
     # Resource Delete
 
@@ -289,6 +308,9 @@ class TestPostViews(TestCase):
         after_delete_resource_count = Resource.objects.count()
         self.assertEqual(after_delete_resource_count, resource_count - 1)
         self.assertRedirects(response, reverse('user_posts_list'))
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Resource deleted!')
 
     def test_resource_delete_not_author(self):
         self.client.logout()
@@ -317,6 +339,9 @@ class TestPostViews(TestCase):
             updated_comment.body, "This is an edited test comment.")
         self.assertRedirects(response, reverse(
             'resource_detail', args=[self.resource.slug]))
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Comment updated')
 
     def test_comment_edit_not_author(self):
         self.client.logout()
@@ -335,6 +360,9 @@ class TestPostViews(TestCase):
             updated_comment.body, "This is an edited test comment.")
         self.assertRedirects(response, reverse(
             'resource_detail', args=[self.resource.slug]))
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Error updating')
 
     # Comment Delete
 
@@ -348,6 +376,9 @@ class TestPostViews(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse(
             'resource_detail', args=[self.resource.slug]))
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Comment deleted!')
 
     def test_comment_delete_not_author(self):
         self.client.logout()
@@ -365,3 +396,35 @@ class TestPostViews(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse(
             'resource_detail', args=[self.resource.slug]))
+
+    # Resource Likes
+
+    def test_successful_resource_like(self):
+        like_count = Like.objects.count()
+        response = self.client.post(
+            reverse('like_resource', args=[self.resource.slug]))
+        after_like_count = Like.objects.count()
+        self.assertEqual(after_like_count, like_count + 1)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse(
+            'resource_detail', args=[self.resource.slug]))
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Liked Resource!')
+
+    def test_successful_resource_unlike(self):
+        self.new_like = Like.objects.create(
+                        resource=self.resource,
+                        author=self.user
+        )
+        like_count = Like.objects.count()
+        response = self.client.post(
+            reverse('like_resource', args=[self.resource.slug]))
+        after_like_count = Like.objects.count()
+        self.assertEqual(after_like_count, like_count - 1)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse(
+            'resource_detail', args=[self.resource.slug]))
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Un-Liked Resource')

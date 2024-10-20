@@ -230,3 +230,7 @@ The default placeholder Bee image is from [Freepik](https://www.freepik.com/free
 
 #### Resources
 There are resources added by my partner and friends in teaching or educational professions.
+
+#### Testing
+Django messages
+https://stackoverflow.com/questions/2897609/how-can-i-unit-test-django-messages/14909727
