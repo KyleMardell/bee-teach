@@ -80,7 +80,7 @@ The results of the WAVE testing can be found below.
 - [Sign Up](/docmedia/validation/wave-signup.png)
 
 ## Unit Testing
-When writing unit tests, I used the built in Django test suite. There are 2 python testing files, [test forms](/post/test_forms.py) and [test views](/post/test_views.py), each of which test the respective forms or views. I used the [Django Testing Documentation](https://docs.djangoproject.com/en/5.1/topics/testing/tools/), to better understand which tests I needed to use and tried to implement as many tests as I could. I also used a [Stack Overflow](https://stackoverflow.com/questions/2897609/how-can-i-unit-test-django-messages/14909727) thread to help in creating tests for feedback messages.
+When writing unit tests, I used the built in Django test suite. There are 2 python testing files, [test forms](/post/test_forms.py) and [test views](/post/test_views.py), each of which test the respective forms or views. I used the [Django Testing Documentation](https://docs.djangoproject.com/en/5.1/topics/testing/tools/) to find and better understand which tests I needed to use. I tried to implement as many tests as I could think of, but I imagine there are more potential tests. I also used a [Stack Overflow](https://stackoverflow.com/questions/2897609/how-can-i-unit-test-django-messages/14909727) thread to help me when creating tests for feedback messages.
 
 The test names for both forms and views testing can be found below.
 
@@ -142,8 +142,62 @@ The test names for both forms and views testing can be found below.
         - test_resource_preview_page_requires_authentication
         - test_resource_preview_uses_correct_template
     - Resource Create
-        - 
+        - test_resource_create_page_status_code
+        - test_resource_create_page_uses_correct_template
+        - test_resource_create_page_with_resource_form
+        - test_successful_published_resource_form_submission
+        - test_successful_draft_resource_form_submission
+    - Resource Edit
+        - test_successful_published_resource_edit_submission
+        - test_successful_draft_resource_edit_submission
+    - Resource Delete
+        - test_resource_delete_success
+        - test_resource_delete_not_author
+    - Comment Edit
+        - test_successful_comment_edit
+        - test_comment_edit_not_author
+    - Comment Delete
+        - test_comment_delete_success
+        - test_comment_delete_not_author
+    - Resource Likes
+        - test_successful_resource_like
+        - test_successful_resource_unlike
 
 ## Manual Testing
 
-## User Testing
+### In Development
+In development testing was done using Google Chrome developer tools and the inspect function. I used console log and print to check data when creating the Javascript scripts as well as when creating the Python view functions. This way I could keep track of the transfer and transformation of the data passed between functions, as well as from the back end to the front end, and visa versa. 
+I also used the mock device sizes to check the apps pages were fully responsive across all screen sizes when styling the app. In the inspect view, I highlighted the Django auto created form elements so I could target them via their id in either CSS or Javascript, adding further styles or functionality.
+As I chose to deploy the app to Heroku early in development, I would also frequently check features or styles were displaying correctly over the internet on the devices I had access to: an iPhone 14 & 15, iPad Pro, Android tablet and 2 PC screens, a 1080 and a 4k monitor.
+
+### User Testing
+When it came to user testing, as I had created the Bee Teach app with my partner in mind, they were my initial go to tester. This meant I could get instant feedback from a target user and make quick changes or implement features and styles suggested. Once the app was in a more complete state, I then asked a small group of people to use the app as they would and let me know of any constructive feedback they had. Although positive feedback is helpful and let me know which elements to keep, I wanted to concentrate on what improvements could be made and thus kept a list of some of the constructive feedback I received. The main change made following feedback was due to a bug caused by simple oversight. Initially when posting a resource as draft, the user was directed to their list of posts and could not view a resource before posting, only edit its contents in the edit form. Creating a resource preview was a core feature I overlooked and created as a result of early user testing.
+
+Below is some of the constructive feedback from a small group of users.
+- Landscape images are aligned at the top of a card rather than in the preferred center such as portrait or square images.
+- Filtering by key stage would be good when there are lots of resources.
+- A user profile page or profile picture next to the name of the person who posted the resource.
+- Help or info might be needed on the resource list and create pages.
+- It would be nice if resources loaded automatically instead of pressing the view more button.
+- More indication of a draft resource, more info to let you know it will be draft by default.
+- A preview page for draft resources to view before posting.
+- You should be able to click the entire resource preview card to link to its detail page, not just the title text.
+- Being able to see thumbnails of the pictures you have added in the create resource page.
+- Being able to add PDFs to a resource in place of, or as well as images.
+
+Some of these features I implemented during the development phase and some I did not get chance to implement but are considerations for future features.
+
+### Final Development Phases
+In the final development phases I carried out manual testing of all the links, buttons, pages and admin permissions across the site, ensuring fully correct functionality of all the features I did not test using automated testing. As the automated testing was fairly robust, I found that did not leave a lot of manual testing that was needed. That being said, I still tested all the features manually incase I had missed anything when writing tests. 
+
+Below is an overview of the manual tests I carried out not covered by automated testing.
+
+- Each menu link works correctly from all pages.
+- Admin menu links and pages are only displayed for, or accessible by admin users. 
+- Both call to action buttons on the index page link to the sign up page as intended.
+- Sign up, log in and log out pages work as intended.
+- All published resources link to their detail page.
+- Images can be added to the create resource page.
+- User posted resources page displays a message when there are no added resources.
+- Admin users can view and delete any resources, comments or image media.
+- Admin users can view a list of users and delete or ban accounts.
