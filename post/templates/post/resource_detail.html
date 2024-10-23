@@ -119,10 +119,13 @@
                 </div>
                 <div class="card-footer d-flex justify-content-between">
                     <p class="mb-0"><span class="fw-bold">{{ comment.author }}</span> - {{ comment.created_on }}</p>
+                    <div>
                     {% if user.is_authenticated and comment.author == user %}
                         <button class="btn edit-button" data-comment_id="{{ comment.id }}">Edit</button>
+                    {% elif user.is_authenticated and comment.author == user or user.is_superuser %}
                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteCommentModal{{ comment.id }}"> Delete </button>
                     {% endif %}
+                    </div>
                 </div>
             </div>
 

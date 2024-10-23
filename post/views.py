@@ -107,7 +107,11 @@ def user_posts_list(request):
     :template:`post/user_posts_list.html`
     """
 
-    user_resources = Resource.objects.filter(author=request.user)
+    if request.user.is_superuser:
+        user_resources = Resource.objects.filter(status=1)
+    else:
+        user_resources = Resource.objects.filter(author=request.user)
+
     resource_form = ResourceForm()
 
     return render(

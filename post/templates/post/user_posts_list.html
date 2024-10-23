@@ -56,8 +56,13 @@
                     {% endif %}
                         <h5 class="card-title text-truncate my-1">{{ resource.title }}</h5>
                     </a>
-                    <div class="d-flex w-100 justify-content-between">
-                        <small>{{ resource.created_on }}</small>
+                    <div class="d-flex w-100 justify-content-between">  
+                        <small>
+                            {% if user.is_superuser and resource.author != user %} 
+                                {{ resource.author }} - 
+                            {% endif %}
+                            {{ resource.created_on }}
+                        </small>
                         <div>
                             {% if user.is_authenticated and resource.author == user %}
                             <a href="#editResourceForm" class="btn edit-button my-2" data-resource_id="{{ resource.id }}"

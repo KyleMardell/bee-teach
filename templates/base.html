@@ -54,7 +54,7 @@
                     <a class="nav-link {% if request.path == user_posts_list_url %}active{% endif %}"
                         aria-current="page" href="{% url 'user_posts_list' %}">My Resources</a>
                     </li>
-                    {% if user.is_staff %}
+                    {% if user.is_superuser %}
                     <li class="nav-item">
                     <a class="nav-link {% if request.path == user_posts_list_url %}active{% endif %}"
                         aria-current="page" href="{% url 'admin:index' %}">Admin Panel</a>
