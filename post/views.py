@@ -71,7 +71,8 @@ def resource_list(request):
     resources = Resource.objects.filter(status=1).order_by("-created_on")
     features = Feature.objects.all()
 
-    paginator = Paginator(resources, 5)
+    pagination_amount = 5
+    paginator = Paginator(resources, pagination_amount)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 

@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const resourceContainer = document.getElementById('resource-container');
     const resourceEnd = document.getElementById("resource-end");
     const lastRow = document.getElementById("last-list-row");
+    const paginationAmount = 5;  // Adjust to match paginator amount in views.py
     let isLoading = false;
 
     /*
@@ -34,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
 
                 // checks if the last retrieved number of resources is less than the pagination amount
-                if (newResources.length < 5) {  // Adjust to match paginator count
+                if (newResources.length < paginationAmount) {
                     showMoreButton.style.display = 'none';
                     resourceEnd.style.display = 'block';
                 } else {
