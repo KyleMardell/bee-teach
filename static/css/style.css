@@ -61,6 +61,7 @@ label {
 }
 
 p,
+small,
 input,
 li,
 article,
@@ -72,6 +73,7 @@ a {
     color: var(--dark-green);
 }
 
+/* Buttons */
 
 .btn {
     background-color: var(--darkest-green);
@@ -338,4 +340,11 @@ nav {
 footer {
     background-color: var(--green);
     box-shadow: 0 -2px 4px 0 var(--dark-green);
+}
+
+@media screen and (min-width: 768px) {
+    p,
+    small {
+        font-size: 1.3rem;
+    } 
 }
