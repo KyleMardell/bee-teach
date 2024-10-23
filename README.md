@@ -185,6 +185,13 @@ When deploying the Bee Teach app there are multiple steps that must be taken to 
     - Locate the "CSRF_TRUSTED_ORIGINS" and replace the first entry with your own development server URL (in this case, starting "8000-kylemardell-beeteach")
     - If deploying locally install the requirements with the command "pip install -r requirements.txt" in the terminal for your local development environment.
 
+- ENV File
+    - In order to run the app locally, you will need to create a file named 'env.py' in the base project folder or same directory as the requirements.txt file.
+    - add 'import os' at the top of the file/page
+    - add the code 'os.environ.setdefault("DATABASE_URL", "postgres://my_database_url")', making sure to add your own database url in place of 'my_database_url'
+    - add the code 'os.environ.setdefault("SECRET_KEY", "my_secret_key")', making sure to add your own secret key in place of 'my_secret_key'
+    - add the code 'os.environ.setdefault("CLOUDINARY_URL", "cloudinary://my_cloudinary_url")', making sure to add your own cloudinary url in place of 'my_cloudinary_url' described below
+
 ### Cloudinary
 
 - In order to set up the Bee Teach app, an image hosting service is needed to host the images. In this case I used [Cloudinary](https://cloudinary.com/).
