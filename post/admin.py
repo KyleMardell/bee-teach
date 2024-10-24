@@ -12,7 +12,11 @@ class ResourceAdmin(SummernoteModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     summernote_fields = ('content',)
 
+@admin.register(Feature)
+class FeatureAdmin(SummernoteModelAdmin):
 
-admin.site.register(Feature)
+    list_display = ('title', 'slug')
+    prepopulated_fields = {'slug': ('title',)}
+
 admin.site.register(Comment)
 admin.site.register(Media)

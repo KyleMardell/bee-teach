@@ -323,6 +323,12 @@ a {
     box-shadow: 0 0 4px 0 var(--yellow)
 }
 
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: var(--dark-green);
+    border-radius: 15%;
+}
+
 /* Nav */
 
 nav {

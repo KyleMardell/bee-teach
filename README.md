@@ -152,6 +152,8 @@ In my database schema I added the ability to comment on an existing comment but 
 #### Media Types
 As resources are the main feature of the app, I would also like users to be able to add multiple types of media such as PDF files, videos or other media types. This would extend the amount and types of resources that users can share within the app. 
 
+## Testing
+Testing can be found in the [testing file](/TESTING.md) and features manual and automated testings, validation and accessibility testing.
 
 ## Deployment
 When deploying the Bee Teach app there are multiple steps that must be taken to ensure the app is functioning correctly. A pre requisite is there needs to be a functioning database. In this case I used one of the [Code Institute](https://codeinstitute.net/) provided PostgreSQL databases. If there is an active database, the app can then be reproduced by cloning the repo and deploying locally or on a hosting service, in this case Heroku. The steps taken to deploy the app are detailed below.
