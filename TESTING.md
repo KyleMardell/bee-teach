@@ -76,7 +76,7 @@ When testing further for accessibility issues, I used the [WAVE Accessibility Te
 The only page with any errors was the create resource page, with the errors for missing form labels being caused by the Summernote content box. After inspecting the summernote editing box, it is created using a div that generates html when the user enters text in the input div. As the input is a div and not an input or another type of [labelable element](https://html.spec.whatwg.org/multipage/forms.html#category-label), it is not possible to add a label to this type of summernote input. I considered removing the summernote content input, but decided that having the text formatting options outweighed having a missing label and in this case is justifiable.
 
 Here you can find the summernote code causing the errors and wave testing results for the create resource page.
-- [Summernote Code](/docmedia/validation/summernote-test-field-code.png)
+- [Summernote Generated Code](/docmedia/validation/summernote-test-field-code.png)
 - [Wave Create Resource Results](/docmedia/validation/wave-create-errors.png)
 - [Wave Create Resource Page](/docmedia/validation/wave-create-page-error.png)
 
@@ -202,7 +202,7 @@ Some of these features I implemented during the development phase and some I did
 ### Final Development Phases
 In the final development phases I carried out manual testing of all the links, buttons, pages and admin permissions across the site, ensuring fully correct functionality of all the features I did not test using automated testing. As the automated testing was fairly robust, I found that did not leave a lot of manual testing that was needed. That being said, I still tested all the features manually incase I had missed anything when writing tests. 
 
-Below is an overview of the manual tests I carried out not covered by automated testing.
+Below is an overview of the manual tests I carried out not covered by automated testing with a full table of tests carried out below.
 
 - Each menu link works correctly from all pages.
 - Admin menu links and pages are only displayed for, or accessible by admin users. 
@@ -213,3 +213,75 @@ Below is an overview of the manual tests I carried out not covered by automated 
 - User posted resources page displays a message when there are no added resources.
 - Admin users can view and delete any resources, comments or image media.
 - Admin users can view a list of users and delete or ban accounts.
+
+### Manual Test Results Table
+
+| Feature | Expected Outcome | Test Performed | Result | Pass/Fail |
+| --- | --- | --- | --- | --- |
+| Nav Bar |
+| Logo text link - Not logged in | When clicked, redirects to the index page | Clicked logo | Redirected to index page | Pass |
+| Logo text link - Logged in | When clicked, redirects to the home page | Clicked logo | Redirected to home page | Pass |
+| Logo text link: hover (desktop) | Changes curser to pointer | Hovered mouse over link | Curser changed to pointer | Pass |
+| Menu burger icon (mobile/tablet) | Displays expanded menu | Clicked menu icon | Expanded menu displayed | Pass |
+| Home menu link |  When clicked, redirects to the home page | Clicked logo | Redirected to home page | Pass |
+| Home menu link: hover (desktop) | Changes curser to pointer | Hovered mouse over link | Curser changed to pointer | Pass |
+| Log In menu link |  When clicked, redirects to the Log In page | Clicked logo | Redirected to Log In page | Pass |
+| Log In menu link: hover (desktop) | Changes curser to pointer | Hovered mouse over link | Curser changed to pointer | Pass |
+| Sign Up menu link |  When clicked, redirects to the Sign Up page | Clicked logo | Redirected to Sign Up page | Pass |
+| Sign Up menu link: hover (desktop) | Changes curser to pointer | Hovered mouse over link | Curser changed to pointer | Pass |
+| Admin menu link | Admin menu link displayed | Logged in as admin / superuser | Admin link displayed in menu | Pass |
+| Admin menu link | Admin menu link not displayed | Logged in as regular user | No admin link in menu | Pass |
+| Admin menu link | When clicked, redirects to the admin page as admin user | Clicked admin link as admin user | Redirected to admin page | Pass |
+
+| Messages |
+| Message Bar | Message removed | Clicked X button | Message removed from page | Pass |
+| Sign Up Page |
+| Sign Up button: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
+| Sign Up form | Error displayed | Click sign up button with all fields empty | "Please fill in this field" error pointing at the username box displayed | Pass |
+| Sign Up form | Error displayed | Click sign up button with only username entered (no passwords) | "Please fill in this field" error pointing at the password box displayed | Pass |
+| Sign Up form | Error displayed | Click sign up button with username and first password entered (repeat password missing) | "Please fill in this field" error pointing at the repeat password box displayed | Pass |
+| Sign Up form | Error displayed, page reloads | Click sign up button with username and short passwords entered | page reloads, no error message displayed | Fail |
+| Sign Up form | Error displayed, page reloads | Click sign up button with username and common passwords entered (tested with "hellohello") | page reloads, no error message displayed | Fail |
+| Sign Up form | redirected to home page, welcome message displayed | Click sign up button with username and both passwords entered correctly | Redirected to home page with message displaying "Successfully signed in as *username*" | Pass |
+| Log In Page |
+| Log In button: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
+| Log In form | Error displayed | Click log in button with all fields empty | "Please fill in this field" error pointing at the username box displayed | Pass |
+| Log In form | Error displayed | Click log in button with only username entered (no password) | "Please fill in this field" error pointing at the password box displayed | Pass |
+| Log In form | redirected to home page, welcome message displayed | Click log in button with username and password entered correctly | Redirected to home page with message displaying "Successfully signed in as *username*" | Pass |
+| Log Out Page !
+| Log Out button: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
+| Log Out button | Redirects to index page, message displayed | Clicked button | Redirected to index page, message displaying "You have signed out." | Pass |
+| Index Page |
+| Join The Hive button: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
+| Join The Hive button | Redirects to Sign Up page | Click Join The Hive button | Redirected to Sign Up page | Pass |
+| Sign Up Now button: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
+| Sign Up Now button | Redirects to Sign Up page | Click Sign Up Now button | Redirected to Sign Up page | Pass |
+| Home Page |
+| Feature Card scroll buttons: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
+| Feature Card | Redirects to the resources detail page | Click featured resource | Resource's detail page displayed | Pass |
+| Resource Card | Redirects to the resources detail page | Click resource card | Resource's detail page displayed | Pass |
+| Auto load resources | Displays 5 more resources | Scroll to the bottom of the initial page of resources | 5 more resources are added to the bottom of the page | Pass |
+| Auto load resources | "No more resources" message displayed | Scroll to the very bottom of the page | Message showing "No more resources" displayed | Pass |
+| My Resources Page |
+| Resource link: hover (desktop) | Changes curser to pointer, link changes colour | Hovered mouse over link | Curser changed to pointer, link colour changed | Pass |
+| Resource link (published resource) | Redirects to the resources detail page | Click featured resource | Resource's detail page displayed | Pass |
+| Resource link (draft resource) | Redirects to the resources draft preview page | Click featured resource | Resource's draft preview page displayed | Pass |
+| Resource edit button: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
+| Resource edit button | Populated form displayed | Click edit button on a resource | Pre populated form with the resources details displayed | Pass |
+| Resource delete button: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
+| Resource delete button | Confirm delete displayed | Click delete button on a resource | Confirm delete message and button displayed | Pass |
+| Resource delete confirmation | Cancel delete, return to resources list | Click cancel button | Returned to resources list, resource still displayed in the list | Pass |
+| Resource delete confirmation | Return to resources list, resource deleted | Click delete button | Returned to resources list, resource deleted from resources list | Pass |
+| Resources list (admin user) | List of all published resources displayed | Viewed "my resources" page as an admin user | A list of all published resources displayed with other users resources only displaying a delete button | Pass |
+| Resource delete button (admin user) | Confirm delete displayed | Click delete button on another users posted resource | Confirm delete message and button displayed | Pass |
+| Resource delete confirmation (admin user) | Cancel delete, return to resources list | Click cancel button | Returned to resources list, resource still displayed in the list | Pass |
+| Resource delete confirmation (admin user) | Return to resources list, resource deleted | Click delete button | Returned to resources list, resource deleted from resources list | Pass |
+| Create Resource Page |
+| Create Resource form submit button: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
+| Create Resource form | Error displayed | Clicked submit without entering a title | "Please fill in this field" error pointing at the title box displayed | Pass |
+| Create Resource form | Images added to the resource | Clicked choose files button and selected multiple images and published the resource | Added images displayed in a carousel in the resource | Pass |
+| Resource Detail Page |
+| Resource card | No footer links displayed | Viewed a resource without added links | No footer on resource detail card | Pass |
+| Resource card | No text displayed | Viewed a resource without added text content | No text content on resource detail card | Pass |
+| Resource card | Default image displayed | Viewed a resource without added images | Default image of a bee displayed | Pass |
+| Resource card | Image opened in separate tab | Clicked download image button | Image opened in a separate tab for saving | Pass |
