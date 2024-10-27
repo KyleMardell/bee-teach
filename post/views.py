@@ -5,6 +5,7 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from django.db.models import Q
 from .models import Resource, Media, Feature, Comment, Like
 from .forms import CommentForm, ResourceForm, MediaForm
 
@@ -109,7 +110,7 @@ def user_posts_list(request):
     """
 
     if request.user.is_superuser:
-        user_resources = Resource.objects.filter(status=1)
+        user_resources = Resource.objects.filter(Q(status=1) | Q(author=request.user))
     else:
         user_resources = Resource.objects.filter(author=request.user)
 

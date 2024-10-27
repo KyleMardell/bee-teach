@@ -230,8 +230,8 @@ When deploying the Bee Teach app there are multiple steps that must be taken to 
 ## Credits
 
 ### Django
-In order to learn more about how to use Django and find out how to use features such as pagination, template snippets and overriding admin templates, I used the [Django Docs](https://docs.djangoproject.com/)
-I also referenced the django blog practice project from [Code Institute](https://codeinstitute.net/)
+In order to learn more about how to use Django and find out how to use features such as pagination, template snippets and overriding admin templates, I used the [Django Docs](https://docs.djangoproject.com/). When coding the functionality for an admin user, I needed to get a list of all the users resource and any resources published by other users. I learned about the django Q object using [this reference](https://books.agiliq.com/projects/django-orm-cookbook/en/latest/query_relatedtool.html) to learn how to get the list of all resources in a single query.
+I referenced the django blog practice project from [Code Institute](https://codeinstitute.net/) to set up the initial project and app before expanding.
 
 ### Javascript
 When writing the javascript for the project, I referenced a combination of examples from my previous projects, and the django blog practice project from [Code Institute](https://codeinstitute.net/)

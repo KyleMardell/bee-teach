@@ -71,18 +71,30 @@ The results of the Lighthouse testing can be found below.
 - [Log Out](/docmedia/validation/lighthouse-logout.png)
 
 ### Wave Testing
-When testing further for accessibility issues, I used the [WAVE Accessibility Tester](https://wave.webaim.org/) on the pages I was able to. These were the pages that do not require users to be logged in, the index page, log in and sign up pages. Each of these pages had no errors when tested using the WAVE tool.
+When testing further for accessibility issues, I used the [WAVE Accessibility Tester](https://wave.webaim.org/) on all pages, ensuring they were populated with content where possible.
 
-The results of the WAVE testing can be found below.
+The only page with any errors was the create resource page, with the errors for missing form labels being caused by the Summernote content box. After inspecting the summernote editing box, it is created using a div that generates html when the user enters text in the input div. As the input is a div and not an input or another type of [labelable element](https://html.spec.whatwg.org/multipage/forms.html#category-label), it is not possible to add a label to this type of summernote input. I considered removing the summernote content input, but decided that having the text formatting options outweighed having a missing label and in this case is justifiable.
+
+Here you can find the summernote code causing the errors and wave testing results for the create resource page.
+- [Summernote Code](/docmedia/validation/summernote-test-field-code.png)
+- [Wave Create Resource Results](/docmedia/validation/wave-create-errors.png)
+- [Wave Create Resource Page](/docmedia/validation/wave-create-page-error.png)
+
+The results of the WAVE testing for all pages can be found below.
 
 - [Index](/docmedia/validation/wave-home.png)
 - [Log In](/docmedia/validation/wave-login.png)
 - [Sign Up](/docmedia/validation/wave-signup.png)
+- [Home Page](/docmedia/validation/wave-home-in.png)
+- [Create Resource](/docmedia/validation/wave-create.png)
+- [Resource List](/docmedia/validation/wave-resource-list.png)
 
 ## Unit Testing
 When writing unit tests, I used the built in Django test suite. There are 2 python testing files, [test forms](/post/test_forms.py) and [test views](/post/test_views.py), each of which test the respective forms or views. I used the [Django Testing Documentation](https://docs.djangoproject.com/en/5.1/topics/testing/tools/) to find and better understand which tests I needed to use. I tried to implement as many tests as I could think of, but I imagine there are more potential tests. I also used a [Stack Overflow](https://stackoverflow.com/questions/2897609/how-can-i-unit-test-django-messages/14909727) thread to help me when creating tests for feedback messages.
 
-The test names for both forms and views testing can be found below.
+The test names for both forms and views testing, as well as a screenshot of the results can be found below.
+
+- [Results](/docmedia/validation/django-tests-results.png)
 
 - Forms
     - Comment Form

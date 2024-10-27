@@ -22,11 +22,14 @@
             <div class="card-body">
                 <h5 class="card-title text-truncate">{{ resource.title }}</h5>
                 <p class="card-text {% if resource.comments.count > 0 %} d-flex justify-content-between {% else %} text-end {% endif %}">
-                    {% if resource.comments.count > 0 %}
                     <span>
+                    {% if resource.comments.count > 0 %}
                         {{ resource.comments.count }} <i class="fa-regular fa-comment"></i>
-                    </span>
                     {% endif %}
+                    {% if resource.likes.count > 0 %}
+                        {{ resource.likes.count }} <i class="fa-regular fa-heart"></i>
+                    {% endif %}
+                    </span>
                     <span>By {{ resource.author }}</span>
                 </p>
             </div>
