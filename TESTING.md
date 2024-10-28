@@ -232,56 +232,63 @@ Below is an overview of the manual tests I carried out not covered by automated 
 | Admin menu link | Admin menu link displayed | Logged in as admin / superuser | Admin link displayed in menu | Pass |
 | Admin menu link | Admin menu link not displayed | Logged in as regular user | No admin link in menu | Pass |
 | Admin menu link | When clicked, redirects to the admin page as admin user | Clicked admin link as admin user | Redirected to admin page | Pass |
-
 | Messages |
-| Message Bar | Message removed | Clicked X button | Message removed from page | Pass |
+| Message bar | Message removed | Clicked X button | Message removed from page | Pass |
 | Sign Up Page |
 | Sign Up button: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
-| Sign Up form | Error displayed | Click sign up button with all fields empty | "Please fill in this field" error pointing at the username box displayed | Pass |
-| Sign Up form | Error displayed | Click sign up button with only username entered (no passwords) | "Please fill in this field" error pointing at the password box displayed | Pass |
-| Sign Up form | Error displayed | Click sign up button with username and first password entered (repeat password missing) | "Please fill in this field" error pointing at the repeat password box displayed | Pass |
-| Sign Up form | Error displayed, page reloads | Click sign up button with username and short passwords entered | page reloads, no error message displayed | Fail |
-| Sign Up form | Error displayed, page reloads | Click sign up button with username and common passwords entered (tested with "hellohello") | page reloads, no error message displayed | Fail |
-| Sign Up form | redirected to home page, welcome message displayed | Click sign up button with username and both passwords entered correctly | Redirected to home page with message displaying "Successfully signed in as *username*" | Pass |
+| Sign Up form | Error displayed | Clicked sign up button with all fields empty | "Please fill in this field" error pointing at the username box displayed | Pass |
+| Sign Up form | Error displayed | Clicked sign up button with only username entered (no passwords) | "Please fill in this field" error pointing at the password box displayed | Pass |
+| Sign Up form | Error displayed | Clicked sign up button with username and first password entered (repeat password missing) | "Please fill in this field" error pointing at the repeat password box displayed | Pass |
+| Sign Up form | Error displayed, page reloads | Clicked sign up button with username and short passwords entered | page reloads, no error message displayed | Fail |
+| Sign Up form | Error displayed, page reloads | Clicked sign up button with username and common passwords entered (tested with "hellohello") | page reloads, no error message displayed | Fail |
+| Sign Up form | redirected to home page, welcome message displayed | Clicked sign up button with username and both passwords entered correctly | Redirected to home page with message displaying "Successfully signed in as *username*" | Pass |
 | Log In Page |
 | Log In button: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
-| Log In form | Error displayed | Click log in button with all fields empty | "Please fill in this field" error pointing at the username box displayed | Pass |
-| Log In form | Error displayed | Click log in button with only username entered (no password) | "Please fill in this field" error pointing at the password box displayed | Pass |
-| Log In form | redirected to home page, welcome message displayed | Click log in button with username and password entered correctly | Redirected to home page with message displaying "Successfully signed in as *username*" | Pass |
-| Log Out Page !
+| Log In form | Error displayed | Clicked log in button with all fields empty | "Please fill in this field" error pointing at the username box displayed | Pass |
+| Log In form | Error displayed | Clicked log in button with only username entered (no password) | "Please fill in this field" error pointing at the password box displayed | Pass |
+| Log In form | redirected to home page, welcome message displayed | Clicked log in button with username and password entered correctly | Redirected to home page with message displaying "Successfully signed in as *username*" | Pass |
+| Log Out Page |
 | Log Out button: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
 | Log Out button | Redirects to index page, message displayed | Clicked button | Redirected to index page, message displaying "You have signed out." | Pass |
 | Index Page |
 | Join The Hive button: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
-| Join The Hive button | Redirects to Sign Up page | Click Join The Hive button | Redirected to Sign Up page | Pass |
+| Join The Hive button | Redirects to Sign Up page | Clicked Join The Hive button | Redirected to Sign Up page | Pass |
 | Sign Up Now button: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
-| Sign Up Now button | Redirects to Sign Up page | Click Sign Up Now button | Redirected to Sign Up page | Pass |
+| Sign Up Now button | Redirects to Sign Up page | Clicked Sign Up Now button | Redirected to Sign Up page | Pass |
 | Home Page |
-| Feature Card scroll buttons: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
-| Feature Card | Redirects to the resources detail page | Click featured resource | Resource's detail page displayed | Pass |
-| Resource Card | Redirects to the resources detail page | Click resource card | Resource's detail page displayed | Pass |
+| Feature card scroll buttons: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
+| Feature card | Redirects to the resources detail page | Clicked featured resource | Resource's detail page displayed | Pass |
+| Resource card | Redirects to the resources detail page | Clicked resource card | Resource's detail page displayed | Pass |
 | Auto load resources | Displays 5 more resources | Scroll to the bottom of the initial page of resources | 5 more resources are added to the bottom of the page | Pass |
 | Auto load resources | "No more resources" message displayed | Scroll to the very bottom of the page | Message showing "No more resources" displayed | Pass |
 | My Resources Page |
 | Resource link: hover (desktop) | Changes curser to pointer, link changes colour | Hovered mouse over link | Curser changed to pointer, link colour changed | Pass |
-| Resource link (published resource) | Redirects to the resources detail page | Click featured resource | Resource's detail page displayed | Pass |
-| Resource link (draft resource) | Redirects to the resources draft preview page | Click featured resource | Resource's draft preview page displayed | Pass |
+| Resource link (published resource) | Redirects to the resources detail page | Clicked featured resource | Resource's detail page displayed | Pass |
+| Resource link (draft resource) | Redirects to the resources draft preview page | Clicked featured resource | Resource's draft preview page displayed | Pass |
 | Resource edit button: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
-| Resource edit button | Populated form displayed | Click edit button on a resource | Pre populated form with the resources details displayed | Pass |
+| Resource edit button | Populated form displayed | Clicked edit button on a resource | Pre populated form with the resources details displayed | Pass |
 | Resource delete button: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
-| Resource delete button | Confirm delete displayed | Click delete button on a resource | Confirm delete message and button displayed | Pass |
-| Resource delete confirmation | Cancel delete, return to resources list | Click cancel button | Returned to resources list, resource still displayed in the list | Pass |
-| Resource delete confirmation | Return to resources list, resource deleted | Click delete button | Returned to resources list, resource deleted from resources list | Pass |
+| Resource delete button | Confirm delete displayed | Clicked delete button on a resource | Confirm delete message and button displayed | Pass |
+| Resource delete confirmation | Cancel delete, return to resources list | Clicked cancel button | Returned to resources list, resource still displayed in the list | Pass |
+| Resource delete confirmation | Return to resources list, resource deleted | Clicked delete button | Returned to resources list, resource deleted from resources list | Pass |
 | Resources list (admin user) | List of all published resources displayed | Viewed "my resources" page as an admin user | A list of all published resources displayed with other users resources only displaying a delete button | Pass |
-| Resource delete button (admin user) | Confirm delete displayed | Click delete button on another users posted resource | Confirm delete message and button displayed | Pass |
-| Resource delete confirmation (admin user) | Cancel delete, return to resources list | Click cancel button | Returned to resources list, resource still displayed in the list | Pass |
-| Resource delete confirmation (admin user) | Return to resources list, resource deleted | Click delete button | Returned to resources list, resource deleted from resources list | Pass |
+| Resource delete button (admin user) | Confirm delete displayed | Clicked delete button on another users posted resource | Confirm delete message and button displayed | Pass |
+| Resource delete confirmation (admin user) | Cancel delete, return to resources list | Clicked cancel button | Returned to resources list, resource still displayed in the list | Pass |
+| Resource delete confirmation (admin user) | Return to resources list, resource deleted | Clicked delete button | Returned to resources list, resource deleted from resources list | Pass |
 | Create Resource Page |
-| Create Resource form submit button: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
-| Create Resource form | Error displayed | Clicked submit without entering a title | "Please fill in this field" error pointing at the title box displayed | Pass |
-| Create Resource form | Images added to the resource | Clicked choose files button and selected multiple images and published the resource | Added images displayed in a carousel in the resource | Pass |
+| Create resource form submit button: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
+| Create resource form | Error displayed | Clicked submit without entering a title | "Please fill in this field" error pointing at the title box displayed | Pass |
+| Create resource form | Images added to the resource | Clicked choose files button and selected multiple images and published the resource | Added images displayed in a carousel in the resource | Pass |
 | Resource Detail Page |
 | Resource card | No footer links displayed | Viewed a resource without added links | No footer on resource detail card | Pass |
+| Resource card link: hover (desktop) | Changes curser to pointer, link changes colour | Hovered mouse over link | Curser changed to pointer, link colour changed | Pass |
 | Resource card | No text displayed | Viewed a resource without added text content | No text content on resource detail card | Pass |
 | Resource card | Default image displayed | Viewed a resource without added images | Default image of a bee displayed | Pass |
-| Resource card | Image opened in separate tab | Clicked download image button | Image opened in a separate tab for saving | Pass |
+| Resource card download image button | Image opened in separate tab | Clicked download image button | Image opened in a separate tab for saving | Pass |
+| Resource card download image button: hover (desktop) | Changes curser to pointer, link changes colour | Hovered mouse over link | Curser changed to pointer, link colour changed | Pass |
+| Like button: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
+| Comment tab: hover (desktop) | Changes curser to pointer | Hovered mouse over button | Curser changed to pointer | Pass |
+| Comment tab | Comment form expands | Clicked tab | Comment tab expands to reveal a comment form | Pass |
+| Comment submit button: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
+| Comment edit button: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
+| Comment edit button | Populates comment form | Clicked edit button on a comment | Comment form populated with the chosen comment | Pass |
