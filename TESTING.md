@@ -95,6 +95,7 @@ When writing unit tests, I used the built in Django test suite. There are 2 pyth
 The test names for both forms and views testing, as well as a screenshot of the results can be found below.
 
 - [Results](/docmedia/validation/django-tests-results.png)
+- Run the tests with the terminal command "python3 manage.py test"
 
 - Forms
     - Comment Form
@@ -202,7 +203,7 @@ Some of these features I implemented during the development phase and some I did
 ### Final Development Phases
 In the final development phases I carried out manual testing of all the links, buttons, pages and admin permissions across the site, ensuring fully correct functionality of all the features I did not test using automated testing. As the automated testing was fairly robust, I found that did not leave a lot of manual testing that was needed. That being said, I still tested all the features manually incase I had missed anything when writing tests. 
 
-Below is an overview of the manual tests I carried out not covered by automated testing with a full table of tests carried out below.
+Below is an overview of the additional manual testing, with a detailed table of manual tests carried not covered by automated testing. Where automated testing also covers manual testing of the create resource form I have included an overview of the testing verified with both manual and the automated tests listed above.
 
 - Each menu link works correctly from all pages.
 - Admin menu links and pages are only displayed for, or accessible by admin users. 
@@ -211,8 +212,7 @@ Below is an overview of the manual tests I carried out not covered by automated 
 - All published resources link to their detail page.
 - Images can be added to the create resource page.
 - User posted resources page displays a message when there are no added resources.
-- Admin users can view and delete any resources, comments or image media.
-- Admin users can view a list of users and delete or ban accounts.
+- Admin users can view and delete any resources or comments.
 
 ### Manual Test Results Table
 
@@ -267,6 +267,7 @@ Below is an overview of the manual tests I carried out not covered by automated 
 | Resource link (draft resource) | Redirects to the resources draft preview page | Clicked featured resource | Resource's draft preview page displayed | Pass |
 | Resource edit button: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
 | Resource edit button | Populated form displayed | Clicked edit button on a resource | Pre populated form with the resources details displayed | Pass |
+| Resource edit form: automated testing | Resource edited | Edited a resources content individually: title, content, links, key stage and status | Resource edited correctly, verified with automated testing | Pass |
 | Resource delete button: hover (desktop) | Changes curser to pointer, button changes colour | Hovered mouse over button | Curser changed to pointer, button colour changed | Pass |
 | Resource delete button | Confirm delete displayed | Clicked delete button on a resource | Confirm delete message and button displayed | Pass |
 | Resource delete confirmation | Cancel delete, return to resources list | Clicked cancel button | Returned to resources list, resource still displayed in the list | Pass |

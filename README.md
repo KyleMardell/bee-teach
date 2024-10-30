@@ -70,6 +70,18 @@ For the typography I wanted To use a chunky style font I could use for things su
 
 I used the [Farsan Font](/docmedia/designs/farsan-font.png) and [Concert One Font](/docmedia/designs/concert-font.png) from [Google Fonts](https://fonts.google.com/).
 
+### Agile & Kanban
+When developing the app I wanted to use an agile methodology to maintain structure and vision while being flexible to changes throughout the design and build process. I used githubs project board and issues to create a kanban board with story point issues for each part of the development process. I found using both an agile methodology and an organised project board helped vastly in staying on target, knowing what tasks needed completing, and embracing design or functionality changes.
+
+To maintain a reasonable time scale for each part of the development process, I used githubs milestones and added sprint labels to each issue. This way I could easily keep track of har far along the development process I was, and through using an agile methodology could increase or reduce the workload for each sprint or milestone. As this was my first time using these methods of working, I had to use my best judgement to assign a story point value to tasks and decide how much work each feature would require. Although not all predictions worked out exactly, I still found it useful to visually see how much time I might need to spend on tasks, versus the amount of time I had for each sprint.
+
+### User Stories & Issues
+Before beginning to write any code, I set up the user stories I had written in the design phase each as an issue using a template I created. I then used custom labels to categorise the user story and add a predicted story point value. This meant I could quickly see how many of each issue type there were and begin to plan the amount of time I might need to spend on each story point. I also made sure to add a short description and acceptance criteria for each user story to help know when the issue could be closed.
+To keep track of the design and documentation stages, I also created issues added to my kanban board. This meant I had a visual representation of the design processes, helping to make sure something wasn't easily overlooked.
+
+The user stories used in the project board, defined the features of the app and meant each feature had a clear objective. In some cases multiple user stories were satisfied in a single feature, although that feature would be a potentially large section of the app. For example the user story of being able to view a list of resources, meant that resources must be able to be created, and have an associated card preview, which are both other examples of user stories. 
+
+Even though I knew I would not have time to create some of the features I added issues or user stories for, I still wanted to add them to the project for two main reasons. Firstly, incase I found I had the time to add further features after creating the main MVP functionality, and secondly for if I choose to revisit and further develop the app in the future. This way I have reference issues to create additional functionality and continue development down the line.
 
 ## Features
 
@@ -114,33 +126,59 @@ In order for the user to create an account I user Django's built in authorisatio
 #### Home Page
 The home page is only shown when a user is logged in to the Bee Teach app. This page has a features section at the top of the page where admin users can highlight resources in a scrolling carousel. Each feature can have its own title and content as well as a resource preview that links to the resource when clicked. Below the features section is a list of all resources from newest to oldest, although initially only 5 resources are displayed, when scrolling down the page, further resources are automatically loaded and rendered on the page until no more resources are available. Each resource is shown as a preview displaying its title, all attached images auto scrolling, its author and if there are any comments, a comment bubble icon with the number of comments on that resource. This keeps the home page a simple and easy way to view all resources, while keeping load times low, as well as highlighting featured resources.
 
+- [Mobile](/docmedia/designs/gifs/mobile-home.gif)
+- [Tablet](/docmedia/designs/gifs/tablet-home.gif)
+- [Desktop](/docmedia/designs/gifs/desktop-hero.gif)
+
 #### Create Resource
 The create resource page is where logged in users can add resources of their own to the Bee Teach App. It has a simple form users can add their resources information, images and link to. The form has text in for the Title (required), text content and a link, a select option for the key stage (required) with options for early years and key stages 1, 2 and 3. Finally users can add multiple images using a file explorer. Once the required fields are filled in, the user can choose to publish a resource or save it as a draft.
+
+- [Mobile](/docmedia/designs/gifs/tablet-create-resource.gif)
+- [Tablet](/docmedia/designs/gifs/tablet-create-resource.gif)
+- [Desktop](/docmedia/designs/gifs/desktop-create-resource.gif)
 
 #### Resource Detail
 When a resource preview is clicked on from the home page, a resource detail page is shown, which displays the entire resource, all its images, content and link if added. Each resource detail page uses a card style design to keep the resource information easy to navigate and read, with the title, author and key stage at the top, followed by the text content, then any images added in a scrolling carousel with navigation arrows, with a link at the bottom of the page.
 
 Below the resource card is the comments section where there is a collapsible comment box for users to add their own comments, and below are any comments left on the resource. If there are no comments, only the collapsible comment box is displayed.
 
+- [Mobile](/docmedia/designs/gifs/mobile-resource-detail.gif)
+- [Tablet](/docmedia/designs/gifs/tablet-resource-detail.gif)
+- [Desktop](/docmedia/designs/gifs/desktop-resource-detail.gif)
+
 #### Resource Draft
 If a resource is saved as a draft when created or edited, a user can view a preview of the resource from the users resources list. This preview is identical to a resource detail page, omitting the comments section. This gives the user a way to see what a resource may look like before publishing or posting.
+
+- [Mobile](/docmedia/designs/screenshots/mobile-draft.png)
+- [Tablet](/docmedia/designs/screenshots/tablet-draft.png)
+- [Desktop](/docmedia/designs/screenshots/desktop-draft.png)
 
 #### User Resources List
 This page displays a simple list of any resources a logged in user has posted. Each list item has a clickable link that takes the user to either the resource detail or draft pages, the date posted and number of comments on that resource. There are also buttons to edit and delete each resource. When a delete button is clicked, a modal confirmation box is displayed and the user must click a confirmation delete button to delete a resource. When editing a resource, a form similar to the create resource form is displayed, pre populated with the chosen resources detail to be edited and again confirmed. 
 
+- [Mobile](/docmedia/designs/gifs/mobile-resource-list.gif)
+- [Tablet](/docmedia/designs/gifs/tablet-resource-list.gif)
+- [Desktop](/docmedia/designs/gifs/desktop-resource-list.gif)
+
 #### Admin Page
-The admin page uses the built in Django admin features, with limited admin user permissions. An admin user can delete resources and comments, as well as creating new features.
-As the admin pages are exclusively for admin users, I have chosen to keep the default Django admin styles to obviously distinguish when an admin page is being navigated. This way admin users are aware that they are carrying out administrative operations on other users resources and comments.
+The admin page uses the built in Django admin features. The only reason to use the admin panel would be to delete or ban a user, delete images or add a feature. In the future I wish to add the ability to add features from within the app for admin users instead of the admin panel. Even though I did not have enough time to add this ability to the app, I still wanted to add featured resources to the MVP.
 
-#### Admin Superuser
-Superusers have access to all the built in Django admin features, extending a regular admin's permissions to include; being able to edit and delete user information, comments and resources, create groups and edit permissions. In order to create a regular admin versus a superuser, I created a group named admin and set limited permissions for users added to the group. This way there are 2 levels of admin user, one set of permissions could be given to trusted ambassadors of the Bee Teach community to help monitor regular and new users posted resources or comments, and a smaller number of trusted high level admin users with full admin permissions. 
+#### 404 & 500 Pages
+In order to keep the user within the app if either a 404 - page not found, or 500 - server error occurs I have created simple 404 and 500 pages. They simply show the error number and message on the page, allowing the user to still use the navigation menu to return to a valid page. I considered adding a 403 - Access forbidden page, but felt I used enough defensive programming to avoid needing this page.
 
+### Defensive Programming
+In order to keep the app and users accounts safe, I added certain defensive programming measures. Firstly the use of authorisation for users meant I could ensure users have to be logged in to access the main features of the app, and guest users can only view the home page with examples of the apps content. With the use of authorisation I could also add defensive programming to users resources and comments, meaning users cannot edit, delete or otherwise manipulate content not created by themselves. This is true even if a user tries to enter a URL not accessible by themselves, such as the URL to edit another users posted resource.
+
+As django is a server run application, that means all the main functions of the app are run server side, again adding to defensive programming by minimising the amount of data processed in the front end. In each of the view functions I have ensured that only logged in users can access the crud functionality of the app, and when doing so there are coded measures to verify that only the creator of any content can edit or delete that content. Other than admin superusers who can delete any published content for basic moderation safety.
 
 ### Future Features
 As I was planning and developing the Bee Teach app, I had to keep scope at the front of my mind as I found it had the potential to be very large and have a lot of features. With this thought, I tried to keep the MVP scope as realistic as possible for the timescale, while also leaving room for growth in the future. Here are some of the features I plan to add in the future to create a fuller experience when visiting the Bee Teach app.
 
 #### Profile Page
 In the future I would like to add a profile page for each user. I originally added a profile page to my designs and plans, although due to time constraints I knew this was a "nice to have" feature. This page would let users add their own profile details such as their name, about section, their posted resources and potentially resources they have liked, creating more depth to the app and letting users easily share more information about themselves or find all the resources posted by a single user.
+
+#### Featured Resources
+As mentioned in the admin page section, I wish to add the ability for admin users to create featured resources from within the app, or in the front end. This would mean creating a page for admin users to view, edit and delete currently featured resources, as well as a form to add new featured resources. To extend the functionality I would also like to add time frames to featured resources, meaning an admin user could schedule a feature to run for a set length of time or on a specific date and time.
 
 #### Search Function
 If the app became populated with a large number of resources, it would be helpful to be able to search for resources. Each resource currently has an associated ket stage that is shown when a resource is viewed in detail and I added this detail to help create a search function where users could filter resources by key stage and easily see all the resources aimed at a certain age range. I would also like to add a word search function so users could search for a resource containing a certain word. For example a user could search "Bee" to find all resources about bees.
@@ -150,7 +188,10 @@ I would also like to add a page or section where the user could see all comments
 In my database schema I added the ability to comment on an existing comment but when creating the database I simplified comments to only apply to resources to stay in the scope of the project. In the future this is a feature I would like to add to create more of a conversational feeling in the comments section. 
 
 #### Media Types
-As resources are the main feature of the app, I would also like users to be able to add multiple types of media such as PDF files, videos or other media types. This would extend the amount and types of resources that users can share within the app. 
+As resources are the main feature of the app, I would also like users to be able to add multiple types of media such as PDF files, videos or other media types. This would extend the amount and types of resources that users can share within the app.
+
+#### Design features
+Although I believe the design, layout and colour schemes currently suit the app, I also think they could be improved and would like to consider some re-designing of the app. This would be things such as ensuring forms fill a single screen or viewport height to make the design feel slightly more intuitive. I also believe the colour scheme of the app could be revised and improved and may consider this in the future too.
 
 ## Testing
 Testing can be found in the [testing file](/TESTING.md) and features manual and automated testings, validation and accessibility testing.
