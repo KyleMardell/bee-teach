@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block meta %}
+<meta name="description" content="Bee Teach, the educational community hive. Free educational resources shared by our community members.">
+{% endblock %}
 
 {% block content %}
 
@@ -32,7 +35,7 @@
                     {% if features %}
                     <div class="carousel-item active" data-bs-interval="10000">
                         <div class="card feature-card">
-                            <div class="card-header">
+                            <div class="card-header text-center">
                                 <h4 class="card-title">{{ features.0.title }}</h4>
                                 <p class="card-text feature-card-text">{{ features.0.body }}</p>
                             </div>

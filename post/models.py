@@ -6,8 +6,6 @@ KEYSTAGE = ((0, "Early Years"), (1, "Key Stage 1"),
             (2, "Key Stage 2"), (3, "Key Stage 3"))
 STATUS = ((0, "Draft"), (1, "Published"))
 
-
-# Create your models here.
 class Resource(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="resource_posts"

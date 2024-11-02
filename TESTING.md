@@ -11,6 +11,7 @@ Testing of the Bee Teach app was done using both manual and automated testing me
 
 ### HTML Validation
 In order to validate each html page, I first used Google Chrome developer tools to view each pages source code once rendered to the browser. This means I have the end HTML documents to full validate, compared to the django templates that can only contain part of the end html, and often use python or javascript to generate HTML to the browser. I then ran each pages full HTML documents through the [Web3 HTML Validator](https://validator.w3.org/). 
+
 The only Page with errors was the Sign Up page. These errors are caused by the auto generated password requirements text, as there is an unordered list contained inside a paragraph. Although it generates errors through the validator, when testing on multiple devices these requirements are displayed as intended. Due to this I have left this page as it is, rather than removing the text using django or javascript and inserting my own.
 
 The results of HTML page validation can be found below.
@@ -55,7 +56,11 @@ When it came to the JavaScript for the project, I checked each of my files and p
 ## Accessibility and Performance
 
 ### Lighthouse Testing
-Google Chrome's Lighthouse testing has criteria for performance, accessability, best practices and SEO. I tested all pages through the lighthouse tester with high scores for most sections. There were some justifiable exceptions or lower resulting scores. Firstly pages with images have lower best practices scores due to the images being retrieved from Cloudinary, and the Heroku server used does not provide a HTTPS automatic connection for these images. This causes warning in the console browser and can only be remedied with the use of a HTTPS server. Secondly there are a couple of pages with lower SEO scores. This is due to the pages only being displayed when logged in, such as creating a resource and therefore do not need high SEO scores.
+Google Chrome's Lighthouse testing has criteria for performance, accessability, best practices and SEO. I tested all pages through the lighthouse tester with high scores for most sections. 
+
+There were some justifiable exceptions or lower resulting scores. Pages with images have lower best practices scores, due to the images being retrieved from Cloudinary and the Heroku server used, does not provide a HTTPS automatic connection for these images. This causes warning in the browser console, although no errors, and can only be remedied with the use of a HTTPS server.
+
+All other results were either in the high 90s or 100, meaning no issues with the tested accessibility, SEO or performance as expected.
 
 The results of the Lighthouse testing can be found below.
 
@@ -73,7 +78,7 @@ The results of the Lighthouse testing can be found below.
 ### Wave Testing
 When testing further for accessibility issues, I used the [WAVE Accessibility Tester](https://wave.webaim.org/) on all pages, ensuring they were populated with content where possible.
 
-The only page with any errors was the create resource page, with the errors for missing form labels being caused by the Summernote content box. After inspecting the summernote editing box, it is created using a div that generates html when the user enters text in the input div. As the input is a div and not an input or another type of [labelable element](https://html.spec.whatwg.org/multipage/forms.html#category-label), it is not possible to add a label to this type of summernote input. I considered removing the summernote content input, but decided that having the text formatting options outweighed having a missing label and in this case is justifiable.
+The only page with any errors was the create resource page, with the errors for missing form labels being caused by the Summernote content box, as accessibility is a known challenge for summernote. After inspecting the summernote editing box using google chrome dev tools, i found it is created using a div, that generates html when the user enters text in the input div. As the input is a div and not an input or another type of [labelable element](https://html.spec.whatwg.org/multipage/forms.html#category-label), it is not possible to add a label to this type of summernote input. I considered removing the summernote content input, but decided that having the text formatting options outweighed having a missing label and in this case is justifiable.
 
 Here you can find the summernote code causing the errors and wave testing results for the create resource page.
 - [Summernote Generated Code](/docmedia/validation/summernote-test-field-code.png)
@@ -90,7 +95,9 @@ The results of the WAVE testing for all pages can be found below.
 - [Resource List](/docmedia/validation/wave-resource-list.png)
 
 ## Unit Testing
-When writing unit tests, I used the built in Django test suite. There are 2 python testing files, [test forms](/post/test_forms.py) and [test views](/post/test_views.py), each of which test the respective forms or views. I used the [Django Testing Documentation](https://docs.djangoproject.com/en/5.1/topics/testing/tools/) to find and better understand which tests I needed to use. I tried to implement as many tests as I could think of, but I imagine there are more potential tests. I also used a [Stack Overflow](https://stackoverflow.com/questions/2897609/how-can-i-unit-test-django-messages/14909727) thread to help me when creating tests for feedback messages.
+When writing unit tests, I used the built in Django test suite. There are 2 python testing files, [test forms](/post/test_forms.py) and [test views](/post/test_views.py), each of which test the respective forms or views. 
+
+I used the [Django Testing Documentation](https://docs.djangoproject.com/en/5.1/topics/testing/tools/) to find and better understand which tests I needed to use. I tried to implement as many tests as I could think of, but I imagine there are more potential tests. I also used a [Stack Overflow](https://stackoverflow.com/questions/2897609/how-can-i-unit-test-django-messages/14909727) thread to help me when creating tests for feedback messages.
 
 The test names for both forms and views testing, as well as a screenshot of the results can be found below.
 
@@ -180,11 +187,14 @@ The test names for both forms and views testing, as well as a screenshot of the 
 
 ### In Development
 In development testing was done using Google Chrome developer tools and the inspect function. I used console log and print to check data when creating the Javascript scripts as well as when creating the Python view functions. This way I could keep track of the transfer and transformation of the data passed between functions, as well as from the back end to the front end, and visa versa. 
+
 I also used the mock device sizes to check the apps pages were fully responsive across all screen sizes when styling the app. In the inspect view, I highlighted the Django auto created form elements so I could target them via their id in either CSS or Javascript, adding further styles or functionality.
 As I chose to deploy the app to Heroku early in development, I would also frequently check features or styles were displaying correctly over the internet on the devices I had access to: an iPhone 14 & 15, iPad Pro, Android tablet and 2 PC screens, a 1080 and a 4k monitor.
 
 ### User Testing
-When it came to user testing, as I had created the Bee Teach app with my partner in mind, they were my initial go to tester. This meant I could get instant feedback from a target user and make quick changes or implement features and styles suggested. Once the app was in a more complete state, I then asked a small group of people to use the app as they would and let me know of any constructive feedback they had. Although positive feedback is helpful and let me know which elements to keep, I wanted to concentrate on what improvements could be made and thus kept a list of some of the constructive feedback I received. The main change made following feedback was due to a bug caused by simple oversight. Initially when posting a resource as draft, the user was directed to their list of posts and could not view a resource before posting, only edit its contents in the edit form. Creating a resource preview was a core feature I overlooked and created as a result of early user testing.
+When it came to user testing, as I had created the Bee Teach app with my partner in mind, they were my initial go to tester. This meant I could get instant feedback from a target user and make quick changes or implement features and styles suggested. Once the app was in a more complete state, I then asked a small group of people to use the app as they would and let me know of any constructive feedback they had. 
+
+Although positive feedback is helpful and let me know which elements to keep, I wanted to concentrate on what improvements could be made and thus kept a list of some of the constructive feedback I received. The main change made following feedback was due to a bug caused by simple oversight. Initially when posting a resource as draft, the user was directed to their list of posts and could not view a resource before posting, only edit its contents in the edit form. Creating a resource preview was a core feature I overlooked and created as a result of early user testing.
 
 Below is some of the constructive feedback from a small group of users.
 - Landscape images are aligned at the top of a card rather than in the preferred center such as portrait or square images.
