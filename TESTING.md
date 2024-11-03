@@ -95,9 +95,9 @@ The results of the WAVE testing for all pages can be found below.
 - [Resource List](/docmedia/validation/wave-resource-list.png)
 
 ## Unit Testing
-When writing unit tests, I used the built in Django test suite. There are 2 python testing files, [test forms](/post/test_forms.py) and [test views](/post/test_views.py), each of which test the respective forms or views. 
+When writing unit tests, I used the Django testing suite suite. There are 2 python testing files, [test forms](/post/test_forms.py) and [test views](/post/test_views.py), each of which test the respective forms or views. I learned the use of basic set up and testing, including the use of assert and its varied functions used in testing, such as assertTemplateUsed and assertRedirects, each of which are a more targeted test compared to an assertTrue, assertFalse or assertEqual test.
 
-I used the [Django Testing Documentation](https://docs.djangoproject.com/en/5.1/topics/testing/tools/) to find and better understand which tests I needed to use. I tried to implement as many tests as I could think of, but I imagine there are more potential tests. I also used a [Stack Overflow](https://stackoverflow.com/questions/2897609/how-can-i-unit-test-django-messages/14909727) thread to help me when creating tests for feedback messages.
+I used the [Django Testing Documentation](https://docs.djangoproject.com/en/5.1/topics/testing/tools/) to find and better understand which tests I needed to use, such as the assert tests mentioned. I tried to implement as many tests as I could think of, but I imagine there are more potential tests. I also used a [Stack Overflow](https://stackoverflow.com/questions/2897609/how-can-i-unit-test-django-messages/14909727) thread to help me when creating tests for feedback messages. This example uses the list method to get a list of all the messages, and then uses an assertEqual to check for the correct feedback message.
 
 The test names for both forms and views testing, as well as a screenshot of the results can be found below.
 
@@ -105,6 +105,7 @@ The test names for both forms and views testing, as well as a screenshot of the 
 - Run the tests with the terminal command "python3 manage.py test"
 
 - Forms
+The form tests include testing for valid and invalid forms of all kinds.
     - Comment Form
         - test_form_is_valid
         - test_form_is_invalid
@@ -133,6 +134,7 @@ The test names for both forms and views testing, as well as a screenshot of the 
         - test_form_is_invalid_only_optional_fields
 
 - Views
+The view tests include testing for page templates and validity, authentication, correct display of resources and form submissions.
     - Index
         - test_index_page_status_code
         - test_index_page_uses_correct_template
