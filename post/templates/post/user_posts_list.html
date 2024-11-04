@@ -7,9 +7,7 @@
 {% endblock %}
 
 {% block content %}
-
-<section class="container">
-    
+<section class="container">  
     <div class="row my-3">
         <div class="col text-center">
             <h1>My Resources</h1>
@@ -48,7 +46,6 @@
 
     <div class="row justify-content-center mb-5">
         <div class="col-12 col-md-10 col-lg-8">
-
             <div class="list-group w-100">
                 {% if user_resources %}
                 {% for resource in user_resources %}
@@ -115,7 +112,6 @@
                 </div>
                 {% endif %}
             </div>
-
         </div>
     </div>
 </section>

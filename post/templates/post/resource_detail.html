@@ -7,9 +7,7 @@
 {% endblock %}
 
 {% block content %}
-
 <div class="container">
-
     <div class="row justify-content-center my-5">
         <div class="col-11 col-md-10 col-xl-8">
             <div class="card detail-card my-3">
@@ -59,7 +57,6 @@
                             </button>
                         {% endif %}
                     </div>
-                    
                 </div>
                 {% if resource.links %}
                 <div class="card-footer">
@@ -151,6 +148,7 @@
                 </div>
             </div>
             {% endfor %}
+
         </div>
     </div>
 </div>
@@ -159,7 +157,6 @@
 {% block script %}
 <script src="{% static 'js/script.js' %}"></script>
 <script src="{% static 'js/comments.js' %}"></script>
-
 <!-- Script to hide the django auto generated form label and add a placeholder to the textarea input -->
 <script>
     document.querySelector('label[for="id_body"]').style.display = "none";
