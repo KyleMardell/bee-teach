@@ -3,9 +3,25 @@
 Testing of the Bee Teach app was done using both manual and automated testing methods. Manual testing was done both during and post development, with in-development testing carried out using Google Chrome Developer Tools. Automated testing carried out using the built in Django test suite. Here you can find details of all the app testing, including validation and accessability tests.
 
 [Bee Teach Live App](https://bee-teach-95df758315f5.herokuapp.com/)
+
 [Bee Teach Repo](https://github.com/KyleMardell/bee-teach)
 
 ## Contents
+
+- [Validation](#validation)
+    - [Html validation](#html-validation)
+    - [Css validation](#css-validation)
+    - [Python linter](#python-linter)
+    - [Javascript](#javascript)
+- [Accessibility and performance](#accessibility-and-performance)
+    - [Lighthouse testing](#lighthouse-testing)
+    - [Wave testing](#wave-testing)
+- [Unit testing](#unit-testing)
+- [Manual testing](#manual-testing)
+    - [In development](#in-development)
+    - [User testing](#user-testing)
+    - [Final development phases](#final-development-phases)
+    - [Manual tests results table](#manual-test-results-table)
 
 ## Validation
 
@@ -98,6 +114,8 @@ The results of the WAVE testing for all pages can be found below.
 When writing unit tests, I used the Django testing suite suite. There are 2 python testing files, [test forms](/post/test_forms.py) and [test views](/post/test_views.py), each of which test the respective forms or views. I learned the use of basic set up and testing, including the use of assert and its varied functions used in testing, such as assertTemplateUsed and assertRedirects, each of which are a more targeted test compared to an assertTrue, assertFalse or assertEqual test.
 
 I used the [Django Testing Documentation](https://docs.djangoproject.com/en/5.1/topics/testing/tools/) to find and better understand which tests I needed to use, such as the assert tests mentioned. I tried to implement as many tests as I could think of, but I imagine there are more potential tests. I also used a [Stack Overflow](https://stackoverflow.com/questions/2897609/how-can-i-unit-test-django-messages/14909727) thread to help me when creating tests for feedback messages. This example uses the list method to get a list of all the messages, and then uses an assertEqual to check for the correct feedback message.
+
+The automated testing carried out covers a large portion of the sites functionality, including checking all resources, comments, likes and pages work correctly. There are some manual tests required to fill in the gaps of automated testing, with manual testing focusing on design based testing.
 
 The test names for both forms and views testing, as well as a screenshot of the results can be found below.
 
@@ -213,7 +231,9 @@ Below is some of the constructive feedback from a small group of users.
 Some of these features I implemented during the development phase and some I did not get chance to implement but are considerations for future features.
 
 ### Final Development Phases
-In the final development phases I carried out manual testing of all the links, buttons, pages and admin permissions across the site, ensuring fully correct functionality of all the features I did not test using automated testing. As the automated testing was fairly robust, I found that did not leave a lot of manual testing that was needed. That being said, I still tested all the features manually incase I had missed anything when writing tests. 
+In the final development phases I carried out manual testing of all the links, buttons, pages and admin permissions across the site, ensuring fully correct functionality of all the features I did not test using automated testing. As the automated testing was fairly robust, I found that did not leave a lot of manual testing that was needed. That being said, I still tested all the features manually incase I had missed anything when writing tests.
+
+At this stage in my github project, there were multiple issues that were left as incomplete. These issues were mainly ones I had added as an extension of the core planned MVP that I wanted to include incase I had time to implement them. All issues that were not seen to in the time scale of this project, have an additional label and comment added for future development. This way all issues could be closed following the end of the project.
 
 Below is an overview of the additional manual testing, with a detailed table of manual tests carried not covered by automated testing. Where automated testing also covers manual testing of the create resource form I have included an overview of the testing verified with both manual and the automated tests listed above.
 
