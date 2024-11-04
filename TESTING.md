@@ -1,5 +1,7 @@
 # Bee Teach Testing
 
+![Bee Teach Responsive Screenshots](/docmedia/designs/responsive-beeteach.png)
+
 Testing of the Bee Teach app was done using both manual and automated testing methods. Manual testing was done both during and post development, with in-development testing carried out using Google Chrome Developer Tools. Automated testing carried out using the built in Django test suite. Here you can find details of all the app testing, including validation and accessability tests.
 
 [Bee Teach Live App](https://bee-teach-95df758315f5.herokuapp.com/)

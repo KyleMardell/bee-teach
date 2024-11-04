@@ -1,5 +1,7 @@
 # Bee Teach
 
+![Bee Teach Responsive Screenshots](/docmedia/designs/responsive-beeteach.png)
+
 Bee Teach is an educational resource sharing web app. Bee Teach is aimed at teachers, parents and educators in general, who want to share and access free educational resources. The app aims to give educators a go-to place for free educational resources, as it can be especially difficult to find varied and quality resources, lesson plans or worksheets without paying high subscription fees. This means teachers and educators spend a large amount of time looking for free resources or creating some themselves. Bee teach serves as a way for educators to quickly find a variety of free resources shared by a community of other educators, as well as share their own resources with others.
 
 [Bee Teach Live App](https://bee-teach-95df758315f5.herokuapp.com/)
