@@ -5,7 +5,7 @@ const submitButton = document.getElementById("submitCommentButton");
 
 /*
 Adds an event listener to each comment edit button and populates 
-the edit form with the comment details.
+the edit form with the comment details when clicked.
 */
 for (let button of editButtons) {
   button.addEventListener("click", (e) => {

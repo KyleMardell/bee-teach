@@ -12,7 +12,7 @@ const submitButton = document.getElementById("submitEditButton");
 
 /*
 Adds an event listener to each resource edit button and populates 
-the edit form with the resource details.
+the edit form with the resource details when clicked.
 */
 for (let button of editButtons) {
   button.addEventListener("click", (e) => {
@@ -20,6 +20,7 @@ for (let button of editButtons) {
     // displays the form
     resourceCard.style.display = "Flex";
 
+    // resource data from the edit button
     let resourceId = e.target.getAttribute("data-resource_id");
     let resourceTitle = e.target.getAttribute("data-resource_title");
     let resourceKeyStage = e.target.getAttribute("data-resource_key_stage");
@@ -27,6 +28,7 @@ for (let button of editButtons) {
     let resourceLinks = e.target.getAttribute("data-resource_links");
     let resourceStatus = e.target.getAttribute("data-resource_status");
 
+    // populates the form
     resource_title.value = resourceTitle;
     resource_key_stage.value = resourceKeyStage;
     resource_links.value = resourceLinks;
@@ -35,7 +37,8 @@ for (let button of editButtons) {
     // uses django summernote for the resource content
     $(resource_content).summernote('code', resourceContent);
 
-    submitButton.innerText = "Update";
+    // sets the action of the edit button to the url for editing the selected resource
     resourceForm.setAttribute("action", `edit_resource/${resourceId}`);
+    submitButton.innerText = "Update";
   });
 }
