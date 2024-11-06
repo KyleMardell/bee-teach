@@ -77,7 +77,9 @@ Comments and likes were the simplest models to create, as they required the leas
 
 Features would be used to highlight resources by admin and therefore needed a resource link. I also included a feature title and content to allow admin users to add a message or description to each feature.
 
-Below is a list of the models created in the schema and their properties.
+Once I had finalised the database schema I created an entity relationship diagram to ensure the database models and properties were correct and only what is required, so as not to over complicate the database unnecessarily. Here is my [E.R.D](/docmedia/designs/erd-diagram.png)
+
+Below is a list of the models created in the ERD and their properties.
 
 - Resource
     - author
